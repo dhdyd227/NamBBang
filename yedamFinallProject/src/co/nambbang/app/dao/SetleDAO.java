@@ -15,18 +15,17 @@ public class SetleDAO extends DAO {
 		try {
 			conn.setAutoCommit(false);
 
-			CallableStatement cstmt = conn.prepareCall("{call SETLE_PR(?,?,?,?,?,?,?,?)}");
+			CallableStatement cstmt = conn.prepareCall("{call SETLE_PR(?,?,?,?,?,?,?)}");
 			cstmt.setInt(1, dto.getSetleNo());
 			cstmt.setString(2, dto.getOrderMn());
 			cstmt.setString(3, dto.getSetleConfmCode());
 			cstmt.setInt(4, dto.getSetleAmount());
 			cstmt.setInt(5, dto.getMlgUseAmount());
-			cstmt.setDate(6, dto.getSetleDe());
-			cstmt.setInt(7, dto.getOrderGroupNo());
-			cstmt.registerOutParameter(8, OracleTypes.VARCHAR);
+			cstmt.setInt(6, dto.getOrderGroupNo());
+			cstmt.registerOutParameter(7, OracleTypes.VARCHAR);
 			cstmt.executeUpdate();
 
-			result = cstmt.getString(8);
+			result = cstmt.getString(7);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

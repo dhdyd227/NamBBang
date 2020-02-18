@@ -1,4 +1,4 @@
-package co.nambbang.app.seller;
+package co.nambbang.app.dto;
 
 import java.util.Date;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 
 public class sellerDTO {
 	private String id;
-	private String pw;
 	private String sname;
 	private String lc;
 	private String name;

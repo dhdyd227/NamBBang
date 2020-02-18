@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 
@@ -23,6 +24,9 @@ public class RegisterGoods implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("======== RegisterGoods 진입!!!");
+		//세션생성
+		HttpSession session = request.getSession();
+		
 		//GoodsDAO 선언
 		GoodsDAO dao = new GoodsDAO();
 		
@@ -77,7 +81,7 @@ public class RegisterGoods implements Command {
 				file.delete();
 				
 			}
-			
+
 			//상품등록
 			GoodsDTO goods = new GoodsDTO();
 			goods.setGoodsId(multi.getParameter("goods_id"));
@@ -86,7 +90,7 @@ public class RegisterGoods implements Command {
 			goods.setGoodsCl(multi.getParameter("goods_cl"));
 			goods.setNetprc(Integer.parseInt(multi.getParameter("netprc")));
 			goods.setPhotoGroupId(photoGroupId);
-			goods.setSelerId((String)request.getAttribute("id")); //세션값으로 대체 할 것
+			goods.setSelerId((String)session.getAttribute("id")); //세션값으로 대체 할 것
 			dao.insertGoods(goods);
 			
 			//트랜잭션 커밋

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<link href="/yedamFinalProject/userassets/css/login-register.css"
+<link href="/yedamFinallProject/userassets/css/login-register.css"
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -10,7 +10,7 @@
 
 <!-- 로그인 스크립트 전체 -->
 <script type="text/javascript"
-	src="/yedamFinalProject/userassets/js/login-register.js"></script>
+	src="/yedamFinallProject/userassets/js/login-register.js"></script>
 
 <header class="header trans_300">	
 	
@@ -21,12 +21,12 @@
 			<div class="row">
 				<div class="col-lg-12 text-right">
 					<div class="logo_container">
-						<a href="/yedamFinalProject/index.do">Nam <span>Bang</span>
+						<a href="/yedamFinallProject/index.do">Nam <span>Bang</span>
 						</a>
 					</div>
 					<nav class="navbar">
 						<ul class="navbar_menu">
-							<li><a href="/yedamFinalProject/index.do">Home</a></li>
+							<li><a href="/yedamFinallProject/index.do">Home</a></li>
 							
 							<li><a href="#">Total Shop</a></li>
 							

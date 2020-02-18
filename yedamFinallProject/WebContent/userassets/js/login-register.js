@@ -193,7 +193,7 @@ function LoginClick() {
 		alert("패스워드를 입력하세요.");
 		return false;
 	}
-
+	
 	var url = "./ajaxLoginCheck.do";
 	var data = $('#loginForm').serialize();
 	// 1.넘긴값 2.상태 3.xhr;
@@ -201,20 +201,24 @@ function LoginClick() {
 		if (result == 1) {
 			shakeModal("아이디가 존재하지 않습니다.")
 			return false;
+			
 		} else if (result == 2) {
 			alert("login ");
 			closeLoginModal();
 			return true;
+			
 		} else {
 			shakeModal("비밀번호가 틀렸습니다.")
-			return false
+			return false;
 		}
-
 	}
 	// 아작스 요청 함수
 	$.post(url, data, callback);
-
-	return true;
+		
+	if(result==2)
+		return true;
+	else
+		return false;
 
 }
 

@@ -5,9 +5,9 @@
 <html lang="en">
 
 <% 
-	String imgPath = "/yedamFinalProject/sellerRegi";
-	String jsPath = "/yedamFinalProject/sellerRegi";
-	String cssPath = "/yedamFinalProject/sellerRegi";
+	String imgPath = "/yedamFinallProject/sellerRegi";
+	String jsPath = "/yedamFinallProject/sellerRegi";
+	String cssPath = "/yedamFinallProject/sellerRegi";
 %>
 
 <head>
@@ -218,6 +218,17 @@
 		
 		<script type="text/javascript">
 	function formCheck(){
+		if(frm.id.value == ""){
+			alert("ID(사업자 번호)를 을 입력해주세요.")
+			frm.sname.focus();
+			return false;
+		}
+		if(frm.sname.value == ""){
+			alert("비밀번호를 입력해주세요.")
+			frm.sname.focus();
+			return false;
+		} 
+		
 		if(frm.sname.value == ""){
 			alert("상호명을 입력해주세요.")
 			frm.sname.focus();

@@ -42,6 +42,8 @@ import co.nambbang.app.login.AjaxIdPwCheck;
 import co.nambbang.app.login.AjaxLoginCheck;
 import co.nambbang.app.login.AjaxRegisterDB;
 import co.nambbang.app.main.MainCommandList;
+import co.nambbang.app.main.MainCommandLogOut;
+import co.nambbang.app.main.MainCommandLogin;
 import co.nambbang.app.setle.AjaxSetleCommand;
 
 @WebServlet({"*.do","*.ad"}) 
@@ -87,6 +89,8 @@ public class FrontController extends HttpServlet {
 		
 		//오용
 		cont.put("/index.do",new MainCommandList());
+		cont.put("/logIn.do", new MainCommandLogin());
+		cont.put("/logOut.do", new MainCommandLogOut());
 		cont.put("/ajaxLoginCheck.do",new AjaxLoginCheck());//login Check
 		cont.put("/ajaxIdDuplicationCheck.do", new AjaxIdDuplicationCheck());//id Check
 		cont.put("/ajaxRegisterDB.do",new AjaxRegisterDB());//register DB transport

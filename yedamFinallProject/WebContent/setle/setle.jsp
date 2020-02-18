@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1"%>
 <!DOCTYPE html>
 <html>
 
@@ -10,14 +11,13 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6">
     <title>Insert title here</title>
- 
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
@@ -25,7 +25,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
-
+    <link href="./css/form-validation.css" rel="stylesheet">
+    <script src="./js/form-validation.js"></script>
 
     <style>
         .bd-placeholder-img {
@@ -44,10 +45,25 @@
         }
     </style>
     <!-- Custom styles for this template -->
-    <link href="form-validation.css" rel="stylesheet">
+
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script type="text/javascript">
         window.addEventListener("load", function () {
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+
             btn.addEventListener("click", function () {
 
                 var IMP = window.IMP; // 생략가능
@@ -116,7 +132,7 @@
                 });
 
             });
-        });
+        }, false);
     </script>
 </head>
 
@@ -125,100 +141,37 @@
         <div class="py-5 text-center"></div>
         <form class="needs-validation" method="POST" action="">
             <div class="row">
-                <div class="col-md-4 order-md-2 mb-4">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted">주문 확인</span> <span class="badge badge-secondary badge-pill"></span>
-                    </h4>
-                    <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">주문그룹번호</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div> <span class="text-muted">12원</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">총 주문 금액</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div> <span class="text-muted">8원</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between lh-condensed">
-                            <div>
-                                <h6 class="my-0">마일리지 사용금액</h6>
-                                <small class="text-muted">Brief description</small>
-                            </div> <span class="text-muted">5원</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between bg-light">
-                            <div class="text-success">
-                                <h6 class="my-0">Promo code</h6>
-                                <small>EXAMPLECODE</small>
-                            </div> <span class="text-success">-5원</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between"><span>결제금액</span>
-                            <strong>20원</strong></li>
-                    </ul>
 
-
-                    <div class="input-group">
-                        <hr class="mb-4">
-                        <button id="btn" name="btn" class="btn btn-primary btn-lg btn-block" type="button">결제하기</button>
-                    </div>
-
-                </div>
 
                 <div class="col-md-8 order-md-1">
                     <h2 class="mb-3">주문서 작성/결제</h2>
 
+                    <c:forEach var="list" items="list" >
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <img src="../userimages/product_1.png" />
+                            <img src="data:image/jpeg;bytes;${list.photoFile}" />
                             <!--제품이미지 출력-->
                         </div>
                         <div class="col-md-8 mb-3" style="padding-top: 40px;">
                             <!--제품정보 출력-->
                             <div class="col-md-12 mb-3">
-                                <!-- 주문번호 -->
-                                <h5>ACL120UASKCG</h5>
+                                <!-- 판매ID -->
+                                <h5>${list.sleId }</h5>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <!-- 제품이름 -->
-                                <h3>공기청정기 12평형</h3>
+                                <h3>${list.goodsName }</h3>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <!--제품수량 가격-->
-                                <h5>수량 1 &nbsp;&nbsp; 799,000원</h5>
+                                <h5>수량 ${list.orderQy } &nbsp;&nbsp; ${list.orderQy }*${list.orderQy } 원</h5>
                             </div>
                         </div>
                     </div>
                     <div class="progress border" style="height: 1px;">
                         <div class="progress-bar bg-light" style="width: 100%;"></div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <img src="../userimages/product_2.png" />
-                            <!--제품이미지 출력-->
-                        </div>
-                        <div class="col-md-8 mb-3" style="padding-top: 40px;">
-                            <!--제품정보 출력-->
-                            <div class="col-md-12 mb-3">
-                                <!-- 주문번호 -->
-                                <h5>ACL120UASTYH</h5>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <!-- 제품이름 -->
-                                <h3>공기청정기 12평형</h3>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <!--제품수량 가격-->
-                                <h5>수량 1 &nbsp;&nbsp; 555,000원</h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="progress border" style="height: 1px;">
-                        <div class="progress-bar bg-light" style="width: 100%;"></div>
-                    </div>
+					</c:forEach>
 
                     <div class="row" style="padding-top: 30px;">
 
@@ -261,6 +214,46 @@
 
 
                 </div>
+                <div class="col-md-4 order-md-2 mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">주문 확인</span> <span class="badge badge-secondary badge-pill"></span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">주문그룹번호</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div> <span class="text-muted">12원</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">총 주문 금액</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div> <span class="text-muted">8원</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">마일리지 사용금액</h6>
+                                <small class="text-muted">Brief description</small>
+                            </div> <span class="text-muted">5원</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Promo code</h6>
+                                <small>EXAMPLECODE</small>
+                            </div> <span class="text-success">-5원</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between"><span>결제금액</span>
+                            <strong>20원</strong></li>
+                    </ul>
+
+
+                    <div class="input-group">
+                        <hr class="mb-4">
+                        <button id="btn" name="btn" class="btn btn-primary btn-lg btn-block" type="button">결제하기</button>
+                    </div>
+
+                </div>
             </div>
         </form>
         <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -273,26 +266,7 @@
         </footer>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="form-validation.js"></script>
-    <script>
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation')
-
-            // Loop over them and prevent submission
-            Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        }, false)
-    </script>
 </body>
 
 </html>

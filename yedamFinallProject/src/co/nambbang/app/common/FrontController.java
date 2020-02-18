@@ -51,6 +51,7 @@ import co.nambbang.app.seller.BoardWrite;
 import co.nambbang.app.seller.BoardWriteOK;
 import co.nambbang.app.seller.sellerEdit;
 import co.nambbang.app.setle.AjaxSetleCommand;
+import co.nambbang.app.setle.SetleFormCommand;
 
 @WebServlet({"*.do","*.ad"}) 
 public class FrontController extends HttpServlet {
@@ -122,6 +123,7 @@ public class FrontController extends HttpServlet {
 		
 		// 민우
 		cont.put("/ajaxSetle.do",new AjaxSetleCommand());
+		cont.put("/SetleForm.do", new SetleFormCommand());
 
 	}
 

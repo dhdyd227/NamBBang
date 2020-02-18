@@ -17,7 +17,7 @@ public class DetailGoods implements Command {
 			throws ServletException, IOException {
 		System.out.println("======== DetailGoods 진입!!!");
 		
-		Map param = Utils.getParameterMap(request);
+		Map<String, Object> param = Utils.getParameterMap(request);
 		GoodsDAO dao = new GoodsDAO();
 		GoodsDTO goodsDetail = null;
 		List<GoodsDTO> photoList = null;

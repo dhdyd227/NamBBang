@@ -35,10 +35,11 @@ public class SetleDAO extends DAO {
 			cstmt.setInt(4, dto.getSetleAmount());
 			cstmt.setInt(5, dto.getMlgUseAmount());
 			cstmt.setInt(6, dto.getOrderGroupNo());
-			cstmt.registerOutParameter(7, OracleTypes.VARCHAR);
+			cstmt.setString(7, dto.getOrderTelno());
+			cstmt.registerOutParameter(8, OracleTypes.VARCHAR);
 			cstmt.executeUpdate();
 
-			result = cstmt.getString(7);
+			result = cstmt.getString(8);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

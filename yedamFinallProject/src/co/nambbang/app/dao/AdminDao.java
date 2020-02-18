@@ -7,6 +7,7 @@ import java.util.List;
 
 import co.nambbang.app.dto.AdminMainDto;
 import co.nambbang.app.dto.AdminMerchListDto;
+import co.nambbang.app.dto.AdminMlgDto;
 import co.nambbang.app.dto.AdminPagingDto;
 import co.nambbang.app.dto.AdminSetleManageDto;
 import co.nambbang.app.dto.AdminUserDto;
@@ -759,7 +760,7 @@ public class AdminDao extends DAO {
 				"and s.SETLE_NO = ur.SETLE_NO " + 
 				"and o.SLE_ID = gs.SLE_ID " + 
 				"and gs.GOODS_ID = gr.GOODS_ID " + and + " order by ? ";
-						
+		
 		int i = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -801,7 +802,7 @@ public class AdminDao extends DAO {
 			
 			// sort 컬럼 - 작동안함. ???
 			pstmt.setString(++i, dto.getSort());
-			
+			System.out.println(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				lastpage = rs.getInt("cnt");
@@ -906,13 +907,13 @@ public class AdminDao extends DAO {
 			pstmt.setInt(++i, pDto.getEnd());
 			
 			rs = pstmt.executeQuery();
-			System.out.println("sql");
+			System.out.println("sql===" + sql);
 			while(rs.next()) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("user_id", rs.getString("user_id"));
 				map.put("user_name", rs.getString("user_name"));
 				map.put("user_brthdy", rs.getDate("user_brthdy"));
-				map.put("srbde", rs.getDate("rsbde"));
+				map.put("srbde", rs.getDate("srbde"));
 				map.put("age", rs.getInt("age"));
 				map.put("user_sttus", rs.getString("user_sttus"));
 				map.put("order_amount", rs.getInt("order_amount"));
@@ -931,11 +932,194 @@ public class AdminDao extends DAO {
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		int lastpage = 0;
 		String and = "and 1=1";
-	
 		
+		if(dto != null) {
+			if(dto.getuName1() != null ) {
+				and += " and u.user_id like '%'||?||'%' ";
+			}
+			if(dto.getuStat1() != null && dto.getuStat1().equals("UNO")) {
+				and += " and u.user_sttus = 'UNO' ";
+			}
+			if(dto.getuStat1() != null && dto.getuStat1().equals("UDR")) {
+				and += " and u.user_sttus = 'UDR' ";
+			}
+			if(dto.getuStat1() != null && dto.getuStat1().equals("UDS")) {
+				and += " and u.user_sttus = 'UDS' ";
+			}
+			if(dto.getuStat1() != null && dto.getuStat1().equals("USE")) {
+				and += " and u.user_sttus = 'USE' ";
+			}			
+			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and u.srbde between to_date(?,'yyyy-mm-dd') and to_date(?,'yyyy-mm-dd') ";
+			}
+			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and u.srbde between to_date(?,'yyyy-mm-dd') and sysdate ";
+			}
+			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and u.user_brthdy between to_date(?,'yyyy-mm-dd') and to_date(?,'yyyy-mm-dd') ";
+			}
+			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and u.user_brthdy between to_date(?,'yyyy-mm-dd') and sysdate ";
+			}
+			if(dto.getuStat2() != null && dto.getuStat2().equals("between 10 and 20")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 19 and to_char(sysdate,'yyyy') - 10 ";
+			}
+			if(dto.getuStat2() != null && dto.getuStat2().equals("between 20 and 30")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 29 and to_char(sysdate,'yyyy') - 20 ";
+			}
+			if(dto.getuStat2() != null && dto.getuStat2().equals("between 30 and 40")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 39 and to_char(sysdate,'yyyy') - 30 ";
+			}
+			if(dto.getuStat2() != null && dto.getuStat2().equals("between 40 and 50")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 49 and to_char(sysdate,'yyyy') - 40 ";
+			}
+			if(dto.getuStat2() != null && dto.getuStat2().equals("between 50 and 60")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 59 and to_char(sysdate,'yyyy') - 50 ";
+			}
+			if(dto.getuStat2() != null && dto.getuStat2().equals("61")) {
+				and += " and to_char(user_brthdy,'yyyy') to_char(user_brthdy,'yyyy') < to_char(sysdate,'yyyy') - 60 ";
+			}
+			
+		}
 		
-		
-		
+		String sql = "select count(*) cnt " + 								
+					"from order_group og, users u, setle s " + 
+					"where u.USER_ID = og.USER_ID " + 
+					"and og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + and +  
+					" order by ? "; 
+				 						
+		int i = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(dto.getuName1() != null ) {
+				pstmt.setString(++i, dto.getuName1());
+			}
+			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			}
+			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());
+			}
+			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			}
+			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());
+			}
+			
+			pstmt.setString(++i, dto.getSort());
+			
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				lastpage = rs.getInt("cnt");
+			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return lastpage;
 	}
+	//마일리지 설정 검색 
+	public AdminMlgDto MlgSelect() {
+		AdminMlgDto dto = new AdminMlgDto();
+		
+		String sql = "select MLG_ACCML_RATE, MUMM_SETLE_ACCML_AMOUNT, USER_SBSCRB_ACCML_AMOUNT, MUMM_MLG_USE_POSBL_AMOUNT, to_char(RGSDE,'yy-mm-dd') mdate "
+				+ "from mlg_policy "
+				+ "where rgsde = (select max(rgsde) from mlg_policy)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();		
+			System.out.println(sql);
+			if(rs.next()) {
+				dto = new AdminMlgDto();
+				dto.setPercent(rs.getInt("MLG_ACCML_RATE"));
+				dto.setAmount(rs.getInt("MUMM_SETLE_ACCML_AMOUNT"));
+				dto.setNewUser(rs.getInt("USER_SBSCRB_ACCML_AMOUNT"));
+				dto.setUseMlgAble(rs.getInt("MUMM_MLG_USE_POSBL_AMOUNT"));
+				dto.setmDate(rs.getString("mdate"));
+				
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				 
+		return dto;
+	}
+	//마일리지 설정 insert
+	public int AdminMlgUpdate(AdminMlgDto dto) {
+		int r = 0;
+		
+		String sql ="insert into mlg_policy(mlg_policy_no, mlg_accml_rate, rgsde, mumm_setle_accml_amount, user_sbscrb_accml_amount, mumm_mlg_use_posbl_amount) " + 
+				"values((select max(mlg_policy_no) from mlg_policy)+1, ?, sysdate, ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, dto.getPercent());
+			pstmt.setInt(2, dto.getAmount());
+			pstmt.setInt(3, dto.getNewUser());
+			pstmt.setInt(4, dto.getUseMlgAble());
+			
+			r = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+						
+		return r;
+	}
+	//user 마일리지 내역 검색 
+	public List<HashMap<String, Object>> AdminMlgManageSelect(AdminMlgDto dto) {		
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		dto = new AdminMlgDto();
+		
+		String and = "and 1=1";
+		String sql ="select user_id, rgsde, mlg, se_code from mlg_change_log "
+				+ "where user_id = ? " + and + " order by user_id";
+		
+		if(dto != null) {
+			if(dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and rgsde > ? ";
+				and += " and to_char(rgsde,'yy-mm-dd') < to_char(sysdate,'yy-mm-dd') ";
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and rgsde > ? ";
+			}
+			int i = 0;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				if(dto.getsDate() != null && dto.geteDate() != null) {
+					pstmt.setString(++i, dto.getsDate());
+					pstmt.setString(++i, dto.geteDate());
+				}
+				if(dto.getsDate() != null && dto.geteDate() == null) {
+					pstmt.setString(++i, dto.getsDate());
+				}
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("user_id", rs.getString("user_id"));
+					map.put("rgsde", rs.getDate("rgsde"));
+					map.put("mlg", rs.getInt("mlg"));
+					map.put("se_code", rs.getString("se_code"));
+					list.add(map);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close();
+			}
+						
+		}						
+		return list;
+	}
+	
+	
 }

@@ -110,6 +110,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/boardWriteOK.do", new BoardWriteOK());
 		cont.put("/boardlist.do", new BoardList());
 		cont.put("/sellerEdit.do", new sellerEdit());
+		//cont.put("/sellerEdit.do", new sellerEdit());
 		
 		// 민우
 		cont.put("/ajaxSetle.do",new AjaxSetleCommand());

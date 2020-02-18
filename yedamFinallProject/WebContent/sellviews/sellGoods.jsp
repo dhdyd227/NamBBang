@@ -76,7 +76,7 @@
 	<script type="text/javascript">
       if("${result}" == "sellOk"){
     	  alert("상품판매가 등록되었습니다.");
-    	  location.href = "/yedamFinallProject/goods/listSellGoods.do";
+    	  location.href = "/yedamFinallProject/listSellGoods.do";
       }
 	</script>
 	

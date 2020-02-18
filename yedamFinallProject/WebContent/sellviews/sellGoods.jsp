@@ -5,9 +5,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% 
-	String imgPath = "/yedamFinalProject/sellviews";
-	String jsPath = "/yedamFinalProject/sellviews";
-	String cssPath = "/yedamFinalProject/sellviews";
+	String imgPath = "/yedamFinallProject/sellviews";
+	String jsPath = "/yedamFinallProject/sellviews";
+	String cssPath = "/yedamFinallProject/sellviews";
 %>
 <html>
 	<head>
@@ -76,7 +76,7 @@
 	<script type="text/javascript">
       if("${result}" == "sellOk"){
     	  alert("상품판매가 등록되었습니다.");
-    	  location.href = "/yedamFinalProject/goods/listSellGoods.do";
+    	  location.href = "/yedamFinallProject/goods/listSellGoods.do";
       }
 	</script>
 	

@@ -5,9 +5,9 @@
 <html lang="en">
 
 <% 
-	String imgPath = "/yedamFinalProject/sellerRegi";
-	String jsPath = "/yedamFinalProject/sellerRegi";
-	String cssPath = "/yedamFinalProject/sellerRegi";
+	String imgPath = "/yedamFinallProject/sellerRegi";
+	String jsPath = "/yedamFinallProject/sellerRegi";
+	String cssPath = "/yedamFinallProject/sellerRegi";
 %>
 
 <head>

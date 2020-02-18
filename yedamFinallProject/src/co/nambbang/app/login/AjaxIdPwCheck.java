@@ -63,7 +63,7 @@ public class AjaxIdPwCheck implements Command {
 			int cer = dao.certificationUpdate(temp2,name,id,email);
 			
 			
-			String host = "http://localhost:9090/yedamFinalProject";
+			String host = "http://localhost:9090/yedamFinallProject";
 			String from = "dhdyd227227@gmail.com";
 			String to = "dhdyd227@naver.com";// 메일보내는 이메일
 			String subject = "예담프로젝트를 위한 이메일 인증 메일";

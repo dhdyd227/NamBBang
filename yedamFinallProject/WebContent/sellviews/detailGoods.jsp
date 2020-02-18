@@ -4,9 +4,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% 
-	String imgPath = "/yedamFinalProject/sellviews";
-	String jsPath = "/yedamFinalProject/sellviews";
-	String cssPath = "/yedamFinalProject/sellviews";
+	String imgPath = "/yedamFinallProject/sellviews";
+	String jsPath = "/yedamFinallProject/sellviews";
+	String cssPath = "/yedamFinallProject/sellviews";
 %>
 <html>
 	<head>

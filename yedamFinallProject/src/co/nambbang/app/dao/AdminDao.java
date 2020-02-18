@@ -883,49 +883,41 @@ public class AdminDao extends DAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			if(dto.getuName1() != null ) {
-				
+				pstmt.setString(++i, dto.getuName1());
 			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("UNO")) {
-				
-			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("UDR")) {
-				
-			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("UDS")) {
-				
-			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("USE")) {
-				
-			}			
 			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
-				
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
 			}
 			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
-				
+				pstmt.setString(++i, dto.getsDate());
 			}
 			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
-				
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
 			}
 			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
-				
+				pstmt.setString(++i, dto.getsDate());
 			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 10 and 20")) {
-				
-			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 20 and 30")) {
-				
-			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 30 and 40")) {
-				
-			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 40 and 50")) {
-				
-			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 50 and 60")) {
-				
-			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("61")) {
-				
+			
+			pstmt.setString(++i, dto.getSort());
+			// 페이징 변수 넣기	
+			pstmt.setInt(++i, pDto.getStart());
+			pstmt.setInt(++i, pDto.getEnd());
+			
+			rs = pstmt.executeQuery();
+			System.out.println("sql");
+			while(rs.next()) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("user_id", rs.getString("user_id"));
+				map.put("user_name", rs.getString("user_name"));
+				map.put("user_brthdy", rs.getDate("user_brthdy"));
+				map.put("srbde", rs.getDate("rsbde"));
+				map.put("age", rs.getInt("age"));
+				map.put("user_sttus", rs.getString("user_sttus"));
+				map.put("order_amount", rs.getInt("order_amount"));
+				map.put("order_cnt", rs.getInt("order_cnt"));
+				list.add(map);
 			}
 			
 		} catch (SQLException e) {

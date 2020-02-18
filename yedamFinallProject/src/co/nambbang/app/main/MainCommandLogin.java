@@ -13,7 +13,8 @@ public class MainCommandLogin implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return "index.do";
+		
+		return "redirect:"+"index.do";
 	}
 
 }

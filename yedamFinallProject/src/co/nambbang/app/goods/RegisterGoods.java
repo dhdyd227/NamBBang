@@ -34,7 +34,7 @@ public class RegisterGoods implements Command {
 		dao.setAutoCommit(false);
 		
 		//결과 리턴 Map 선언
-		Map map = new HashMap();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		//파일업로드 실제 경로 구하기
 		String uploadPath = request.getSession().getServletContext().getRealPath("/uploadFile");
@@ -61,6 +61,7 @@ public class RegisterGoods implements Command {
 //			}
 			
 			//파일 저장
+			@SuppressWarnings("unchecked")
 			Enumeration<String> en = multi.getFileNames();
 			
 			String photoGroupId = dao.selectPhotoGroupId();

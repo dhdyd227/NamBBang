@@ -15,7 +15,7 @@ public class ModifySellGoods implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("======== ModifySellGoods 진입!!!");
-		Map param = Utils.getParameterMap(request);
+		Map<String, Object> param = Utils.getParameterMap(request);
 		
 		SellGoodsDAO dao = new SellGoodsDAO();
 		SellGoodsDTO sell = null;

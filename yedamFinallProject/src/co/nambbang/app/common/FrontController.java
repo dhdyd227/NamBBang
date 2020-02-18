@@ -36,9 +36,11 @@ import co.nambbang.app.admin.AdminUserManageCommand;
 import co.nambbang.app.admin.AdminUserManageOkCommand;
 import co.nambbang.app.goods.DeleteGoods;
 import co.nambbang.app.goods.DetailGoods;
+import co.nambbang.app.goods.DetailSellGoods;
 import co.nambbang.app.goods.ListGoods;
 import co.nambbang.app.goods.ListSellGoods;
 import co.nambbang.app.goods.ModifyGoods;
+import co.nambbang.app.goods.ModifySellGoods;
 import co.nambbang.app.goods.RegisterGoods;
 import co.nambbang.app.goods.RegisterGoodsForm;
 import co.nambbang.app.goods.SellGoods;
@@ -123,6 +125,8 @@ public class FrontController extends HttpServlet {
 		cont.put("/sellGoods.do", new SellGoods()); 
 		cont.put("/sellGoodsForm.do", new SellGoodsForm());//판매할 상품 등록
 		cont.put("/listSellGoods.do", new ListSellGoods()); //상품판매 정보보기
+		cont.put("/detailSellGoods.do", new DetailSellGoods()); //상품판대 등록
+		cont.put("/modifySellGoods.do", new ModifySellGoods()); //상품판대 수정		
 		
 		// 시현
 		cont.put("/boardWrite.do", new BoardWrite()); 

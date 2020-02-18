@@ -6,7 +6,7 @@ import java.util.List;
 
 public class sellerDTO {
 	private String id;
-	private String pw;
+	//private String pw;
 	private String sname;
 	private String lc;
 	private String name;

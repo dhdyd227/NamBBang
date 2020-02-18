@@ -86,7 +86,7 @@ public class RegisterGoods implements Command {
 			goods.setGoodsCl(multi.getParameter("goods_cl"));
 			goods.setNetprc(Integer.parseInt(multi.getParameter("netprc")));
 			goods.setPhotoGroupId(photoGroupId);
-			goods.setSelerId("503-44-63836"); //세션값으로 대체 할 것
+			goods.setSelerId((String)request.getAttribute("id")); //세션값으로 대체 할 것
 			dao.insertGoods(goods);
 			
 			//트랜잭션 커밋

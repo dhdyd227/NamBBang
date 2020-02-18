@@ -32,10 +32,12 @@ import co.nambbang.app.admin.AdminUserManageCommand;
 import co.nambbang.app.goods.DeleteGoods;
 import co.nambbang.app.goods.DetailGoods;
 import co.nambbang.app.goods.ListGoods;
+import co.nambbang.app.goods.ListSellGoods;
 import co.nambbang.app.goods.ModifyGoods;
 import co.nambbang.app.goods.RegisterGoods;
 import co.nambbang.app.goods.RegisterGoodsForm;
 import co.nambbang.app.goods.SellGoods;
+import co.nambbang.app.goods.SellGoodsForm;
 import co.nambbang.app.login.AjaxIdDuplicationCheck;
 import co.nambbang.app.login.AjaxIdFindClick;
 import co.nambbang.app.login.AjaxIdPwCheck;
@@ -93,13 +95,15 @@ public class FrontController extends HttpServlet {
 		cont.put("/ajaxIdPwCheck.do", new AjaxIdPwCheck()); //email certification
 		cont.put("/ajaxIdFindClick.do", new AjaxIdFindClick()); //idfindclick ;
 		// 미영
-		cont.put("/goods/regGoodsForm.do", new RegisterGoodsForm()); // 상품등록
-		cont.put("/goods/regGoods.do", new RegisterGoods()); // 상품목록
-		cont.put("/goods/listGoods.do", new ListGoods()); // 상품상세
-		cont.put("/goods/detailGoods.do", new DetailGoods()); // 상품상세(수정)
-		cont.put("/goods/modifyGoods.do", new ModifyGoods()); // 상품삭제
-		cont.put("/goods/deleteGoods.do", new DeleteGoods()); // 상품판매등록목록
-		cont.put("/goods/sellGoods.do", new SellGoods());
+		cont.put("/regGoodsForm.do", new RegisterGoodsForm()); // 상품등록
+		cont.put("/regGoods.do", new RegisterGoods()); // 상품목록
+		cont.put("/listGoods.do", new ListGoods()); // 상품상세
+		cont.put("/detailGoods.do", new DetailGoods()); // 상품상세(수정)
+		cont.put("/modifyGoods.do", new ModifyGoods()); // 상품삭제
+		cont.put("/deleteGoods.do", new DeleteGoods()); // 상품판매 등록목록
+		cont.put("/sellGoods.do", new SellGoods()); 
+		cont.put("/sellGoodsForm.do", new SellGoodsForm());//판매할 상품 등록
+		cont.put("/listSellGoods.do", new ListSellGoods()); //상품판매 정보보기
 		
 		// 시현
 		

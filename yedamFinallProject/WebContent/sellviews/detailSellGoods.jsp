@@ -49,7 +49,7 @@
 	<script type="text/javascript">
       if("${result}" == "modifyOk"){
     	  alert("상품판매가 수정되었습니다.");
-    	  location.href = "/yedamFinallProject/goods/listSellGoods.do";
+    	  location.href = "/yedamFinallProject/listSellGoods.do";
       }
 	</script>
 

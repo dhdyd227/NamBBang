@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.nambbang.app.common.Command;
+import co.nambbang.app.dao.sellerDAO;
+import co.nambbang.app.dto.sellerDTO;
 
 public class BoardWriteOK implements Command{
 

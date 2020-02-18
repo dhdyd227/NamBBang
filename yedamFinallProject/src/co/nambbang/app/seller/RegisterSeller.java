@@ -16,6 +16,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import co.nambbang.app.common.Command;
+import co.nambbang.app.dao.sellerDAO;
+import co.nambbang.app.dto.sellerDTO;
 import net.sf.json.JSONObject;
 
 public class RegisterSeller implements Command {

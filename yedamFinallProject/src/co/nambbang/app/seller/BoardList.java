@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.nambbang.app.common.Command;
+import co.nambbang.app.dao.sellerDAO;
+import co.nambbang.app.dto.sellerDTO;
 
 public class BoardList implements Command {
 
@@ -15,7 +17,7 @@ public class BoardList implements Command {
 
 		sellerDAO dao = new sellerDAO();
 		ArrayList<sellerDTO> list = new ArrayList<>();
-		list = dao.select();
+		list = dao.select();  
 		
 		request.setAttribute("list", list);
 		return "/sellerRegi/view/boardlist.jsp";

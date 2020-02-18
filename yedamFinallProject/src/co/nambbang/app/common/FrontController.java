@@ -42,6 +42,10 @@ import co.nambbang.app.login.AjaxIdPwCheck;
 import co.nambbang.app.login.AjaxLoginCheck;
 import co.nambbang.app.login.AjaxRegisterDB;
 import co.nambbang.app.main.MainCommandList;
+import co.nambbang.app.seller.BoardList;
+import co.nambbang.app.seller.BoardWrite;
+import co.nambbang.app.seller.BoardWriteOK;
+import co.nambbang.app.seller.sellerEdit;
 import co.nambbang.app.setle.AjaxSetleCommand;
 
 @WebServlet({"*.do","*.ad"}) 
@@ -102,6 +106,10 @@ public class FrontController extends HttpServlet {
 		cont.put("/goods/sellGoods.do", new SellGoods());
 		
 		// 시현
+		cont.put("/boardWrite.do", new BoardWrite()); 
+		cont.put("/boardWriteOK.do", new BoardWriteOK());
+		cont.put("/boardlist.do", new BoardList());
+		cont.put("/sellerEdit.do", new sellerEdit());
 		
 		// 민우
 		cont.put("/ajaxSetle.do",new AjaxSetleCommand());

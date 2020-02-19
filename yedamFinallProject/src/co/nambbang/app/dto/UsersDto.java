@@ -59,6 +59,12 @@ public class UsersDto {
 	public void setUserSRBDE(Date userSRBDE) {
 		this.userSRBDE = userSRBDE;
 	}
+	@Override
+	public String toString() {
+		return "UsersDto [userId=" + userId + ", userName=" + userName + ", userMail=" + userMail + ", userTelNo="
+				+ userTelNo + ", userBirthdy=" + userBirthdy + ", userSexDSTN=" + userSexDSTN + ", userSttus="
+				+ userSttus + ", userSRBDE=" + userSRBDE + "]";
+	}
 	
 	
 	

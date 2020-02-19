@@ -12,7 +12,7 @@ public class sellerDAO extends DAO {
 		String sql = "insert into seler (SELER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, BSN_BEGIN_TIME, BSN_CLOS_TIME, SNS_ADRES, INTRCN_SNTNC) "
 				+ "values (?, ?, ?, ?, ?, to_date(?,'HH24:mi'), to_date(?,'HH24:mi'), ?, ?)";
 		String sql2 = "insert into LOGIN_INFO (ID, PASSWORD) "
-				+ "values(?, ?)";
+				+ "values (?, ?)";
 		
 		try {
 			System.out.println();
@@ -68,8 +68,12 @@ public class sellerDAO extends DAO {
 		int n = 0;
 		try {
 			String sql = "update seler set "
-					+ "MTLTY_LC = ?, SELLER_TELNO = ?, BSN_BEGIN_TIME = ?, BSN_CLOS_TIME = ?, SNS_ADRES = ?, INTRCN_SNTNC = ? "
+					+ "MTLTY_LC = ?, SELLER_TELNO = ?, BSN_BEGIN_TIME = to_date(?,'HH24:mi'), BSN_CLOS_TIME = to_date(?,'HH24:mi'), SNS_ADRES = ?, INTRCN_SNTNC = ? "
 					+ "where SELER_ID = ?";
+			String sql2 = "update LOGIN_INFO set "
+					+ "PASSWORD = ? "
+					+ "where id = ?";
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getLc());
 			pstmt.setString(2, dto.getNo());
@@ -77,7 +81,14 @@ public class sellerDAO extends DAO {
 			pstmt.setString(4, dto.getClose());
 			pstmt.setString(5, dto.getSns());
 			pstmt.setString(6, dto.getIntrcn());
+			pstmt.setString(7, dto.getSid());
 			n = pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, dto.getPw());
+			pstmt.setString(2, dto.getSid());
+			n = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception();
@@ -88,7 +99,7 @@ public class sellerDAO extends DAO {
 	}
 
 	// 단건 조회
-	public sellerDTO boardEditSelect(int id) {
+	public sellerDTO boardEditSelect(String sid) {
 
 		sellerDTO dto = new sellerDTO();
 		String sql = "select SELER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, "
@@ -99,7 +110,7 @@ public class sellerDAO extends DAO {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id);
+			pstmt.setString(1, sid);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				dto.setSid(rs.getString("SELER_ID"));

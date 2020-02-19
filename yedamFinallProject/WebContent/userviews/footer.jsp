@@ -1,40 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/466f6d08a6.js" crossorigin="anonymous"></script>
 <footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6">
-						<div
-							class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
-							<ul class="footer_nav">
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">FAQs</a></li>
-								<li><a href="contact.html">Contact us</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div
-							class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+<body>
+<br><br>
+<div class="container">
+<div class="row">
+	<div class="col-md-4 text-center cell-tall"><h3>Contact us</h3></div>
+    <div class="col-md-4 text-center cell-tall"><h3>Connect with us</h3></div>
+    <div class="col-md-4 text-center cell-tall"><h3>Favorite menu</h3></div>
+</div>
+<div class="row">
+	<div class="col-md-4 text-center cell-med">대구광역시 중구 상서동 22-2 5F</div>
+    <div class="col-md-4 text-center cell-tall">
+    <i class='fab fa-facebook-square' style='font-size:36px'></i>
+    <i class='fab fa-twitter-square' style='font-size:36px'></i>
+    <i class='fab fa-instagram' style='font-size:36px'></i></div>
+    <div class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">회원정보</div>
+</div>
+<div class="row">
+	<div class="col-md-4 text-center cell-med">대표자 : 권 오 용</div>
+    <div class="col-md-4 text-center cell-tall"></div>
+    <div class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">사장님사이트</div>
+</div>
+<div class="row">
+	<div class="col-md-4 text-center cell-med">사업자 번호: 880-87-01188 </div>
+    <div class="col-md-4 text-center cell-tall"><h5>고객 센터 : 1588-8700</h5></div>
+    <div class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">입점 문의</div>
+</div>
+<div class="row">
+	<div class="col-md-4 text-center cell-med">이메일: cs@nambbang.co.kr </div>
+    <div class="col-md-4 text-center cell-tall"></div>
+    <div class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">주문/결제</div>
+</div>
+</br>
+<div class="row">
+	<div class="col-md-12 text-center cell-med"></div>
+</div>
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="footer_nav_container">
-							<div class="cr">2018 All Rights Reserverd. Made with <i class="fa fa-heart-o"
-									aria-hidden="true"></i> by <a href="#">Colorlib</a> &amp; distributed by <a
-									href="https://themewagon.com">ThemeWagon</a></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+<div class="row">
+	<div class="col-md-12 text-center text-white cell-med bg-dark">
+	<h6>© 2020&nbsp;by NamBBang.&nbsp;All rights&nbsp;reserved.</h6></div>
+</div>
+</div>
+</footer>

@@ -170,19 +170,22 @@
 	
 	//회원가입 비밀번호와 비밀번호확인 같은지 체크
 	  function isPwSame() {
-	  	var pw = registerForm.password.value;
-	  	var pwCheck = registerForm.password_confirmation.value;
+		var pw = frm.pw.value;
+		var pwCheck = frm.pw_conf.value;
+		
+		frm.pw.value = "";
+		frm.pw_conf.value="";
 
 	  	if (pw == "" && pwCheck == "") {
-	  		registerForm.password.style.background = 'rgba(0, 0, 0, 0.09)';
-	  		registerForm.password_confirmation.style.background = 'rgba(0, 0, 0,0.09)';
+	  		frm.pw.style.background = 'rgba(0, 0, 0, 0.09)';
+	  		frm.pw_conf.style.background = 'rgba(0, 0, 0,0.09)';
 	  	} else {
 	  		if (pw != pwCheck) {
-	  			registerForm.password.style.background = 'red';
-	  			registerForm.password_confirmation.style.background = 'red';
+	  			frm.pw.style.background = 'red';
+	  			frm.pw_conf.style.background = 'red';
 	  		} else {
-	  			registerForm.password.style.background = 'rgb(232, 240, 254)';
-	  			registerForm.password_confirmation.style.background = 'rgb(232, 240, 254)';
+	  			frm.pw.style.background = 'rgb(232, 240, 254)';
+	  			frm.pw_conf.style.background = 'rgb(232, 240, 254)';
 	  		}
 	  	}
 	  }
@@ -203,13 +206,12 @@
 		        });
 		        
 	  }
-	  
+	//아이디 중복 체크  
 	  function id_overlap_check() {
 
 		      $('#id_check_sucess').hide();
 		      $('.id_overlap_button').show();
 		      $('.sid_input').attr("check_result", "fail");
-
 
 		    if ($('.sid_input').val() == '') {
 		      alert('ID(사업자번호)를 입력해주세요.')
@@ -219,14 +221,14 @@
 		    id_overlap_input = document.querySelector('input[name="sid"]');
 
 		    $.ajax({
-		      url: "{% url 'lawyerAccount:id_overlap_check' %}",
+		      url: "../sellerIdCheck.do",
 		      data: {
 		        'sid': id_overlap_input.value
 		      },
 		      datatype: 'json',
 		      success: function (data) {
 		        console.log(data['overlap']);
-		        if (data['overlap'] == "fail") {
+		        if (data['overlap'] == "1") {
 		          alert("이미 존재하는 아이디 입니다.");
 		          id_overlap_input.focus();
 		          return;
@@ -284,6 +286,15 @@
 			frm.pw.focus();
 			return false;
 		} 
+		if(frm.pw_conf.value == ""){
+			alert("비밀번호를 입력해주세요.")
+			frm.pw_conf.focus();
+			return false;
+		} 
+		if (frm.pw.value != frm.pw_conf.value) {
+			alert("패스워드 확인과 다릅니다.")
+			return false;
+		} 
 		
 		if(frm.sname.value == ""){
 			alert("상호명을 입력해주세요.")
@@ -325,11 +336,7 @@
 			frm.intrcn.focus();
 			return false;
 		}
-		if(frm.grade.value == ""){
-			alert("등급을 입력해주세요.")
-			frm.grade.focus();
-			return false;
-		}
+		
 		return true;
 	}
 	
@@ -351,7 +358,7 @@
 					<th>*비밀번호</th><td><input style="width:730px;" type="password" id="pw" name="pw"></td>
 				</tr>
 				<tr height="30">
-					<th>*비밀번호확인</th><td><input style="width:730px;" type="password" id="pw" name="pw"></td>
+					<th>*비밀번호확인</th><td><input style="width:730px;" type="password" id="pw_conf" name="pw_conf"></td>
 				</tr>
 				<tr height="30">
 					<th>*상호명</th><td><input style="width:730px;" type="text" id="sname" name="sname"></td>

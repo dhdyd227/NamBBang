@@ -23,7 +23,5 @@ public class SellerIdCheck implements Command {
 		return "ajax:"+Check;
 		
 		//request.setAttribute("dto", dto);
-		
 	}
-
 }

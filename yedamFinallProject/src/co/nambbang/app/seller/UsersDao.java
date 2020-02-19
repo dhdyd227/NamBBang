@@ -2,6 +2,8 @@ package co.nambbang.app.seller;
 
 import java.sql.SQLException;
 
+import co.nambbang.app.dao.DAO;
+
 public class UsersDao extends DAO {
 	public int isLoginCheck(String id, String pw) {
 

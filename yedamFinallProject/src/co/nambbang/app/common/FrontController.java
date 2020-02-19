@@ -54,6 +54,7 @@ import co.nambbang.app.main.MainCommandLogin;
 import co.nambbang.app.seller.BoardList;
 import co.nambbang.app.seller.BoardWrite;
 import co.nambbang.app.seller.BoardWriteOK;
+import co.nambbang.app.seller.SellerEditCommand;
 import co.nambbang.app.seller.SellerIdCheck;
 import co.nambbang.app.seller.sellerEdit;
 import co.nambbang.app.setle.AjaxSetleCommand;
@@ -129,9 +130,9 @@ public class FrontController extends HttpServlet {
 		cont.put("/boardWriteOK.do", new BoardWriteOK());
 		cont.put("/boardlist.do", new BoardList());
 		cont.put("/sellerEdit.do", new sellerEdit());
+		cont.put("/sellerEditCommand.do", new SellerEditCommand());
 		cont.put("/sellerIdCheck.do", new SellerIdCheck());
 		
-		//cont.put("/sellerEdit.do", new sellerEdit());
 		
 		// 민우
 		cont.put("/ajaxSetle.do",new AjaxSetleCommand());

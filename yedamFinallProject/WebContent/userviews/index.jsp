@@ -131,7 +131,7 @@
 									</div>
 									<div class="product_info">
 										<h6 class="product_name">
-											<a href="single.html">${list.goodsName} </a>
+											<a href="single.do?sleId=${list.sleId }">${list.goodsName} </a>
 										</h6>
 										<div class="product_price">
 											${list.slePc}<span>${list.netPrc }</span>

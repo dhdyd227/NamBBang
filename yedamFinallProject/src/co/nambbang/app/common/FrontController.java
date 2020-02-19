@@ -47,6 +47,7 @@ import co.nambbang.app.goods.RegisterGoods;
 import co.nambbang.app.goods.RegisterGoodsForm;
 import co.nambbang.app.goods.SellGoods;
 import co.nambbang.app.goods.SellGoodsForm;
+import co.nambbang.app.goods.Single;
 import co.nambbang.app.login.AjaxIdDuplicationCheck;
 import co.nambbang.app.login.AjaxIdFindClick;
 import co.nambbang.app.login.AjaxIdPwCheck;
@@ -137,6 +138,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/listSellGoods.do", new ListSellGoods()); //상품판매 정보보기
 		cont.put("/detailSellGoods.do", new DetailSellGoods()); //상품판대 등록
 		cont.put("/modifySellGoods.do", new ModifySellGoods()); //상품판대 수정		
+		cont.put("/single.do", new Single()); //싱글페이지
 		
 		// 시현
 		cont.put("/boardWrite.do", new BoardWrite()); 

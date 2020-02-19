@@ -120,7 +120,7 @@ jQuery(document).ready(function($)
 						</ul>
 					</div>
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<span>구매수량:</span>
+						<span style="min-width: 70px;">구매수량:</span>
 						<div class="quantity_selector">
 							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
 							<span id="quantity_value">1</span>

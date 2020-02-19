@@ -3,19 +3,30 @@ package co.nambbang.app.dto;
 import java.sql.Date;
 
 public class SetleDto {
-	private int setleNo;
+	private Long setleNo;
 	private String orderMn;
 	private String setleConfmCode;
 	private int setleAmount;
 	private int mlgUseAmount;
 	private Date setleDe;
 	private int orderGroupNo;
+	private String orderTelno;
 
-	public int getSetleNo() {
+	
+	
+	public String getOrderTelno() {
+		return orderTelno;
+	}
+
+	public void setOrderTelno(String orderTelno) {
+		this.orderTelno = orderTelno;
+	}
+
+	public Long getSetleNo() {
 		return setleNo;
 	}
 
-	public void setSetleNo(int setleNo) {
+	public void setSetleNo(Long setleNo) {
 		this.setleNo = setleNo;
 	}
 
@@ -67,8 +78,13 @@ public class SetleDto {
 		this.orderGroupNo = orderGroupNo;
 	}
 
-	public SetleDto(int setleNo, String orderMn, String setleConfmCode, int setleAmount, int mlgUseAmount, Date setleDe,
-			int orderGroupNo) {
+
+	public SetleDto() {
+		super();
+	}
+
+	public SetleDto(Long setleNo, String orderMn, String setleConfmCode, int setleAmount, int mlgUseAmount, Date setleDe,
+			int orderGroupNo, String orderTelno) {
 		super();
 		this.setleNo = setleNo;
 		this.orderMn = orderMn;
@@ -77,10 +93,9 @@ public class SetleDto {
 		this.mlgUseAmount = mlgUseAmount;
 		this.setleDe = setleDe;
 		this.orderGroupNo = orderGroupNo;
+		this.orderTelno = orderTelno;
 	}
 
-	public SetleDto() {
-		super();
-	}
-
+	
+	
 }

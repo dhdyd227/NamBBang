@@ -139,11 +139,12 @@ public class UsersDao extends DAO {
 	//�α��� ���� (LOGIN_INFO)�� �� ����
 	public int insertIdPw(LoginInfoDto idPw) {
 		int n=0;
-		String sql="insert into login_info values(?,?)";
+		String sql="insert into login_info values(?,?,'US')";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, idPw.getId());
 			pstmt.setString(2, idPw.getPassword());
+			System.out.println(idPw);
 			n = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -156,9 +157,9 @@ public class UsersDao extends DAO {
 	//(Users)register
 	public int insertRegister(UsersDto user) {
 		int n=0;
-		String sql = "insert into users(USER_ID,USER_NAME,USER_MAIL,"
-				+ "USER_TELNO, USER_BRTHDY,USER_SEXDSTN,USER_STTUS)"
-				+ " values(?,?,?,?,?,?,'UNO')";
+		String sql = "insert into users(USER_ID, USER_NAME, USER_MAIL, "
+				+ "USER_TELNO, USER_BRTHDY, USER_SEXDSTN, USER_STTUS, SRBDE)"
+				+ " values(?,?,?,?,?,?,'UNO',sysdate)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getUserId());
@@ -167,6 +168,7 @@ public class UsersDao extends DAO {
 			pstmt.setString(4, user.getUserTelNo());
 			pstmt.setDate(5, new java.sql.Date(user.getUserBirthdy().getTime()));
 			pstmt.setString(6, user.getUserSexDSTN());
+			System.out.println(user);
 			n = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

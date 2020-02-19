@@ -44,7 +44,7 @@ public class AdminUserManageOkCommand implements Command {
 		dto.setsDate(sDate);
 		dto.seteDate(eDate);
 		dto.setSort(request.getParameter("sort"));
-		
+		System.out.println(dto);
 		//페이징 변수  + 처리 
 				int p = 1;
 				String pa = request.getParameter("page");
@@ -64,10 +64,10 @@ public class AdminUserManageOkCommand implements Command {
 				
 				pDto.setLastPage(lastPage);
 				pDto.setTotalCnt(totalrecord); // 검색 결과 총 몇건인지 전달할 Dto
-				System.out.println("pDto=====" + pDto);
+//				System.out.println("pDto=====" + pDto);
 				request.setAttribute("pDto", pDto);		 // 페이징 값 전달 Dto
 				request.setAttribute("uDto", dto);	 // 검색 조건 전달 Dto
-				System.out.println(dto);
+//				System.out.println(dto);
 				list = dao.selectUser(dto, pDto);
 				request.setAttribute("list", list);		 // 검색 결과 전달  List
 		

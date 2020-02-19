@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,8 +111,13 @@ function formCheck(){
 		                  </div>
 		                  <div class="col-7 col-md-8">
 		                    <div class="numbers">
-		                      <p class="card-category">마일리지 증가</p>                      
-		                      <p class="card-title">0원<p>
+		                      <p class="card-category">
+		                      	<c:choose> 
+		                      		<c:when test="${empty mDto.mName }">총 마일리지 증가</c:when>
+		                      		<c:otherwise>마일리지 증가</c:otherwise>
+		                      	</c:choose>
+		                      </p>                      
+		                      <p class="card-title">${mlgStat.increase }원<p>
 		                    </div>
 		                  </div>
 		                </div>
@@ -134,8 +140,13 @@ function formCheck(){
 		                  </div>
 		                  <div class="col-7 col-md-8">
 		                    <div class="numbers">
-		                      <p class="card-category">마일리지 차감</p>                      
-		                      <p class="card-title">0원<p>
+		                      <p class="card-category">
+		                      	<c:choose> 
+		                      		<c:when test="${empty mDto.mName }">총 마일리지 차감</c:when>
+		                      		<c:otherwise>마일리지 차감</c:otherwise>
+		                      	</c:choose>
+		                      </p>                      
+		                      <p class="card-title">${mlgStat.decrease }원<p>
 		                    </div>
 		                  </div>
 		                </div>
@@ -159,8 +170,13 @@ function formCheck(){
 		                  </div>
 		                  <div class="col-7 col-md-8">
 		                    <div class="numbers">
-		                      <p class="card-category">현재 마일리지</p>                      
-		                      <p class="card-title">0원<p>
+		                      <p class="card-category">
+		                      	<c:choose> 
+		                      		<c:when test="${empty mDto.mName }">현재 총 마일리지</c:when>
+		                      		<c:otherwise>현재 마일리지</c:otherwise>
+		                      	</c:choose>
+		                      </p>                      
+		                      <p class="card-title">${mlgStat.mlgSum }원<p>
 		                    </div>
 		                  </div>
 		                </div>
@@ -180,7 +196,7 @@ function formCheck(){
 					<div class="card-header">
 						<div class="row">
 							<div class="col-md-1">
-							<h6 class="card-title">총 [ n건]</h6>
+							<h6 class="card-title"><c:if test="${pDto.totalCnt != null }">[총  ${pDto.totalCnt }건]</c:if></h6>
 							</div>
 							<div class="col-md-9"></div>
 							<div class="col-md-2">
@@ -225,15 +241,32 @@ function formCheck(){
 			                      <tr>	                    
 		                    </thead>
 		                    <tbody>
-		                     	<tr class="text-center">
-		                     		
-		                     		
-		                     	</tr>
-           
+		                     <c:forEach var="map" items="${list }">
+								<tr class="text-center">
+									<td>
+										<div class="custom-control custom-checkbox text-center">
+											  <input type="checkbox" class="custom-control-input" id="" name="result_chk">
+											  <label class="custom-control-label" for=""></label>
+								  		</div>	
+									</td>
+									<td>${map.get("rgsde") }</td>
+									<td>${map.get("user_id") }</td>	
+									<td>${map.get("mlg") }</td>								
+									<c:if test="${map.get('se_code').equals('PUR') }"><td>구매</td></c:if>																		
+									<c:if test="${map.get('se_code').equals('EVE') }"><td>이벤트</td></c:if>
+									<c:if test="${map.get('se_code').equals('ELC') }"><td>충전</td></c:if>
+								</tr>								
+					 	      </c:forEach>
 		                    </tbody>
 		                  </table>
                 		</div>
-												
+						<div class="row">
+                			<div class="col-md-12 text-center">
+                				<c:forEach begin="1" end="${pDto.lastPage }" var="i">
+										<a href="#" onclick="goPage(${i})">${i }</a>
+								</c:forEach>
+                			</div>
+                		</div>						
 					</div>
 					<div class="card-footer">
 					</div>

@@ -36,9 +36,11 @@ import co.nambbang.app.admin.AdminUserManageCommand;
 import co.nambbang.app.admin.AdminUserManageOkCommand;
 import co.nambbang.app.goods.DeleteGoods;
 import co.nambbang.app.goods.DetailGoods;
+import co.nambbang.app.goods.DetailSellGoods;
 import co.nambbang.app.goods.ListGoods;
 import co.nambbang.app.goods.ListSellGoods;
 import co.nambbang.app.goods.ModifyGoods;
+import co.nambbang.app.goods.ModifySellGoods;
 import co.nambbang.app.goods.RegisterGoods;
 import co.nambbang.app.goods.RegisterGoodsForm;
 import co.nambbang.app.goods.SellGoods;
@@ -51,6 +53,7 @@ import co.nambbang.app.login.AjaxRegisterDB;
 import co.nambbang.app.main.MainCommandList;
 import co.nambbang.app.main.MainCommandLogOut;
 import co.nambbang.app.main.MainCommandLogin;
+import co.nambbang.app.main.TotalShopCommandList;
 import co.nambbang.app.seller.BoardList;
 import co.nambbang.app.seller.BoardWrite;
 import co.nambbang.app.seller.BoardWriteOK;
@@ -109,11 +112,15 @@ public class FrontController extends HttpServlet {
 		cont.put("/index.do",new MainCommandList());
 		cont.put("/logIn.do", new MainCommandLogin());
 		cont.put("/logOut.do", new MainCommandLogOut());
+		cont.put("/totalShop.do", new TotalShopCommandList());
 		cont.put("/ajaxLoginCheck.do",new AjaxLoginCheck());//login Check
 		cont.put("/ajaxIdDuplicationCheck.do", new AjaxIdDuplicationCheck());//id Check
 		cont.put("/ajaxRegisterDB.do",new AjaxRegisterDB());//register DB transport
 		cont.put("/ajaxIdPwCheck.do", new AjaxIdPwCheck()); //email certification
 		cont.put("/ajaxIdFindClick.do", new AjaxIdFindClick()); //idfindclick ;
+		
+		
+		
 		// 미영
 		cont.put("/regGoodsForm.do", new RegisterGoodsForm()); // 상품등록
 		cont.put("/regGoods.do", new RegisterGoods()); // 상품목록
@@ -124,6 +131,8 @@ public class FrontController extends HttpServlet {
 		cont.put("/sellGoods.do", new SellGoods()); 
 		cont.put("/sellGoodsForm.do", new SellGoodsForm());//판매할 상품 등록
 		cont.put("/listSellGoods.do", new ListSellGoods()); //상품판매 정보보기
+		cont.put("/detailSellGoods.do", new DetailSellGoods()); //상품판대 등록
+		cont.put("/modifySellGoods.do", new ModifySellGoods()); //상품판대 수정		
 		
 		// 시현
 		cont.put("/boardWrite.do", new BoardWrite()); 

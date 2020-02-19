@@ -1,7 +1,9 @@
 package co.nambbang.app.dao;
 
 import java.sql.Blob;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import co.nambbang.app.dto.GoodsMainSellDto;
@@ -24,16 +26,17 @@ public class GoodsSellDao extends DAO {
 				GoodsMainSellDto dto = new GoodsMainSellDto();
 				dto.setSleId(rs.getString("SLE_ID"));
 				dto.setGoodsName(rs.getString("GOODS_NAME"));
-				dto.setSleBeginTime(rs.getDate("SLE_BEGIN_TIME"));
-				dto.setSleEndTime(rs.getDate("SLE_END_TIME"));
+				
+				dto.setSleBeginTime(rs.getTimestamp("SLE_BEGIN_TIME"));
+				dto.setSleEndTime(rs.getTimestamp("SLE_END_TIME"));
+				
 				dto.setSlePc(rs.getInt("SLE_PC"));
 				dto.setSleQy(rs.getInt("SLE_QY"));
 				dto.setNetPrc(rs.getInt("NETPRC"));
 				dto.setGoodsCl(rs.getString("GOODS_CL"));
-				
 				Blob blob = rs.getBlob("PHOTO_NAME");
 				dto.setPhotoFile(blob.getBytes(1, (int)blob.length()));
-
+				
 				list.add(dto);
 			}
 		} catch (SQLException e) {

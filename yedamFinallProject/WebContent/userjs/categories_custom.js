@@ -411,26 +411,34 @@ jQuery(document).ready(function($)
 	*/
 
     function initCheckboxes()
-    {
-    	if($('.checkboxes li').length)
+    {	var checkboxesLength = $('.checkboxes li').length;
+    
+    	if(checkboxesLength)
     	{
     		var boxes = $('.checkboxes li');
-
+    		
     		boxes.each(function()
     		{	
     			var box = $(this);
-
+    			
+				
     			box.on('click', function()
     			{
-    				/*
+    				boxes.find('i').removeClass('fa-square');
+    				boxes.find('i').addClass('fa-square-o');
+    				
+    				
+    				var boxcategory = box.find('i').attr('data-checkcate');
+    				
     	        	$('.product-grid').isotope({
     		            filter: function()
     		            {
-    		            	var priceRange = $('#amount').val();
-    			        	//product-item
-    			        	var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace( '$', '' );
-
-    			        	return (itemPrice > priceMin) && (itemPrice < priceMax);
+    		            	var categoryvalue=$(this).attr('data-cate');
+    		            	 console.log($(this).attr('data-cate'));
+							if(boxcategory == '*')
+								return true;
+							else
+								return (categoryvalue == boxcategory);
     		            },
     		            animationOptions: {
     		                duration: 750,
@@ -438,18 +446,19 @@ jQuery(document).ready(function($)
     		                queue: false
     		            }
     		        });
-    	        });
-    			*/
+  
+    			
     				if(box.hasClass('active'))
     				{
     					box.find('i').removeClass('fa-square');
-    					box.find('i').addClass('fa-square-o');
+    					box.find('i').addClass('fa-square-o'); //체크안되있음
     					box.toggleClass('active');
     				}
     				else
-    				{
+    				{	
+    					
     					box.find('i').removeClass('fa-square-o');
-    					box.find('i').addClass('fa-square');
+    					box.find('i').addClass('fa-square'); //체크
     					box.toggleClass('active');
     				}
     				// box.toggleClass('active');

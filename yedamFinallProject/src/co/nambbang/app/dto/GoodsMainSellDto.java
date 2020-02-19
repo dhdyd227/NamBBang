@@ -1,14 +1,14 @@
 package co.nambbang.app.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class GoodsMainSellDto {
 	private String sleId;//판매ID
 	private String goodsName;//상품이름
 	private int sleQy; //판매수량
 	private int slePc; //판매가격
-	private Date sleBeginTime; //판매시작시간
-	private Date sleEndTime; //판매종료 시간
+	private Timestamp sleBeginTime; //판매시작시간
+	private Timestamp sleEndTime; //판매종료 시간
 	private String goodsCl; //카테고리
 	private int netPrc;  //빵판매가격
 	
@@ -47,16 +47,16 @@ public class GoodsMainSellDto {
 	public void setSlePc(int slePc) {
 		this.slePc = slePc;
 	}
-	public Date getSleBeginTime() {
+	public Timestamp getSleBeginTime() {
 		return sleBeginTime;
 	}
-	public void setSleBeginTime(Date sleBeginTime) {
+	public void setSleBeginTime(Timestamp sleBeginTime) {
 		this.sleBeginTime = sleBeginTime;
 	}
-	public Date getSleEndTime() {
+	public Timestamp getSleEndTime() {
 		return sleEndTime;
 	}
-	public void setSleEndTime(Date sleEndTime) {
+	public void setSleEndTime(Timestamp sleEndTime) {
 		this.sleEndTime = sleEndTime;
 	}
 	public String getGoodsCl() {

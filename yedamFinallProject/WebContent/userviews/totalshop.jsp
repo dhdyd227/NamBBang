@@ -42,18 +42,16 @@
 				</div>
 
 				<div class="sidebar">
-					<div class="sidebar_section">
+					<div class="sidbar_section">
 						<div class="sidebar_title">
-							<h5>Product Category</h5>
+							<h5>Ah......</h5>
 						</div>
-						<ul class="sidebar_categories">
-							<li><a href="#">Men</a></li>
-							<li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-							<li><a href="#">Accessories</a></li>
-							<li><a href="#">New Arrivals</a></li>
-							<li><a href="#">Collection</a></li>
-							<li><a href="#">Shop</a></li>
-						</ul>
+							<ul class="checkboxes">
+							<li><i class="fa fa-square-o" data-checkcate="*" aria-hidden="true"></i><span>all</span></li>
+							<li><i class="fa fa-square-o" data-checkcate='식빵류'  aria-hidden="true"></i><span>식빵류</span></li>
+							<li><i class="fa fa-square-o" data-checkcate='과자빵류' aria-hidden="true"></i><span>과자빵류</span></li>
+							<li><i class="fa fa-square-o" data-checkcate='조리빵류' aria-hidden="true"></i><span>조리빵류</span></li>
+							</ul>
 					</div>
 
 					<!-- Price Range Filtering -->
@@ -68,19 +66,7 @@
 						<div class="filter_button"><span>filter</span></div>
 					</div>
 					
-					<div class="sidbar_section">
-						<div class="sidebar_title">
-							<h5>Ah......</h5>
-						</div>
-							<ul class="checkboxes">
-							<li><i class="fa fa-square-o" data-filter=".*" aria-hidden="true"></i><span>all</span></li>
-							<li class="active"><i class="fa fa-square" data-filter="product-grid .식빵류"  aria-hidden="true"></i><span>식빵류</span></li>
-							<li><i class="fa fa-square-o" data-filter=".과자빵류" aria-hidden="true"></i><span>과자빵류</span></li>
-							<li><i class="fa fa-square-o" aria-hidden="true"></i><span>조리빵류</span></li>
-							
-							</ul>
-						
-					</div>
+					
 
 				</div>
 
@@ -142,7 +128,7 @@
 
 								<!-- Product -->
 								<c:forEach var="list" items="${GoodsMain }">
-								<div class="product-item ${list.goodsCl }">   
+								<div class="product-item ${list.goodsCl }" data-cate='${list.goodsCl }'>   
 									<div class="product discount product_filter">
 										<div class="product_image">
 										<img src="${list.stringImage }" width="30px" height="200px" alt="">

@@ -45,14 +45,17 @@
 									onclick="javascript: openLoginModal();" class="fa fa-user" aria-hidden="true"></i></a></li>
 							 -->
 							
-								<li><a data-toggle="modal" href="" onclick="javascript: openLoginModal();"> <i class="fa fa-user"
-									  aria-hidden="true" ></i></a></li>
+								
 						
 							<c:if test ="${empty CONECTR_SE}">
-							세션없다!!
+								세션없다!!
+								<li><a data-toggle="modal" href="" onclick="javascript: openLoginModal();"> <i class="fa fa-user"
+									  aria-hidden="true" ></i></a></li>
 							</c:if>
 							<c:if test ="${not empty CONECTR_SE}">
-							세션있다!!
+								세션있다!!
+								<li><a data-toggle="modal" href="" onclick="javascript: openLogoutModal();"> <i class="fa fa-user"
+									  aria-hidden="true" ></i></a></li>
 							</c:if>
 							<%
 								String ss = (String) session.getAttribute("id");

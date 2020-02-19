@@ -1,7 +1,11 @@
 package co.nambbang.app.main;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +31,8 @@ public class MainCommandList implements Command{
 			String imageString = new String(Base64.encodeBase64(list.get(i).getPhotoFile()));
 			String changeString ="data:image/jpg;base64, "+imageString;
 			list.get(i).setStringImage(changeString);
+			
+			//System.out.println(list.get(i).getSleEndTime());
 		}
 			
 		request.setAttribute("GoodsMain", list);

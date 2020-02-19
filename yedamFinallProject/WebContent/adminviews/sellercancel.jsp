@@ -1,12 +1,125 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>판매자 취소 신청</title>
+<script>
+	window.addEventListener("load", function(){
+			
+		 day.addEventListener("click",function(){
+			dateInput(0,0);			
+			if(startDate.disabled == true && endDate.disabled == true){
+				startDate.disabled = false;
+				endDate.disabled = false;
+			}
+		});
+		t_day.addEventListener("click",function(){
+			dateInput(3,0);
+			if(startDate.disabled == true && endDate.disabled == true){
+				startDate.disabled = false;
+				endDate.disabled = false;
+			}
+		});
+		s_day.addEventListener("click",function(){			
+			dateInput(7,0);
+			if(startDate.disabled == true && endDate.disabled == true){
+				startDate.disabled = false;
+				endDate.disabled = false;
+			}
+		});
+		o_mon.addEventListener("click",function(){			
+			dateInput(30,0);
+			if(startDate.disabled == true && endDate.disabled == true){
+				startDate.disabled = false;
+				endDate.disabled = false;
+			}
+		});
+		t_mon.addEventListener("click",function(){
+			dateInput(90,0);
+			if(startDate.disabled == true && endDate.disabled == true){
+				startDate.disabled = false;
+				endDate.disabled = false;
+			}
+		});
+		s_mon.addEventListener("click",function(){
+			dateInput(180,0);
+			if(startDate.disabled == true && endDate.disabled == true){
+				startDate.disabled = false;
+				endDate.disabled = false;
+			}
+		});
+		o_year.addEventListener("click",function(){
+			dateInput(365,0);
+			if(startDate.disabled == true && endDate.disabled == true){
+				startDate.disabled = false;
+				endDate.disabled = false;
+			}
+		});
+		d_all.addEventListener("click",function(){
+			dateInput(365*2,0);
+			startDate.setAttribute("disabled",true);
+			endDate.setAttribute("disabled",true);
+		});
+	});
+	 //날짜 계산
+	 function dateInput(n,m){
+		  startDate.value = "";
+		  endDate.value = "";
+		  
+		  var date = new Date();
+		  var start = new Date(Date.parse(date) - n * 1000 * 60 * 60 * 24);
+		  var today = new Date(Date.parse(date) - m * 1000 * 60 * 60 * 24);
+		  
+		  var yyyy = start.getFullYear();
+		  var mm = start.getMonth()+1;
+		  var dd = start.getDate();
+		  
+		  if(mm<10){
+		   mm = "0" + mm; //10 보다 작으면 숫자앞에 0을 붙임
+		  }if(dd<10){
+		   dd = "0" + dd;
+		  }
+		  
+		  var t_yyyy = today.getFullYear();
+		  var t_mm = today.getMonth()+1;
+		  var t_dd = today.getDate();
+		  
+		  if(t_mm<10){
+		   t_mm = "0" + t_mm;
+		  }if(t_dd<10){
+		   t_dd = "0" + t_dd;
+		  }
+		  
+		  startDate.value = yyyy + "-" + mm + "-" + dd;
+		  endDate.value = t_yyyy + "-" + t_mm + "-" + t_dd;
+		  
+		 }
+	 // submit 유효성 검사
+	 function formCheck(){
+		 var d1 = new Date(startDate.value);
+		 var d2 = new Date(endDate.value);
+	        if(frm.startDate.value > frm.endDate.value) {	             
+	            alert("시작날짜와 종료날짜를 확인해 주세요.");
+	            frm.startDate.focus();
+	            return false;	            	        	        	
+	        }
+	        if(frm.rTime.value > frm.eTime.value) {
+	        	alert("등록시간과 판매종료시간을 확인해 주세요.");
+	        	frm.rTime.focus();
+	        	return false;
+	        }
+	 }
+	
+	 
+	 
+</script>
 </head>
 <body>
+<form id="frm" name="frm" method="post" action="AdminSellerCancelOk.ad" onsubmit="return formCheck()">
+	<input type="hidden" name="page" value="1">
 	<div class="row ">
 		<div class="col-md-12">
 			<div class="row" style="padding: 0 30px">
@@ -41,7 +154,7 @@
 			                  <div class="col-7 col-md-8">
 			                    <div class="numbers">
 			                      <p class="card-category">취소신청</p>
-			                      <p class="card-title">총 0건 <br>
+			                      <p class="card-title">총 ${cancelCnt }건 <br>
 			                        <p>
 			                    </div>
 			                  </div>
@@ -54,13 +167,13 @@
 			                </div>
 			              </div>
 			            </div>	
-		    </div>	
+		    	</div>	
 			</div>
 		</div>
 		</div>
 		<div class="col-md-12">
 			<div class="col-md-12">
-				<form id="frm" name="frm" method="post" action="">
+
 				<div class="card" >
 					<div class="card-header">
 						<h6 class="card-title">판매자 취소 관리</h6>
@@ -78,18 +191,15 @@
 						<div class="row ">
 							<div class="col-md-1 pt-3 row-st">검색어</div> <!-- 첫줄끝 -->
 							<div class="col-md-2 pt-2 row-st">
-								<select class="custom-select ">
-									<option selected >주문번호</option>
-									<option>결제번호</option>
-									<option>회원ID</option>
-									
-									<option>상품번호</option>
-									<option>상품명</option>
-									<option>판매번호</option>
+								<select class="custom-select" id="ctg1" name="ctg1">									
+									<option value="seler_id" selected>판매자ID</option>																		
+									<option value="goods_id">상품번호</option>									
+									<option value="goods_name">상품명</option>
+									<option value="sle_id">판매번호</option>
 								</select>
 							</div> 
 							<div class="col-md-6 ml-2 row-st" style="padding-top:10px">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="s_word1" name="s_word1">
 							</div> 
 							
 							<div class="col-md-1 pt-1 row-st">
@@ -103,19 +213,19 @@
 						<div class="row">
 							<div class="col-md-1 row-st"><p class="mt-2 pt-1">검색기간</p></div>
 							<div class="col-md-4 row-st">
-								<button type="button" class="btn btn-primary btn-sm">오늘</button>											
-											<button type="button" class="btn btn-primary btn-sm">3일</button>
-											<button type="button" class="btn btn-primary btn-sm">7일</button>
-											<button type="button" class="btn btn-primary btn-sm">1개월</button>
-											<button type="button" class="btn btn-primary btn-sm">3개월</button>
-											<button type="button" class="btn btn-primary btn-sm">6개월</button>
-											<button type="button" class="btn btn-primary btn-sm">1년</button>																					
-											<button type="button" class="btn btn-primary btn-sm">전체</button>
+								<button type="button" class="btn btn-primary btn-sm" id="day" name="day">오늘</button>											
+								<button type="button" class="btn btn-primary btn-sm" id="t_day" name="t_day">3일</button>
+								<button type="button" class="btn btn-primary btn-sm" id="s_day" name="s_day">7일</button>
+								<button type="button" class="btn btn-primary btn-sm" id="o_mon" name="o_mon">1개월</button>
+								<button type="button" class="btn btn-primary btn-sm" id="t_mon" name="t_mon">3개월</button>
+								<button type="button" class="btn btn-primary btn-sm" id="s_mon" name="s_mon">6개월</button>
+								<button type="button" class="btn btn-primary btn-sm" id="o_year" name="o_year">1년</button>																					
+								<button type="button" class="btn btn-primary btn-sm" id="d_all" name="d_all">전체</button>
 							</div>
 							<div class="col-md-2 pt-1 row-st">
 																
 								<div class="input-group date" >								  
-								    <input type="text" class="form-control" id="startDate" placeholder="시작일">
+								    <input type="text" class="form-control" id="startDate" name="startDate" placeholder="시작일">
 								    <div class="input-group-append">								    	
 								    	<div class="input-group-text">
 								    		<label for="startDate" class="fa fa-calendar" style="cursor:pointer;">
@@ -129,7 +239,7 @@
 							<div class="col-md-2 pt-1 row-st">
 								
 								<div class="input-group date" >								  
-								    <input type="text" class="form-control" id="endDate" placeholder="종료일">
+								    <input type="text" class="form-control" id="endDate" name="endDate" placeholder="종료일">
 								    <div class="input-group-append">								    	
 								    	<div class="input-group-text">
 								    		<label for="endDate" class="fa fa-calendar" style="cursor:pointer;">
@@ -143,15 +253,14 @@
 						<div class="row ">
 							<div class="col-md-1 pt-3 row-st">상품</div> 
 							<div class="col-md-2 pt-2 row-st">
-								<select class="custom-select">
-									<option selected >상품명</option>
-									<option>상품번호</option>
-									<option>주문번호</option>
-									<option>판매번호</option>
+								<select class="custom-select" id="ctg2" name="ctg2">
+									<option value="goods_name" selected >상품명</option>
+									<option value="goods_id">상품번호</option>									
+									<option value="sle_id">판매번호</option>
 								</select>
 							</div> 
 							<div class="col-md-6 ml-2 row-st" style="padding-top:10px;">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="s_word2" name="s_word2">
 							</div> 
 							
 							<div class="col-md-1 pt-1 row-st">
@@ -162,49 +271,29 @@
 							</div>
 						</div><!-- 셋째라인 끝 -->
 						<div class="row">
-							<div class="col-md-1 pt-3">
-								취소 신청자
-							</div>
-							<div class="col-md-1">
-								<div class="custom-control custom-checkbox">
-								  <input type="checkbox" class="custom-control-input" id="customCheck1">
-								  <label class="custom-control-label" for="customCheck1">전체</label>
-								</div>
-							</div>
-							<div class="col-md-1">
-								<div class="custom-control custom-checkbox">
-								  <input type="checkbox" class="custom-control-input" id="customCheck2">
-								  <label class="custom-control-label" for="customCheck2">사용자</label>
-								</div>
-							</div>
-							<div class="col-md-1">
-								<div class="custom-control custom-checkbox">
-								  <input type="checkbox" class="custom-control-input" id="customCheck3">
-								  <label class="custom-control-label" for="customCheck3">판매자</label>
-								</div>
-							</div>
-							<div class="col-md-1 row-st"></div>
-							<div class="col-md-1 row-st"></div>
 							<div class="col-md-1 pt-3 row-st">취소상태</div>
 							<div class="col-md-1 row-st">
 								<div class="custom-control custom-checkbox">
-								  <input type="checkbox" class="custom-control-input" id="customCheck4">
-								  <label class="custom-control-label" for="customCheck4">전체</label>
+								  <input type="checkbox" class="custom-control-input" id="All" name="stat_chk1" value="All">
+								  <label class="custom-control-label" for="All">전체</label>
 								</div>
 							</div>
 							<div class="col-md-1 row-st">
 								<div class="custom-control custom-checkbox">
-								  <input type="checkbox" class="custom-control-input" id="customCheck5">
-								  <label class="custom-control-label" for="customCheck5">취소</label>
+								  <input type="checkbox" class="custom-control-input" id="R" name="stat_chk1" value="R">
+								  <label class="custom-control-label" for="R">취소신청</label>
 								</div>
 
 							</div>
 							<div class="col-md-1 row-st">
 								<div class="custom-control custom-checkbox">
-								  <input type="checkbox" class="custom-control-input" id="customCheck6">
-								  <label class="custom-control-label" for="customCheck6">취소완료</label>
+								  <input type="checkbox" class="custom-control-input" id="C" name="stat_chk1" value="C">
+								  <label class="custom-control-label" for="C">취소완료</label>
 								</div>
 							</div>
+							<div class="col-md-1 row-st"></div>
+							<div class="col-md-1 row-st"></div>
+							
 							
 						</div>
 						<div class="row ">
@@ -219,7 +308,7 @@
 						</div>
 					</div>
 				</div>
-				</form>			
+			
 			</div>
 		</div>
 		<div class="col-md-12">
@@ -228,24 +317,23 @@
 					<div class="card-header">
 						<div class="row">
 							<div class="col-1 row-st">
-								<h6 class="h6">[총 n 건]</h6>								
+								<h6 class="h6"><c:if test="${pDto.totalCnt != null }">[총  ${pDto.totalCnt }건]</c:if></h6>								
 							</div>
 							<div class="col-7">								
 							</div>
 							<div class="col-2 row-st">
-								<select class="custom-select">
-									<option selected>등록일순</option>
-									<option>등록일 역순</option>
-									<option>주문번호순</option>
-									<option>상품명 순</option>
-									<option>상품ID순</option>
+								<select class="custom-select" id="sort" name="sort">
+									<option value="gs.rgsde desc" selected>최신순</option>																	
+									<option value="gr.goods_name">상품명 순</option>
+									<option value="gr.goods_id">상품ID순</option>
+									<option value="gc.cancl_de desc">취소일순</option>
 								</select>								
 							</div>
 							<div class="col-2 row-st">
-								<select class="custom-select">
-									<option selected>10개씩보기</option>
-									<option>20개씩보기</option>
-									<option>30개씩보기</option>															
+								<select class="custom-select" id="pageCnt" name="pageCnt">
+									<option value="10" selected>10개씩보기</option>
+									<option value="20">20개씩보기</option>
+									<option value="30">30개씩보기</option>															
 								</select>									
 							</div>
 						</div>
@@ -269,57 +357,66 @@
 					<div class="card-body">
 					<hr>
 						<div class="table-responsive" style="overflow:hidden;">
-		                  <table class="table table-hover table-condensed">
+		                  <table class="table table-hover table-condensed text-center">
 		                    <thead class="text-primary">
-		                      <th>		                      	
-								  <div class="custom-control custom-checkbox">
-									  <input type="checkbox" class="custom-control-input" id="resultChkAll">
-									  <label class="custom-control-label" for="resultChkAll"></label>
-								  </div>							
-		                      </th>
-		                      <th>
-		                      		신청자
-		                      </th>
-		                      <th>
-		                        	주문일
-		                      </th>
-		                      <th>
-		                        	주문번호
-		                      </th>
-		                      <th>
-		                        	구매수량
-		                      </th>
-		                      <th>
-		                        	구매자 ID
-		                      </th>
-		                      <th>
-		                      		상품명
-		                      </th>
-		                      <th>
-		                      		결제 금액
-		                      </th>
-		                      <th>
-		                      		결제 수단
-		                      </th>
-		                      <th>
-		                      		결제 상태
-		                      </th>
+		                    	<tr>
+			                      <th>		                      	
+									  <div class="custom-control custom-checkbox">
+										  <input type="checkbox" class="custom-control-input" id="resultChkAll">
+										  <label class="custom-control-label" for="resultChkAll"></label>
+									  </div>							
+			                      </th>		
+			                      <th>취소처리상태</th>			                    
+			                      <th>판매자ID</th>
+			                      <th>판매번호</th>
+			                      <th>상품명</th>
+			                      <th>상호명</th>
+			                      <th>판매가격(개당)</th>
+			                      <th>등록일시</th>
+			                      <th>취소사유</th>
+			                      <th>취소일시</th>			                      	                      
+		                      </tr>
 		                    </thead>
 		                    <tbody>
-		                     <tr>
-		                     </tr>		              
+		                       <c:forEach var="map" items="${list }">
+								<tr class="text-center">
+									<td>
+										<div class="custom-control custom-checkbox text-center">
+											  <input type="checkbox" class="custom-control-input" id="" name="result_chk">
+											  <label class="custom-control-label" for=""></label>
+								  		</div>	
+									</td>
+									<c:if test="${map.get('goos_sle_result').equals('C') }"><td>취소완료</td></c:if>																											
+									<c:if test="${map.get('goos_sle_result').equals('R') }"><td>취소신청</td></c:if>
+									<td>${map.get("seler_id") }</td>
+									<td>${map.get("sle_id") }</td>																		
+									<td>${map.get("goods_name") }</td>	
+									<td>${map.get("cmpnm") }</td>
+									<td>${map.get("sle_pc") }</td>
+									<td>${map.get("rgsde") }</td>
+									<td>${map.get("cancl_resn") }</td>
+									<td>${map.get("cancl_de") }</td>
+								</tr>								
+					 	      </c:forEach>			              
 		                    </tbody>
 		                  </table>
+                		</div>
+                		<div class="row">                			
+	                		<div class="col-md-12 text-center">
+	                			<c:forEach begin="1" end="${pDto.lastPage }" var="i">
+										<a href="#" onclick="goPage(${i})">${i }</a>
+								</c:forEach>
+	                		</div>
                 		</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+	</form>		
 	<script>	
 	 $( "#startDate" ).datepicker({
 	    	dateFormat: 'yyyy-mm-dd'
-	    	,startDate: '-10d'
+	    	/* ,startDate: '-10d' */
 	    	,uiLibrary: 'bootstrap4'
 	    	/* ,showOn: "both"  
 	        ,buttonImage: "../assets/icon/calendar.png"
@@ -331,7 +428,7 @@
 	    
 	    $( "#endDate" ).datepicker({
 	    	dateFormat: 'yyyy-mm-dd'
-	    	,startDate: '-10d'
+	    	/* ,startDate: '-10d' */
 	    	,uiLibrary: 'bootstrap4'
 	    	,showOn: "both"  
 	        ,buttonImage: "../assets/icon/calendar.png" 
@@ -339,7 +436,22 @@
 	        ,language:"ko"
 	        ,todayHighlight : true
 	        ,autoclose: true
-	    });			    	    	  
+	    });			    	 
+	    function goPage(p){
+			frm.page.value = p;
+			frm.submit();
+		};
+		if(${scDto != null}){		
+	    	$("select[name='ctg1']").val(['${scDto.sCtg1}']);
+	    	$("select[name='ctg2']").val(['${scDto.sCtg2}']);	    	
+	    	$("[name='s_word1']").val(['${scDto.sName1}']);	    	
+	    	$("[name='s_word2']").val(['${scDto.sName2}']);	    	
+	    	$("[name='startDate']").val(['${scDto.sDate}']);
+	    	$("[name='endDate']").val(['${scDto.eDate}']);	    					    		 	 	 
+	    	$("[name='stat_chk1']").val(['${scDto.sStat1}']);	    		
+	    	$("[name='sort']").val(['${scDto.sort}']);
+	    	$("[name='pageCnt']").val(['${pDto.pageUnit}']);
+	    	};
 	</script>
 	
 </body>

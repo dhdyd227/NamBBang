@@ -295,11 +295,11 @@
 							</div>
 							<div class="col-2 row-st">
 								<select class="custom-select" id="sort" name="sort">
-									<option value="order_setlede desc" selected>최신순</option>
-									<option value="order_setlede">주문일순</option>			
-									<option value="otime">주문시간순</option>
-									<option value="order_id">주문번호순</option>
-									<option value="goods_name">상품명 순</option>									
+									<option value="og.order_setlede desc" selected>최신순</option>
+									<option value="og.order_setlede">주문일순</option>			
+									<option value="to_char(og.order_setlede,'hh24mi')">주문시간순</option>
+									<option value="o.order_id">주문번호순</option>
+									<option value="gr.goods_name">상품명 순</option>									
 								</select>								
 							</div>
 							<div class="col-2 row-st">

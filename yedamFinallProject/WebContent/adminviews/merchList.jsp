@@ -317,12 +317,12 @@
 							</div>
 							<div class="col-2 row-st">
 								<select class="custom-select" id="sort" name="sort">
-									<option value="goods_id" selected>상품번호순</option>
-									<option value="rgsde">등록일순</option>
-									<option value="rgsde desc">등록일 역순</option>
-									<option value="sle_id">판매번호순</option>
-									<option value="seler_id">판매자ID순</option>
-									<option value="goods_name">상품명 순</option>									
+									<option value="g.rgsde desc" selected>최신순</option>
+									<option value="g.goods_id">상품번호순</option>
+									<option value="g.rgsde">등록일순</option>									
+									<option value="gs.sle_id">판매번호순</option>
+									<option value="gs.seler_id">판매자ID순</option>
+									<option value="g.goods_name">상품명 순</option>									
 								</select>								
 							</div>
 							<div class="col-2 row-st">

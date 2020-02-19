@@ -46,6 +46,7 @@ import co.nambbang.app.login.AjaxRegisterDB;
 import co.nambbang.app.main.MainCommandList;
 import co.nambbang.app.main.MainCommandLogOut;
 import co.nambbang.app.main.MainCommandLogin;
+import co.nambbang.app.main.TotalShopCommandList;
 import co.nambbang.app.seller.BoardList;
 import co.nambbang.app.seller.BoardWrite;
 import co.nambbang.app.seller.BoardWriteOK;
@@ -97,11 +98,15 @@ public class FrontController extends HttpServlet {
 		cont.put("/index.do",new MainCommandList());
 		cont.put("/logIn.do", new MainCommandLogin());
 		cont.put("/logOut.do", new MainCommandLogOut());
+		cont.put("/totalShop.do", new TotalShopCommandList());
 		cont.put("/ajaxLoginCheck.do",new AjaxLoginCheck());//login Check
 		cont.put("/ajaxIdDuplicationCheck.do", new AjaxIdDuplicationCheck());//id Check
 		cont.put("/ajaxRegisterDB.do",new AjaxRegisterDB());//register DB transport
 		cont.put("/ajaxIdPwCheck.do", new AjaxIdPwCheck()); //email certification
 		cont.put("/ajaxIdFindClick.do", new AjaxIdFindClick()); //idfindclick ;
+		
+		
+		
 		// 미영
 		cont.put("/regGoodsForm.do", new RegisterGoodsForm()); // 상품등록
 		cont.put("/regGoods.do", new RegisterGoods()); // 상품목록

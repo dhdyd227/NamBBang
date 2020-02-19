@@ -57,17 +57,17 @@
 					</ol>
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img class="d-block w-100" src="../userimages/banner_1.jpg"
+							<img class="d-block w-100" src="./userimages/a1.jpg"  height="500px"
 								alt="First slide">
 							<div class="carousel-caption d-none d-md-block"></div>
 						</div>
 						<div class="carousel-item">
-							<img class="d-block w-100" src="../userimages/banner_2.jpg"
+							<img class="d-block w-100" src="./userimages/a2.jpg"  height="500px"
 								alt="Second slide">
 
 						</div>
 						<div class="carousel-item">
-							<img class="d-block w-100" src="../userimages/banner_3.jpg"
+							<img class="d-block w-100" src="./userimages/a3.jpg"  height="500px"
 								alt="Third slide">
 
 						</div>
@@ -85,14 +85,7 @@
 			</div>
 		</div>
 
-		<%
-			String ss = (String) session.getAttribute("id");
-			String sa = (String) session.getAttribute("CONECTR_SE");		
-			
-		%>
-		<%=ss%>
-		<%=sa%>
-		<%="안녕하세요"%>
+		
 		<!-- New Arrivals -->
 
 		<div class="new_arrivals">
@@ -107,19 +100,14 @@
 				<div class="row align-items-center">
 					<div class="col text-center">
 						<div class="new_arrivals_sorting">
-							<ul
-								class="arrivals_grid_sorting clearfix button-group filters-button-group">
-								<li
-									class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked"
+							<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked"
 									data-filter="*">all</li>
-								<li
-									class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
 									data-filter=".식빵류">식빵류</li>
-								<li
-									class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
 									data-filter=".과자빵류">과자빵류</li>
-								<li
-									class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
+								<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
 									data-filter=".조리빵류">조리빵류</li>
 							</ul>
 						</div>
@@ -134,7 +122,7 @@
 								<div class="product-item ${list.goodsCl }">   
 								<div class="product discount product_filter">
 									<div class="product_image">
-										<img src="${list.stringImage }" alt="">
+										<img src="${list.stringImage }" width="30px" height="200px" alt="">
 									</div>
 									<div class="favorite favorite_left"></div>
 									<div

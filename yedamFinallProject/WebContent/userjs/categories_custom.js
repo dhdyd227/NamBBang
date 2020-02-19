@@ -417,11 +417,29 @@ jQuery(document).ready(function($)
     		var boxes = $('.checkboxes li');
 
     		boxes.each(function()
-    		{
+    		{	
     			var box = $(this);
 
     			box.on('click', function()
     			{
+    				/*
+    	        	$('.product-grid').isotope({
+    		            filter: function()
+    		            {
+    		            	var priceRange = $('#amount').val();
+    			        	//product-item
+    			        	var itemPrice = $(this).find('.product_price').clone().children().remove().end().text().replace( '$', '' );
+
+    			        	return (itemPrice > priceMin) && (itemPrice < priceMax);
+    		            },
+    		            animationOptions: {
+    		                duration: 750,
+    		                easing: 'linear',
+    		                queue: false
+    		            }
+    		        });
+    	        });
+    			*/
     				if(box.hasClass('active'))
     				{
     					box.find('i').removeClass('fa-square');

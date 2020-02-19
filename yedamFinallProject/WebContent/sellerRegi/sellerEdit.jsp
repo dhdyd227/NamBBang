@@ -182,6 +182,28 @@
 		        
 	  }
 	  
+	//비밀번호와 비밀번호확인 같은지 체크
+	  function isPwSame() {
+		var pw = frm.pw.value;
+		var pwCheck = frm.pw_conf.value;
+		
+		frm.pw.value = "";
+		frm.pw_conf.value="";
+
+	  	if (pw == "" && pwCheck == "") {
+	  		frm.pw.style.background = 'rgba(0, 0, 0, 0.09)';
+	  		frm.pw_conf.style.background = 'rgba(0, 0, 0,0.09)';
+	  	} else {
+	  		if (pw != pwCheck) {
+	  			frm.pw.style.background = 'red';
+	  			frm.pw_conf.style.background = 'red';
+	  		} else {
+	  			frm.pw.style.background = 'rgb(232, 240, 254)';
+	  			frm.pw_conf.style.background = 'rgb(232, 240, 254)';
+	  		}
+	  	}
+	  }
+	  
 	</script>
 
 </head>
@@ -258,10 +280,19 @@
 <body>
 <br><br>
 	<div align="center">
-		<form id="frm" name="frm" action="./boardWriteOK.do" method="post" onsubmit="return formCheck()">
+		<form id="frm" name="frm" action="./sellerEditCommand.do" method="post" onsubmit="return formCheck()">
 			<br><br>
 			<div><h3> 판매자 수정 </h3></div><br>
 			<table>
+				<tr height="30">
+					<th>*ID(사업자번호)</th><td><input value="${dto.sid}" style="width:730px;" type="text" class="sid_input" id="sid" name="sid" readonly>
+				</tr>
+				<tr height="30">
+					<th>*비밀번호</th><td><input style="width:730px;" type="password" id="pw" name="pw"></td>
+				</tr>
+				<tr height="30">
+					<th>*비밀번호확인</th><td><input style="width:730px;" type="password" id="pw_conf" name="pw_conf"></td>
+				</tr>
 				<tr height="30">
 					<th>*상호명</th><td><input value="${dto.sname}" style="width:730px;" type="text" id="sname" name="sname"></td>
 				</tr>

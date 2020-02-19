@@ -18,12 +18,11 @@ public class ListSellGoods implements Command {
 		System.out.println("======== ListSellGoods 진입!!!");
 		
 		SellGoodsDAO dao = new SellGoodsDAO();
-		SellGoodsDTO sell = null;
 		Paging paging = new Paging();
 		
 		
 		try {
-			Map param = Utils.getParameterMap(request);
+			Map<String, Object> param = Utils.getParameterMap(request);
 			//현재 페이지 받기
 			String curPageNo = (String)param.get("curPageNo");
 			//페이징 블록처리

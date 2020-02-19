@@ -28,9 +28,9 @@
 						<ul class="navbar_menu">
 							<li><a href="/yedamFinallProject/index.do">Home</a></li>
 							
-							<li><a href="#">Total Shop</a></li>
+							<li><a href="./totalShop.do">Total Shop</a></li>
 							
-							<li><a href="./goods/listGoods.do">상품 등록</a></li>
+							<li><a href="./listGoods.do">상품 등록</a></li>
 							<li><a href="#">판매자 등록</a></li>
 							<c:if test ="${CONECTR_SE eq 'SE'}">
 							</c:if>
@@ -44,15 +44,27 @@
 							<!-- <li><a data-toggle="modal" href="javascript:void(0)"> <i
 									onclick="javascript: openLoginModal();" class="fa fa-user" aria-hidden="true"></i></a></li>
 							 -->
+							
+								
+						
 							<c:if test ="${empty CONECTR_SE}">
+								세션없다!!
 								<li><a data-toggle="modal" href="" onclick="javascript: openLoginModal();"> <i class="fa fa-user"
 									  aria-hidden="true" ></i></a></li>
 							</c:if>
 							<c:if test ="${not empty CONECTR_SE}">
+								세션있다!!
 								<li><a data-toggle="modal" href="" onclick="javascript: openLogoutModal();"> <i class="fa fa-user"
 									  aria-hidden="true" ></i></a></li>
 							</c:if>
-							
+							<%
+								String ss = (String) session.getAttribute("id");
+								String sa = (String) session.getAttribute("CONECTR_SE");		
+			
+							%>
+							<%=ss%>
+							<%=sa%>
+							<%="안녕하세요"%>
 							
 							<li class="checkout"><a href="#"> <i
 									class="fa fa-shopping-cart" aria-hidden="true"></i> <span

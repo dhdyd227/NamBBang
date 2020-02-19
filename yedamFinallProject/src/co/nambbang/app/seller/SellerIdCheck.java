@@ -10,20 +10,18 @@ import co.nambbang.app.common.Command;
 import co.nambbang.app.dao.sellerDAO;
 import co.nambbang.app.dto.sellerDTO;
 
-public class BoardEdit implements Command {
-	
+public class SellerIdCheck implements Command {
+
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		sellerDAO dao = new sellerDAO();
 		sellerDTO dto = new sellerDTO();
 		
-		//dto = dao.boardEditSelect(Integer.parseInt(request.getParameter("id")));
+		int Check = dao.idDuplicationCheck(request.getParameter("sid"));
+		System.out.println("---"+request.getParameter("sid"));
+		return "ajax:"+Check;
 		
-		request.setAttribute("dto", dto);
-		
-		return "/sellerRegi/view/boardedit.jsp";
-		
-		
+		//request.setAttribute("dto", dto);
 	}
-
 }

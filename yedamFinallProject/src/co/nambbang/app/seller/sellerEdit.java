@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.nambbang.app.common.Command;
+import co.nambbang.app.dao.sellerDAO;
+import co.nambbang.app.dto.sellerDTO;
 
 public class sellerEdit implements Command {
 	
@@ -15,7 +17,8 @@ public class sellerEdit implements Command {
 		sellerDAO dao = new sellerDAO();
 		sellerDTO dto = new sellerDTO();
 		
-		dto = dao.boardEditSelect(Integer.parseInt(request.getParameter("id")));
+			
+		dto = dao.boardEditSelect(request.getParameter("sid"));
 		
 		request.setAttribute("dto", dto);
 		

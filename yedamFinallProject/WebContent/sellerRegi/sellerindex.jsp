@@ -168,6 +168,28 @@
 	      console.log("finish");
 	  }
 	
+	//회원가입 비밀번호와 비밀번호확인 같은지 체크
+	  function isPwSame() {
+		var pw = frm.pw.value;
+		var pwCheck = frm.pw_conf.value;
+		
+		frm.pw.value = "";
+		frm.pw_conf.value="";
+
+	  	if (pw == "" && pwCheck == "") {
+	  		frm.pw.style.background = 'rgba(0, 0, 0, 0.09)';
+	  		frm.pw_conf.style.background = 'rgba(0, 0, 0,0.09)';
+	  	} else {
+	  		if (pw != pwCheck) {
+	  			frm.pw.style.background = 'red';
+	  			frm.pw_conf.style.background = 'red';
+	  		} else {
+	  			frm.pw.style.background = 'rgb(232, 240, 254)';
+	  			frm.pw_conf.style.background = 'rgb(232, 240, 254)';
+	  		}
+	  	}
+	  }
+//주소 찾기 API 사용	  
 	  function fn_setAddr(){
 		  var width = 500;
 		  var height = 600;
@@ -184,6 +206,42 @@
 		        });
 		        
 	  }
+	//아이디 중복 체크  
+	  function id_overlap_check() {
+
+		      $('#id_check_sucess').hide();
+		      $('.id_overlap_button').show();
+		      $('.sid_input').attr("check_result", "fail");
+
+		    if ($('.sid_input').val() == '') {
+		      alert('ID(사업자번호)를 입력해주세요.')
+		      return;
+		    }
+
+		    id_overlap_input = document.querySelector('input[name="sid"]');
+
+		    $.ajax({
+		      url: "../sellerIdCheck.do",
+		      data: {
+		        'sid': id_overlap_input.value
+		      },
+		      datatype: 'json',
+		      success: function (data) {
+		        console.log(data['overlap']);
+		        if (data['overlap'] == "1") {
+		          alert("이미 존재하는 아이디 입니다.");
+		          id_overlap_input.focus();
+		          return;
+		        } else {
+		          alert("사용가능한 아이디 입니다.");
+		          $('.sid_input').attr("check_result", "success");
+		          $('#id_check_sucess').show();
+		          $('.id_overlap_button').hide();
+		          return;
+		        }
+		      }
+		    });
+		  }
 	  
 	</script>
 
@@ -218,14 +276,23 @@
 		
 		<script type="text/javascript">
 	function formCheck(){
-		if(frm.id.value == ""){
-			alert("ID(사업자 번호)를 을 입력해주세요.")
-			frm.sname.focus();
+		/* if(frm.id.value == ""){
+			alert("ID(사업자 번호)를  입력해주세요.")
+			frm.id.focus();
 			return false;
-		}
-		if(frm.sname.value == ""){
+		} */
+		if(frm.pw.value == ""){
 			alert("비밀번호를 입력해주세요.")
-			frm.sname.focus();
+			frm.pw.focus();
+			return false;
+		} 
+		if(frm.pw_conf.value == ""){
+			alert("비밀번호를 입력해주세요.")
+			frm.pw_conf.focus();
+			return false;
+		} 
+		if (frm.pw.value != frm.pw_conf.value) {
+			alert("패스워드 확인과 다릅니다.")
 			return false;
 		} 
 		
@@ -269,11 +336,7 @@
 			frm.intrcn.focus();
 			return false;
 		}
-		if(frm.grade.value == ""){
-			alert("등급을 입력해주세요.")
-			frm.grade.focus();
-			return false;
-		}
+		
 		return true;
 	}
 	
@@ -286,6 +349,17 @@
 			<br><br>
 			<div><h3> 판매자 등록 </h3></div><br>
 			<table>
+				<tr height="30">
+					<th>*ID(사업자번호)</th><td><input style="width:660px;" type="text" class="sid_input" id="sid" name="sid">
+					<button type="button" onclick="id_overlap_check()" >중복확인</button>
+					<img id="id_check_sucess" style="display: none;"></td>
+				</tr>
+				<tr height="30">
+					<th>*비밀번호</th><td><input style="width:730px;" type="password" id="pw" name="pw"></td>
+				</tr>
+				<tr height="30">
+					<th>*비밀번호확인</th><td><input style="width:730px;" type="password" id="pw_conf" name="pw_conf"></td>
+				</tr>
 				<tr height="30">
 					<th>*상호명</th><td><input style="width:730px;" type="text" id="sname" name="sname"></td>
 				</tr>

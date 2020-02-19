@@ -25,7 +25,7 @@ public class AjaxSetleCommand implements Command {
 		String setleConfmCode = request.getParameter("imp_uid"); //결제승인코드
 		int setleAmount = (Integer.parseInt(request.getParameter("paid_amount"))); //결제금액
 		int mlgUseAmount = (Integer.parseInt(request.getParameter("mlg_use_amount")));	//마일리지 사용금액
-			//결제일시
+		String orderTelno = request.getParameter("order_Telno");	//주문전화번호
 		int orderGroupNo = (Integer.parseInt(request.getParameter("order_group_no")));	//주문그룹 번호
 		String orderTelno = request.getParameter("order_tel_no");//주문자 전화번호
 		

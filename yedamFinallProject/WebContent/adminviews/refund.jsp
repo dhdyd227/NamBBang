@@ -150,7 +150,7 @@ window.addEventListener("load", function(){
 	                  <div class="col-7 col-md-8">
 	                    <div class="numbers">
 	                      <p class="card-category">환불</p>
-	                      <p class="card-title">총 0건 <br>
+	                      <p class="card-title">총 ${refundCnt }건 <br>
 	                        <p>
 	                    </div>
 	                  </div>

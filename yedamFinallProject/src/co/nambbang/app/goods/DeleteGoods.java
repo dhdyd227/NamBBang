@@ -27,7 +27,7 @@ public class DeleteGoods implements Command {
 		dao.setAutoCommit(false);
 		
 		//결과 리턴 Map 선언
-		Map map = new HashMap();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
 			//파라메터 출력해보기(확인용)

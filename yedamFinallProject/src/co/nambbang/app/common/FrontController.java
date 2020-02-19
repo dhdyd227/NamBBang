@@ -18,9 +18,12 @@ import co.nambbang.app.admin.AdminMerchListCommand;
 import co.nambbang.app.admin.AdminMerchListModifyCommand;
 import co.nambbang.app.admin.AdminMerchListOkCommand;
 import co.nambbang.app.admin.AdminMlgEstbsCommand;
+import co.nambbang.app.admin.AdminMlgEstbsOkCommand;
 import co.nambbang.app.admin.AdminMlgManageCommand;
+import co.nambbang.app.admin.AdminMlgManageOkCommand;
 import co.nambbang.app.admin.AdminNoticeInsertCommand;
 import co.nambbang.app.admin.AdminRefundCommand;
+import co.nambbang.app.admin.AdminRefundOkCommand;
 import co.nambbang.app.admin.AdminSellerAnalysisCommand;
 import co.nambbang.app.admin.AdminSellerCancelCommand;
 import co.nambbang.app.admin.AdminSellerManageCommand;
@@ -28,12 +31,16 @@ import co.nambbang.app.admin.AdminSelngAnalysisDayCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisMonthCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisWeekCommand;
 import co.nambbang.app.admin.AdminSetleManageCommand;
+import co.nambbang.app.admin.AdminSetleManageOkCommand;
 import co.nambbang.app.admin.AdminUserManageCommand;
+import co.nambbang.app.admin.AdminUserManageOkCommand;
 import co.nambbang.app.goods.DeleteGoods;
 import co.nambbang.app.goods.DetailGoods;
+import co.nambbang.app.goods.DetailSellGoods;
 import co.nambbang.app.goods.ListGoods;
 import co.nambbang.app.goods.ListSellGoods;
 import co.nambbang.app.goods.ModifyGoods;
+import co.nambbang.app.goods.ModifySellGoods;
 import co.nambbang.app.goods.RegisterGoods;
 import co.nambbang.app.goods.RegisterGoodsForm;
 import co.nambbang.app.goods.SellGoods;
@@ -46,9 +53,12 @@ import co.nambbang.app.login.AjaxRegisterDB;
 import co.nambbang.app.main.MainCommandList;
 import co.nambbang.app.main.MainCommandLogOut;
 import co.nambbang.app.main.MainCommandLogin;
+import co.nambbang.app.main.TotalShopCommandList;
 import co.nambbang.app.seller.BoardList;
 import co.nambbang.app.seller.BoardWrite;
 import co.nambbang.app.seller.BoardWriteOK;
+import co.nambbang.app.seller.SellerEditCommand;
+import co.nambbang.app.seller.SellerIdCheck;
 import co.nambbang.app.seller.sellerEdit;
 import co.nambbang.app.setle.AjaxSetleCommand;
 import co.nambbang.app.setle.SetleFormCommand;
@@ -67,20 +77,24 @@ public class FrontController extends HttpServlet {
 		// 재흠
 		cont.put("/AdminMain.ad", new AdminMainCommand());	//admin 메인페이지
 		cont.put("/AdminMerchList.ad", new AdminMerchListCommand()); // admin 목록관리페이지 
-		cont.put("/AdminMerchListOk.ad", new AdminMerchListOkCommand()); //admin 목록페이지 필터 검색 커맨드 
-		
+		cont.put("/AdminMerchListOk.ad", new AdminMerchListOkCommand()); //admin 목록페이지 필터 검색 커맨드 		
 		cont.put("/AdminMerchListModify.ad", new AdminMerchListModifyCommand()); //admin 목록 결과 상태적용 커맨드
+		
 		cont.put("/AdminSetleManage.ad", new AdminSetleManageCommand()); //admin 결제관리 페이지
-		
-		
+		cont.put("/AdminSetleManageOk.ad", new AdminSetleManageOkCommand()); //admin 결제관리 페이지
 		cont.put("/AdminRefund.ad", new AdminRefundCommand()); // 결제관리 - 환불 관리 페이지
+		cont.put("/AdminRefundOk.ad", new AdminRefundOkCommand()); // 결제관리 - 환불 관리 검색 페이지
 		
 		cont.put("/AdminUserManage.ad", new AdminUserManageCommand()); // admin - 유저 관리 페이지
+		cont.put("/AdminUserManageOk.ad", new AdminUserManageOkCommand()); // admin - 유저 관리 페이지
+		
 		cont.put("/AdminSellerManage.ad", new AdminSellerManageCommand()); // admin - 판매자 관리 페이지
 		cont.put("/AdminSellerCancel.ad", new AdminSellerCancelCommand()); // admin - 판매자 판매 취소 관리 페이지
 		
 		cont.put("/AdminMlgManage.ad", new AdminMlgManageCommand()); // admin - 마일리지 관리 페이지
-		cont.put("/AdminMlgEstbs.ad", new AdminMlgEstbsCommand()); // admin - 마일리지 설정 페이지
+		cont.put("/AdminMlgManageOk.ad", new AdminMlgManageOkCommand()); // admin - 마일리지 관리 페이지
+		cont.put("/AdminMlgEstbs.ad", new AdminMlgEstbsCommand()); // admin - 마일리지 설정 페이지		
+		cont.put("/AdminMlgEstbsOk.ad", new AdminMlgEstbsOkCommand()); // admin - 마일리지 설정 - 재설정 저장 
 		
 		cont.put("/AdminBbsNoticeManage.ad", new AdminBbsNoticeManageCommand()); // admin - 게시판 및 공지사항 관리 페이지
 		cont.put("/AdminNoticeInsert.ad", new AdminNoticeInsertCommand()); // admin - 공지사항 글작성 폼
@@ -98,11 +112,15 @@ public class FrontController extends HttpServlet {
 		cont.put("/index.do",new MainCommandList());
 		cont.put("/logIn.do", new MainCommandLogin());
 		cont.put("/logOut.do", new MainCommandLogOut());
+		cont.put("/totalShop.do", new TotalShopCommandList());
 		cont.put("/ajaxLoginCheck.do",new AjaxLoginCheck());//login Check
 		cont.put("/ajaxIdDuplicationCheck.do", new AjaxIdDuplicationCheck());//id Check
 		cont.put("/ajaxRegisterDB.do",new AjaxRegisterDB());//register DB transport
 		cont.put("/ajaxIdPwCheck.do", new AjaxIdPwCheck()); //email certification
 		cont.put("/ajaxIdFindClick.do", new AjaxIdFindClick()); //idfindclick ;
+		
+		
+		
 		// 미영
 		cont.put("/regGoodsForm.do", new RegisterGoodsForm()); // 상품등록
 		cont.put("/regGoods.do", new RegisterGoods()); // 상품목록
@@ -113,13 +131,17 @@ public class FrontController extends HttpServlet {
 		cont.put("/sellGoods.do", new SellGoods()); 
 		cont.put("/sellGoodsForm.do", new SellGoodsForm());//판매할 상품 등록
 		cont.put("/listSellGoods.do", new ListSellGoods()); //상품판매 정보보기
+		cont.put("/detailSellGoods.do", new DetailSellGoods()); //상품판대 등록
+		cont.put("/modifySellGoods.do", new ModifySellGoods()); //상품판대 수정		
 		
 		// 시현
 		cont.put("/boardWrite.do", new BoardWrite()); 
 		cont.put("/boardWriteOK.do", new BoardWriteOK());
 		cont.put("/boardlist.do", new BoardList());
 		cont.put("/sellerEdit.do", new sellerEdit());
-		//cont.put("/sellerEdit.do", new sellerEdit());
+		cont.put("/sellerEditCommand.do", new SellerEditCommand());
+		cont.put("/sellerIdCheck.do", new SellerIdCheck());
+		
 		
 		// 민우
 		cont.put("/ajaxSetle.do",new AjaxSetleCommand());

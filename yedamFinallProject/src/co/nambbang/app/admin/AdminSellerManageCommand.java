@@ -14,13 +14,10 @@ public class AdminSellerManageCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		AdminMainDto dto = new AdminMainDto();
+			throws ServletException, IOException {		
 		AdminDao dao = new AdminDao();
-		dto = dao.selectAll();
-		
-		int cancel = dto.getCustomerCnt();
-		
+				
+		int cancel = dao.sellerCancleCnt();		
 		request.setAttribute("cancelCnt", cancel);
 		
 		

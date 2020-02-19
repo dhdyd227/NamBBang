@@ -70,10 +70,18 @@ public class AdminDao extends DAO {
 				+ "(select count(sle_end_time) " + "from goods_sle "
 				+ "where sle_end_time between sysdate+1/24/2 and sysdate) as about_over_goods,"
 				+ "(select count(user_id) " + "from users) as user_cnt," + "(select count(seler_id) "
-				+ "from seler) as seler_cnt," + "(select count(sle_id) " + "from goods_cancl "
-				+ "where cancl_de = sysdate) as goods_cancl_cnt," + "(select sum(g.sle_qy*g.sle_pc) "
-				+ "from goods_sle g, goods_cancl c " + "where g.sle_id = c.sle_id "
-				+ "and c.cancl_de = sysdate) as goods_cancl_sum " + "from dual";
+				+ "from seler) as seler_cnt," 
+				+ "(select count(gs.sle_id) "  
+				+ "from goods_sle gs, goods_cancl gc "  
+				+ "where gs.sle_id = gc.sle_id "  
+				+ "and gs.GOOS_SLE_RESULT in ('C','R') "  
+				+ "and to_char(gc.cancl_de,'yy-mm-dd') = to_char(sysdate,'yy-mm-dd')) as goods_cancl_cnt," 
+				+ "(select sum(gs.sle_qy*gs.sle_pc) "  
+				+ "from goods_sle gs, goods_cancl gc "  
+				+ "where gs.sle_id = gc.sle_id " 
+				+ "and gs.GOOS_SLE_RESULT in ('C','R') "  
+				+ "and to_char(gc.cancl_de,'yy-mm-dd') = to_char(sysdate,'yy-mm-dd')) as goods_cancl_sum "				 
+				+ "from dual";
 //		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -1614,5 +1622,28 @@ public class AdminDao extends DAO {
 		}
 		
 		return lastpage;
+	}
+	//취소신청 카운트
+	public int sellerCancleCnt() {
+		int cancleCnt = 0;
+		
+		String sql = "select count(gs.sle_id) cancleCnt " + 
+					 "from goods_sle gs, goods_cancl gc " + 
+					 "where gs.sle_id = gc.sle_id " + 
+					 "and gs.GOOS_SLE_RESULT = 'R'";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				cancleCnt = rs.getInt("cancleCnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cancleCnt;
 	}
 }

@@ -338,24 +338,28 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-1 row-st text-center">
-								
+							<div class="col-md-2 row-st text-center">
+								<select class="custom-select mt-1">
+									<option value="#">취소 승인 여부</option>
+									<option value="C">취소 승인</option>
+								</select>
 							</div>
-							<div class="col-md-1 row-st text-center">
-								
+							<div class="col-md-1 row-st text-left">
+									<button type="button" class="btn btn-danger btn-sm">적용</button>
 							</div>
 							<div class="col-md-2 row-st">
 								
 							</div>
-							<div class="col-md-7 row-st"></div>
-							<div class="col-md-1 row-st">
+							<div class="col-md-6 row-st"></div>
+							<div class="col-md-1 row-st pr-1">
 								<button type="button" class="btn btn-success btn-sm">엑셀다운로드</button>
 							</div>
 						</div>
+						<hr>
 					</div>
 					
 					<div class="card-body">
-					<hr>
+					
 						<div class="table-responsive" style="overflow:hidden;">
 		                  <table class="table table-hover table-condensed text-center">
 		                    <thead class="text-primary">
@@ -387,7 +391,7 @@
 								  		</div>	
 									</td>
 									<c:if test="${map.get('goos_sle_result').equals('C') }"><td>취소완료</td></c:if>																											
-									<c:if test="${map.get('goos_sle_result').equals('R') }"><td>취소신청</td></c:if>
+									<c:if test="${map.get('goos_sle_result').equals('R') }"><td style="color: #ed5565">취소신청</td></c:if>
 									<td>${map.get("seler_id") }</td>
 									<td>${map.get("sle_id") }</td>																		
 									<td>${map.get("goods_name") }</td>	
@@ -395,7 +399,8 @@
 									<td>${map.get("sle_pc") }</td>
 									<td>${map.get("rgsde") }</td>
 									<td>${map.get("cancl_resn") }</td>
-									<td>${map.get("cancl_de") }</td>
+									<c:if test="${empty map.get('cancl_de') }"><td style="color:#ed5565">취소 승인 요청중</td></c:if>
+									<c:if test="${!empty map.get('cancl_de') }"><td>${map.get("cancl_de") }</td></c:if>
 								</tr>								
 					 	      </c:forEach>			              
 		                    </tbody>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@ function formCheck(){
 }
 </script>
 <body>
-	<form id="frm" name="frm" class="form-horizontal" method="post" action="AdminUserManage.ad" onsubmit="return formCheck()">
+	<form id="frm" name="frm" class="form-horizontal" method="post" action="AdminUserManageOk.ad" onsubmit="return formCheck()">
 	<input type="hidden" name="page" value="1">
 	<div class="row">
 		<div class="col-md-12">
@@ -186,7 +187,7 @@ function formCheck(){
 								  <label class="custom-control-label" for=age50>50대</label>
 								</div>
 							</div>
-							<div cass="col-md-1 row-st">
+							<div class="col-md-1 row-st">
 								<div class="custom-control custom-checkbox">
 								  <input type="checkbox" class="custom-control-input" id="over50" name="chk_age" value="61">
 								  <label class="custom-control-label" for="over50">60대 이상</label>
@@ -210,8 +211,8 @@ function formCheck(){
 				<div class="card">
 					<div class="card-header">
 						<div class="row">
-							<div class="col-1 row-st text-center">
-								<h6 class="h6">[총 n 건]</h6>								
+							<div class="col-1 row-st">
+								<h6 class="h6"><c:if test="${pDto.totalCnt != null }">[총  ${pDto.totalCnt }건]</c:if></h6>								
 							</div>
 							<div class="col-7">								
 							</div>
@@ -270,16 +271,43 @@ function formCheck(){
 								  <th>생일</th>
 								  <th>나이</th>
 								  <th>가입일</th>
-								  <th>주문상품</th>
+								  <th>상태</th>
 								  <th>구매금액</th>								  
-								  <th>주문일</th>								  
+								  <th>주문수</th>								  
 							  </tr>							  		                        			                      		                    
 		                    </thead>
 		                    <tbody>
-		                     <tr>
-		                     </tr>		              
+		                      <c:forEach var="map" items="${list }">
+								<tr class="text-center">
+									<td>
+										<div class="custom-control custom-checkbox text-center">
+											  <input type="checkbox" class="custom-control-input" id="" name="result_chk">
+											  <label class="custom-control-label" for=""></label>
+								  		</div>	
+									</td>
+									<td>${map.get("user_id") }</td>
+									<td>${map.get("user_name") }</td>
+									<td>${map.get("user_brthdy") }</td>
+									<td>${map.get("age") }</td>
+									<td>${map.get("srbde") }</td>									
+									<c:if test="${map.get('user_sttus').equals('UNO') }"><td>일반</td></c:if>
+									<c:if test="${map.get('user_sttus').equals('UDR') }"><td>휴면</td></c:if>
+									<c:if test="${map.get('user_sttus').equals('UDS') }"><td>징계</td></c:if>
+									<c:if test="${map.get('user_sttus').equals('USE') }"><td>탈퇴</td></c:if>
+									<td>${map.get("order_amount") }</td>
+									<td>${map.get("order_cnt") }</td>									
+								</tr>								
+					 	      </c:forEach>		              
 		                    </tbody>
 		                  </table>
+                		</div>
+                		<div class="row">
+                			
+                			<div class="col-md-12 text-center">
+                				<c:forEach begin="1" end="${pDto.lastPage }" var="i">
+										<a href="#" onclick="goPage(${i})">${i }</a>
+								</c:forEach>
+                			</div>
                 		</div>
 					</div>
 				</div>
@@ -311,8 +339,21 @@ function formCheck(){
 	        ,todayHighlight : true
 	        ,autoclose: true
 	    });		
-	    
-	    
+	    function goPage(p){
+			frm.page.value = p;
+			frm.submit();
+		};
+		//검색 조건 고정
+	    if(${uDto != null}){		
+	    	$("select[name='ctg1']").val(['${uDto.uCtg1}']);
+	    	$("[name='s_word1']").val(['${uDto.uName1}']);	    	
+	    	$("[name='startDate']").val(['${uDto.sDate}']);
+	    	$("[name='endDate']").val(['${uDto.eDate}']);	    					    		 	 	 
+	    	$("[name='stat_chk']").val(['${uDto.uStat1}']);
+	    	$("[name='chk_age']").val(['${uDto.uStat2}']);
+	    	$("[name='sort']").val(['${uDto.sort}']);
+	    	$("[name='pageCnt']").val(['${pDto.pageUnit}']);
+	    	};
 	</script>
 </body>
 </html>

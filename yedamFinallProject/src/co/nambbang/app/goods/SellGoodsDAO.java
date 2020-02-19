@@ -8,7 +8,7 @@ import co.nambbang.app.dao.DAO;
 
 public class SellGoodsDAO extends DAO {
 	//상품목록
-	public List<SellGoodsDTO> selectSellGoodsList(Map param, int startNo, int endNo) {
+	public List<SellGoodsDTO> selectSellGoodsList(Map<String, Object> param, int startNo, int endNo) {
 		List<SellGoodsDTO> list = new ArrayList<SellGoodsDTO>();
 
 		try {
@@ -89,7 +89,7 @@ public class SellGoodsDAO extends DAO {
 	}
 
 	//상품목록총건수
-	public int selectSellGoodsCount(Map param) {
+	public int selectSellGoodsCount(Map<String, Object> param) {
 		int result = 0;
 		
 		try {

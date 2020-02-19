@@ -7,12 +7,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public class Utils {
-	public static Map getParameterMap(HttpServletRequest request) {
+	public static Map<String, Object> getParameterMap(HttpServletRequest request) {
 		// 파라미터 이름
-		Enumeration paramNames = request.getParameterNames();
+		Enumeration<String> paramNames = request.getParameterNames();
 
 		// 저장할 맵
-		Map paramMap = new HashMap();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 
 		// 맵에 저장
 		while (paramNames.hasMoreElements()) {

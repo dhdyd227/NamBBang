@@ -7,6 +7,8 @@ import java.util.List;
 
 import co.nambbang.app.dto.AdminMainDto;
 import co.nambbang.app.dto.AdminMerchListDto;
+import co.nambbang.app.dto.AdminMlgDto;
+import co.nambbang.app.dto.AdminMlgSelectDto;
 import co.nambbang.app.dto.AdminPagingDto;
 import co.nambbang.app.dto.AdminSetleManageDto;
 import co.nambbang.app.dto.AdminUserDto;
@@ -17,8 +19,9 @@ public class AdminDao extends DAO {
 	public AdminDao() {
 		super();
 	}
+
 	// 메인 페이지 하단 공지사항 select
-	public ArrayList<NoticeDto> NselectAll() { 
+	public ArrayList<NoticeDto> NselectAll() {
 		ArrayList<NoticeDto> list = new ArrayList<>();
 
 		String sql = "select notice_no, notice_sj, notice_cn, writng_de, rdcnt"
@@ -108,7 +111,7 @@ public class AdminDao extends DAO {
 			if (dto.getmCtg().equals("name") && !name.isEmpty()) {
 				and += " and g.goods_name like '%'|| ? ||'%' ";
 			}
-			System.out.println("name is null?======="+ name != null);
+//			System.out.println("name is null?=======" + name != null);
 			if (dto.getmCtg().equals("id") && !name.isEmpty()) {
 				and += " and g.goods_id = ?";
 			}
@@ -146,7 +149,6 @@ public class AdminDao extends DAO {
 		String sql = "select count(*) cnt " + "from goods_regist g, seler s, goods_sle gs "
 				+ "where g.seler_id = s.seler_id " + "and g.goods_id = gs.goods_id " + and + " order by ? ";
 
-		
 		int i = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -172,7 +174,7 @@ public class AdminDao extends DAO {
 			if (dto.geteTime() != null) {
 				pstmt.setString(++i, dto.geteTime());
 			}
-			
+
 			pstmt.setString(++i, dto.getSort());
 			System.out.println(sql);
 			rs = pstmt.executeQuery();
@@ -233,13 +235,13 @@ public class AdminDao extends DAO {
 			if (dto.getmStat() != null && dto.getmStat().equals("soldOut")) {
 				and += " and gs.goos_sle_result = 'A' ";
 			}
-			
+
 		}
 		String sql = "select * from( select rownum rn, a.* from ( " + "select g.goods_info, g.goods_id, g.goods_name, "
 				+ "g.rgsde, g.netprc, g.seler_id, s.cmpnm, gs.GOOS_SLE_RESULT "
 				+ "from goods_regist g, seler s, goods_sle gs " + "where g.seler_id = s.seler_id "
 				+ "and g.goods_id = gs.goods_id " + and + " order by ? " + ") a ) b where rn between ? and ?";
-		
+
 		int i = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -265,17 +267,17 @@ public class AdminDao extends DAO {
 			if (dto.geteTime() != null) {
 				pstmt.setString(++i, dto.geteTime());
 			}
-			
+
 			// sort 컬럼 - 작동안함. ???
 			pstmt.setString(++i, dto.getSort());
-			
-			System.out.println("sort="+dto.getSort());
-			// 페이징 변수 넣기	
+
+			System.out.println("sort=" + dto.getSort());
+			// 페이징 변수 넣기
 			pstmt.setInt(++i, pDto.getStart());
 			pstmt.setInt(++i, pDto.getEnd());
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			while (rs.next()) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("id", rs.getString("goods_id"));
@@ -288,51 +290,52 @@ public class AdminDao extends DAO {
 				map.put("stat", rs.getString("goos_sle_result"));
 				list.add(map);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 
-		}		
+		}
 		return list;
 	}
-	// 결제관리 검색 
+
+	// 결제관리 검색
 	public List<HashMap<String, Object>> selectSetleManage(AdminSetleManageDto dto, AdminPagingDto pDto) {
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		String and = "and 1=1";
 
 		if (dto != null) {
-			if(dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
 				and += " and o.order_group_no = ?";
 			}
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				and += " and o.order_id = ?";
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				and += " and og.user_id = ?";
 			}
-			if(dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
 				and += " and s.setle_amount = ?";
 			}
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				and += " and s.setle_no = ?";
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -351,50 +354,47 @@ public class AdminDao extends DAO {
 				and += " and s.setle_code = 'RC' ";
 			}
 		}
-		
-		
-		String sql ="select * from( select rownum rn, a.* from ( " +  
-				"select o.order_id, o.order_group_no, og.user_id, og.order_setlede, to_char(og.order_setlede,'hh24:mi') otime,  o.order_qy, gr.goods_name, s.setle_amount, s.setle_code " + 
-				"from order_group og, orders o, setle s, goods_sle gs, goods_regist gr " + 
-				"where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + 
-				"and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO " + 
-				"and o.SLE_ID = gs.SLE_ID " + 
-				"and gs.GOODS_ID = gr.GOODS_ID " + and + "order by ? " +
-				") a ) b where rn between ? and ?";
+
+		String sql = "select * from( select rownum rn, a.* from ( "
+				+ "select o.order_id, o.order_group_no, og.user_id, og.order_setlede, to_char(og.order_setlede,'hh24:mi') otime,  o.order_qy, gr.goods_name, s.setle_amount, s.setle_code "
+				+ "from order_group og, orders o, setle s, goods_sle gs, goods_regist gr "
+				+ "where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + "and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO "
+				+ "and o.SLE_ID = gs.SLE_ID " + "and gs.GOODS_ID = gr.GOODS_ID " + and + "order by ? "
+				+ ") a ) b where rn between ? and ?";
 		int i = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			if(dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -409,14 +409,14 @@ public class AdminDao extends DAO {
 			}
 			// sort 컬럼 - 작동안함. ???
 			pstmt.setString(++i, dto.getSort());
-						
+
 			System.out.println(sql);
-						// 페이징 변수 넣기	
+			// 페이징 변수 넣기
 			pstmt.setInt(++i, pDto.getStart());
 			pstmt.setInt(++i, pDto.getEnd());
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("order_id", rs.getString("order_id"));
 				map.put("order_group_no", rs.getInt("order_group_no"));
@@ -429,53 +429,54 @@ public class AdminDao extends DAO {
 				map.put("setle_code", rs.getString("setle_code"));
 				list.add(map);
 			}
-			
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-		}finally {
-			
-		}			
+		} finally {
+
+		}
 		return list;
 	}
-	//결제관리페이지 페이지 카운트
+
+	// 결제관리페이지 페이지 카운트
 	public int SetleManagePageCnt(AdminSetleManageDto dto) {
 		int lastpage = 0;
-		
+
 		String and = "and 1=1";
 //		String minus = "";
 		if (dto != null) {
-			if(dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
 				and += " and o.order_group_no = ?";
 			}
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				and += " and o.order_id = ?";
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				and += " and og.user_id = ?";
 			}
-			if(dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
 				and += " and s.setle_amount = ?";
 			}
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				and += " and s.setle_no = ?";
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -494,7 +495,6 @@ public class AdminDao extends DAO {
 				and += " and s.setle_code = 'RC' ";
 			}
 
-			
 		}
 //		String sql = "select count(*) cnt " + 
 //				"from order_group og, orders o, setle s, user_refnd ur, goods_sle gs, goods_regist gr " + 
@@ -503,49 +503,46 @@ public class AdminDao extends DAO {
 //				"and s.SETLE_NO = ur.SETLE_NO " + 
 //				"and o.SLE_ID = gs.SLE_ID " + 
 //				"and gs.GOODS_ID = gr.GOODS_ID " + and + " order by ?";
-		
-		String sql = "select count(*) cnt " +				
-				"from order_group og, orders o, setle s, goods_sle gs, goods_regist gr " + 
-				"where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + 
-				"and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO " + 
-				"and o.SLE_ID = gs.SLE_ID " + 
-				"and gs.GOODS_ID = gr.GOODS_ID " + and + "order by ? ";
+
+		String sql = "select count(*) cnt " + "from order_group og, orders o, setle s, goods_sle gs, goods_regist gr "
+				+ "where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + "and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO "
+				+ "and o.SLE_ID = gs.SLE_ID " + "and gs.GOODS_ID = gr.GOODS_ID " + and + "order by ? ";
 
 //		System.out.println("CntSql============"+ sql);
-		try {			
+		try {
 			pstmt = conn.prepareStatement(sql);
 			int i = 0;
-			if(dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("o_group") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("amount") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -560,53 +557,52 @@ public class AdminDao extends DAO {
 			}
 			// sort 컬럼 - 작동안함. ???
 			pstmt.setString(++i, dto.getSort());
-			
+
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				lastpage = rs.getInt("cnt");
 			}
-						
+
 		} catch (SQLException e) {
- 
+
 			e.printStackTrace();
 		} finally {
-			
-		}			
+
+		}
 		return lastpage;
 	}
-			
-	
-	//환불 검색 
-	public List<HashMap<String, Object>> selectRefundInfo(AdminSetleManageDto dto, AdminPagingDto pDto) {			
+
+	// 환불 검색
+	public List<HashMap<String, Object>> selectRefundInfo(AdminSetleManageDto dto, AdminPagingDto pDto) {
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		String and = "and 1=1";
-		
-		if (dto != null) {			
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+
+		if (dto != null) {
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				and += " and o.order_id = ?";
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				and += " and og.user_id = ?";
-			}			
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			}
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				and += " and o.order_id = ?";
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -621,47 +617,44 @@ public class AdminDao extends DAO {
 			if (dto.getStat() != null && dto.getStat().equals("complete")) {
 				and += " and s.setle_code = 'CC' ";
 			}
-		
+
 		}
-		String sql="select * from( select rownum rn, a.* from ( " +
-				"select o.order_group_no, o.order_id, og.user_id, gr.goods_name, og.order_setlede, ur.refnd_de, ur.refnd_amount, ur.refnd_resn, s.setle_code " + 
-				"from order_group og, orders o, setle s, user_refnd ur, goods_sle gs, goods_regist gr " + 
-				"where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + 
-				"and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO " + 
-				"and s.SETLE_NO = ur.SETLE_NO " + 
-				"and o.SLE_ID = gs.SLE_ID " + 
-				"and gs.GOODS_ID = gr.GOODS_ID " + and + " order by ? " +
-				") a ) b where rn between ? and ?";
-		
+		String sql = "select * from( select rownum rn, a.* from ( "
+				+ "select o.order_group_no, o.order_id, og.user_id, gr.goods_name, og.order_setlede, ur.refnd_de, ur.refnd_amount, ur.refnd_resn, s.setle_code "
+				+ "from order_group og, orders o, setle s, user_refnd ur, goods_sle gs, goods_regist gr "
+				+ "where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + "and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO "
+				+ "and s.SETLE_NO = ur.SETLE_NO " + "and o.SLE_ID = gs.SLE_ID " + "and gs.GOODS_ID = gr.GOODS_ID " + and
+				+ " order by ? " + ") a ) b where rn between ? and ?";
+
 		int i = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
-				pstmt.setString(++i, dto.getName1());
-			}			
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+				pstmt.setString(++i, dto.getName1());
+			}
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -671,71 +664,72 @@ public class AdminDao extends DAO {
 			if (dto.getsDate() != null && dto.geteDate() == null) {
 				pstmt.setString(++i, dto.getsDate());
 			}
-			
+
 			// sort 컬럼 - 작동안함. ???
 			pstmt.setString(++i, dto.getSort());
-						
+
 			System.out.println(sql);
-			
-			// 페이징 변수 넣기	
+
+			// 페이징 변수 넣기
 			pstmt.setInt(++i, pDto.getStart());
 			pstmt.setInt(++i, pDto.getEnd());
-			
+
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("order_id", rs.getString("order_id"));
 				map.put("order_group_no", rs.getInt("order_group_no"));
 				map.put("user_id", rs.getString("user_id"));
-				map.put("order_setlede", rs.getDate("order_setlede"));							
+				map.put("order_setlede", rs.getDate("order_setlede"));
 				map.put("goods_name", rs.getString("goods_name"));
 				map.put("refnd_de", rs.getString("refnd_de"));
-				map.put("refnd_amount",rs.getInt("refnd_amount"));
-				map.put("refnd_resn",rs.getString("refnd_resn"));
-				map.put("setle_code",rs.getString("setle_code"));
+				map.put("refnd_amount", rs.getInt("refnd_amount"));
+				map.put("refnd_resn", rs.getString("refnd_resn"));
+				map.put("setle_code", rs.getString("setle_code"));
 				list.add(map);
 			}
-			
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-		}finally {
-			
-		}							
+		} finally {
+
+		}
 		return list;
 	}
-	//환불 검색 페이지 카운트
-	public int selectRefundInfoCnt(AdminSetleManageDto dto) {		
+
+	// 환불 검색 페이지 카운트
+	public int selectRefundInfoCnt(AdminSetleManageDto dto) {
 		int lastpage = 0;
 		String and = "and 1=1";
-		
-		if (dto != null) {			
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+
+		if (dto != null) {
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				and += " and o.order_id = ?";
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				and += " and og.user_id = ?";
-			}			
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			}
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				and += " and gr.goods_name = ?";
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				and += " and gs.goods_id = ?";
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				and += " and o.order_id = ?";
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				and += " and gs.sle_id = ?";
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -750,45 +744,43 @@ public class AdminDao extends DAO {
 			if (dto.getStat() != null && dto.getStat().equals("complete")) {
 				and += " and s.setle_code = 'CC' ";
 			}
-		
+
 		}
-		String sql="select count(*) cnt " +				 
-				"from order_group og, orders o, setle s, user_refnd ur, goods_sle gs, goods_regist gr " + 
-				"where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + 
-				"and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO " + 
-				"and s.SETLE_NO = ur.SETLE_NO " + 
-				"and o.SLE_ID = gs.SLE_ID " + 
-				"and gs.GOODS_ID = gr.GOODS_ID " + and + " order by ? ";
-						
+		String sql = "select count(*) cnt "
+				+ "from order_group og, orders o, setle s, user_refnd ur, goods_sle gs, goods_regist gr "
+				+ "where og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + "and og.ORDER_GROUP_NO = o.ORDER_GROUP_NO "
+				+ "and s.SETLE_NO = ur.SETLE_NO " + "and o.SLE_ID = gs.SLE_ID " + "and gs.GOODS_ID = gr.GOODS_ID " + and
+				+ " order by ? ";
+
 		int i = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
-			if(dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
+
+			if (dto.getsCtg().equals("setleId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
-				pstmt.setString(++i, dto.getName1());
-			}			
-			if(dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("uId") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("id") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+			if (dto.getsCtg().equals("name") && !dto.getName1().isEmpty()) {
 				pstmt.setString(++i, dto.getName1());
 			}
-			if(dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg().equals("sleId") && !dto.getName1().isEmpty()) {
+				pstmt.setString(++i, dto.getName1());
+			}
+			if (dto.getsCtg2().equals("name") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("id") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("setleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
-			if(dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
+			if (dto.getsCtg2().equals("sleId") && !dto.getName2().isEmpty()) {
 				pstmt.setString(++i, dto.getName2());
 			}
 			if (dto.getsDate() != null && dto.geteDate() != null) {
@@ -798,144 +790,422 @@ public class AdminDao extends DAO {
 			if (dto.getsDate() != null && dto.geteDate() == null) {
 				pstmt.setString(++i, dto.getsDate());
 			}
-			
+
 			// sort 컬럼 - 작동안함. ???
 			pstmt.setString(++i, dto.getSort());
-			
+			System.out.println(sql);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				lastpage = rs.getInt("cnt");
 			}
-						
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+
 		}
 		return lastpage;
 	}
-	
-	
-	// 회원 정보 관리 
-	public List<HashMap<String, Object>> selectUser(AdminUserDto dto, AdminPagingDto pDto) {			
+
+	// 회원 정보 관리
+	public List<HashMap<String, Object>> selectUser(AdminUserDto dto, AdminPagingDto pDto) {
 		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 		String and = "and 1=1";
-	
-		if(dto != null) {
-			if(dto.getuName1() != null ) {
+
+		if (dto != null) {
+			if (dto.getuName1() != null) {
 				and += " and u.user_id like '%'||?||'%' ";
 			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("UNO")) {
+			if (dto.getuStat1() != null && dto.getuStat1().equals("UNO")) {
 				and += " and u.user_sttus = 'UNO' ";
 			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("UDR")) {
+			if (dto.getuStat1() != null && dto.getuStat1().equals("UDR")) {
 				and += " and u.user_sttus = 'UDR' ";
 			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("UDS")) {
+			if (dto.getuStat1() != null && dto.getuStat1().equals("UDS")) {
 				and += " and u.user_sttus = 'UDS' ";
 			}
-			if(dto.getuStat1() != null && dto.getuStat1().equals("USE")) {
+			if (dto.getuStat1() != null && dto.getuStat1().equals("USE")) {
 				and += " and u.user_sttus = 'USE' ";
-			}			
-			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
+			}
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
 				and += " and u.srbde between to_date(?,'yyyy-mm-dd') and to_date(?,'yyyy-mm-dd') ";
 			}
-			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
 				and += " and u.srbde between to_date(?,'yyyy-mm-dd') and sysdate ";
 			}
-			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
 				and += " and u.user_brthdy between to_date(?,'yyyy-mm-dd') and to_date(?,'yyyy-mm-dd') ";
 			}
-			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
 				and += " and u.user_brthdy between to_date(?,'yyyy-mm-dd') and sysdate ";
 			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 10 and 20")) {
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 10 and 20")) {
 				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 19 and to_char(sysdate,'yyyy') - 10 ";
 			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 20 and 30")) {
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 20 and 30")) {
 				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 29 and to_char(sysdate,'yyyy') - 20 ";
 			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 30 and 40")) {
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 30 and 40")) {
 				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 39 and to_char(sysdate,'yyyy') - 30 ";
 			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 40 and 50")) {
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 40 and 50")) {
 				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 49 and to_char(sysdate,'yyyy') - 40 ";
 			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("between 50 and 60")) {
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 50 and 60")) {
 				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 59 and to_char(sysdate,'yyyy') - 50 ";
 			}
-			if(dto.getuStat2() != null && dto.getuStat2().equals("61")) {
+			if (dto.getuStat2() != null && dto.getuStat2().equals("61")) {
 				and += " and to_char(user_brthdy,'yyyy') to_char(user_brthdy,'yyyy') < to_char(sysdate,'yyyy') - 60 ";
 			}
-			
+
 		}
-		
-		String sql = "SELECT * FROM " + 				
-				"(SELECT rownum rn, a.* FROM " + 				
-				"(select u.user_id, u.user_name, u.user_brthdy, u.srbde, (to_char(sysdate,'yyyy')- to_char(u.user_brthdy,'yyyy')) as age, u.user_sttus, sum(s.setle_amount) order_amount, count(s.setle_amount) order_cnt " + 
-				"from order_group og, users u, setle s " + 
-				"where u.USER_ID = og.USER_ID " + 
-				"and og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + and + 
-				"group by u.user_id, u.user_name, u.user_brthdy, u.srbde, (to_char(sysdate,'yyyy')- to_char(u.user_brthdy,'yyyy')), u.user_sttus, s.setle_amount " + 
-				"order by ? ) a ) b WHERE rn BETWEEN ? AND ? "; 
-				 						
+
+		String sql = "SELECT * FROM " + "(SELECT rownum rn, a.* FROM "
+				+ "(select u.user_id, u.user_name, u.user_brthdy, u.srbde, (to_char(sysdate,'yyyy')- to_char(u.user_brthdy,'yyyy')) as age, u.user_sttus, sum(s.setle_amount) order_amount, count(s.setle_amount) order_cnt "
+				+ "from order_group og, users u, setle s " + "where u.USER_ID = og.USER_ID "
+				+ "and og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + and
+				+ "group by u.user_id, u.user_name, u.user_brthdy, u.srbde, (to_char(sysdate,'yyyy')- to_char(u.user_brthdy,'yyyy')), u.user_sttus, s.setle_amount "
+				+ "order by ? ) a ) b WHERE rn BETWEEN ? AND ? ";
+
 		int i = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			if(dto.getuName1() != null ) {
+			if (dto.getuName1() != null) {
 				pstmt.setString(++i, dto.getuName1());
 			}
-			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
 				pstmt.setString(++i, dto.getsDate());
 				pstmt.setString(++i, dto.geteDate());
 			}
-			if(dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
 				pstmt.setString(++i, dto.getsDate());
 			}
-			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
 				pstmt.setString(++i, dto.getsDate());
 				pstmt.setString(++i, dto.geteDate());
 			}
-			if(dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
 				pstmt.setString(++i, dto.getsDate());
 			}
-			
+
 			pstmt.setString(++i, dto.getSort());
-			// 페이징 변수 넣기	
+			// 페이징 변수 넣기
 			pstmt.setInt(++i, pDto.getStart());
 			pstmt.setInt(++i, pDto.getEnd());
-			
+
 			rs = pstmt.executeQuery();
-			System.out.println("sql");
-			while(rs.next()) {
+			System.out.println("sql===" + sql);
+			while (rs.next()) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("user_id", rs.getString("user_id"));
 				map.put("user_name", rs.getString("user_name"));
 				map.put("user_brthdy", rs.getDate("user_brthdy"));
-				map.put("srbde", rs.getDate("rsbde"));
+				map.put("srbde", rs.getDate("srbde"));
 				map.put("age", rs.getInt("age"));
 				map.put("user_sttus", rs.getString("user_sttus"));
 				map.put("order_amount", rs.getInt("order_amount"));
 				map.put("order_cnt", rs.getInt("order_cnt"));
 				list.add(map);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+		return list;
+	}
+
+	public int selectUserCnt(AdminUserDto dto) {
+		int lastpage = 0;
+		String and = "and 1=1";
+
+		if (dto != null) {
+			if (dto.getuName1() != null) {
+				and += " and u.user_id like '%'||?||'%' ";
+			}
+			if (dto.getuStat1() != null && dto.getuStat1().equals("UNO")) {
+				and += " and u.user_sttus = 'UNO' ";
+			}
+			if (dto.getuStat1() != null && dto.getuStat1().equals("UDR")) {
+				and += " and u.user_sttus = 'UDR' ";
+			}
+			if (dto.getuStat1() != null && dto.getuStat1().equals("UDS")) {
+				and += " and u.user_sttus = 'UDS' ";
+			}
+			if (dto.getuStat1() != null && dto.getuStat1().equals("USE")) {
+				and += " and u.user_sttus = 'USE' ";
+			}
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and u.srbde between to_date(?,'yyyy-mm-dd') and to_date(?,'yyyy-mm-dd') ";
+			}
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and u.srbde between to_date(?,'yyyy-mm-dd') and sysdate ";
+			}
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and u.user_brthdy between to_date(?,'yyyy-mm-dd') and to_date(?,'yyyy-mm-dd') ";
+			}
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and u.user_brthdy between to_date(?,'yyyy-mm-dd') and sysdate ";
+			}
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 10 and 20")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 19 and to_char(sysdate,'yyyy') - 10 ";
+			}
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 20 and 30")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 29 and to_char(sysdate,'yyyy') - 20 ";
+			}
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 30 and 40")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 39 and to_char(sysdate,'yyyy') - 30 ";
+			}
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 40 and 50")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 49 and to_char(sysdate,'yyyy') - 40 ";
+			}
+			if (dto.getuStat2() != null && dto.getuStat2().equals("between 50 and 60")) {
+				and += " and to_char(user_brthdy,'yyyy') between to_char(sysdate,'yyyy') - 59 and to_char(sysdate,'yyyy') - 50 ";
+			}
+			if (dto.getuStat2() != null && dto.getuStat2().equals("61")) {
+				and += " and to_char(user_brthdy,'yyyy') to_char(user_brthdy,'yyyy') < to_char(sysdate,'yyyy') - 60 ";
+			}
+
+		}
+
+		String sql = "select count(*) cnt " + "from order_group og, users u, setle s " + "where u.USER_ID = og.USER_ID "
+				+ "and og.ORDER_GROUP_NO = s.ORDER_GROUP_NO " + and + " order by ? ";
+
+		int i = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (dto.getuName1() != null) {
+				pstmt.setString(++i, dto.getuName1());
+			}
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			}
+			if (dto.getuCtg1().equals("srbde") && dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());
+			}
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			}
+			if (dto.getuCtg1().equals("user_brthdy") && dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());
+			}
+
+			pstmt.setString(++i, dto.getSort());
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				lastpage = rs.getInt("cnt");
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lastpage;
+	}
+
+	// 마일리지 설정 검색
+	public AdminMlgDto MlgSelect() {
+		AdminMlgDto dto = new AdminMlgDto();
+
+		String sql = "select MLG_ACCML_RATE, MUMM_SETLE_ACCML_AMOUNT, USER_SBSCRB_ACCML_AMOUNT, MUMM_MLG_USE_POSBL_AMOUNT, to_char(RGSDE,'yy-mm-dd') mdate "
+				+ "from mlg_policy " + "where rgsde = (select max(rgsde) from mlg_policy)";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			System.out.println(sql);
+			if (rs.next()) {
+				dto = new AdminMlgDto();
+				dto.setPercent(rs.getInt("MLG_ACCML_RATE"));
+				dto.setAmount(rs.getInt("MUMM_SETLE_ACCML_AMOUNT"));
+				dto.setNewUser(rs.getInt("USER_SBSCRB_ACCML_AMOUNT"));
+				dto.setUseMlgAble(rs.getInt("MUMM_MLG_USE_POSBL_AMOUNT"));
+				dto.setmDate(rs.getString("mdate"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
+
+	// 마일리지 설정 insert
+	public int AdminMlgUpdate(AdminMlgDto dto) {
+		int r = 0;
+
+		String sql = "insert into mlg_policy(mlg_policy_no, mlg_accml_rate, rgsde, mumm_setle_accml_amount, user_sbscrb_accml_amount, mumm_mlg_use_posbl_amount) "
+				+ "values((select max(mlg_policy_no) from mlg_policy)+1, ?, sysdate, ?, ?, ?)";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, dto.getPercent());
+			pstmt.setInt(2, dto.getAmount());
+			pstmt.setInt(3, dto.getNewUser());
+			pstmt.setInt(4, dto.getUseMlgAble());
+
+			r = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return r;
+	}
+
+	// user 마일리지 내역 검색
+	public List<HashMap<String, Object>> AdminMlgManageSelect(AdminMlgSelectDto dto) {
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+		String and = "where 1=1";
+		
+		
+		if (dto != null) {
+			if (dto.getmName() != null && !dto.getmName().equals("")) {
+				and += " and user_id like '%'||?||'%' ";
+			}
+			if (dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and rgsde >= ? ";
+				and += " and rgsde <= ? ";
+			}
+			if (dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and rgsde > ? ";
+			}
+		}
+		System.out.println(dto);
+		String sql = "select user_id, rgsde, mlg, se_code from mlg_change_log " + and + " order by user_id";
+		
+			int i = 0;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				if (dto.getmName() != null && !dto.getmName().equals("")) {
+					pstmt.setString(++i, dto.getmName());
+				}
+				if (dto.getsDate() != null && dto.geteDate() != null) {
+					pstmt.setString(++i, dto.getsDate());
+					pstmt.setString(++i, dto.geteDate());
+				}
+				if (dto.getsDate() != null && dto.geteDate() == null) {
+					pstmt.setString(++i, dto.getsDate());
+				}
+				
+				rs = pstmt.executeQuery();				
+				System.out.println("sql1=====" + sql);
+				while (rs.next()) {
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("user_id", rs.getString("user_id"));
+					map.put("rgsde", rs.getDate("rgsde"));
+					map.put("mlg", rs.getInt("mlg"));
+					map.put("se_code", rs.getString("se_code"));
+					list.add(map);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				
+			}
 		
 		return list;
 	}
-	
-	public int selectUserCnt(AdminUserDto dto) {			
-		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+
+	// 마일리지 검색 페이징
+	public int selectMlgManageCnt(AdminMlgSelectDto dto) {
 		int lastpage = 0;
-		String and = "and 1=1";
-	
+		String and = "where 1=1";
+		System.out.println(dto);
+		if (dto != null) {
+			if (dto.getmName() != null && !dto.getmName().equals("")) {
+				and += " and user_id like '%'||?||'%' ";
+			}
+			if (dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and rgsde >= ? ";
+				and += " and rgsde <= ? ";
+			}
+			if (dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and rgsde > ? ";
+			}
+		}
 		
+		String sql = "select count(*) cnt from mlg_change_log " + and + " order by user_id";
 		
-		
+			int i = 0;
+			try {
+				pstmt = conn.prepareStatement(sql);
+				System.out.println("sql=====" + sql);
+				if (dto.getmName() != null && !dto.getmName().equals("")) {
+					pstmt.setString(++i, dto.getmName());
+				}
+				if (dto.getsDate() != null && dto.geteDate() != null) {
+					pstmt.setString(++i, dto.getsDate());
+					pstmt.setString(++i, dto.geteDate());
+				}
+				if (dto.getsDate() != null && dto.geteDate() == null) {
+					pstmt.setString(++i, dto.getsDate());
+				}
+				
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					lastpage = rs.getInt("cnt");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}			
 		
 		return lastpage;
+	}
+	public HashMap<String, Object> AdminMlgManageStatus(AdminMlgSelectDto dto) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String and = "where 1=1";
+		
+		if (dto != null) {
+			if (dto.getmName() != null && !dto.getmName().equals("")) {
+				and += " and user_id like '%'||?||'%' ";
+				
+			}
+			if (dto.getsDate() != null && dto.geteDate() != null) {
+				and += " and rgsde >= ? ";
+				and += " and rgsde <= ? ";
+			}
+			if (dto.getsDate() != null && dto.geteDate() == null) {
+				and += " and rgsde > ? ";
+			}
+			
+		}
+		String sql = "select sum(decode(sign(mlg), -1, mlg)) decrease, sum(decode(sign(mlg), 1, mlg)) increase, sum(mlg) mlgSum " + 
+				"from MLG_CHANGE_LOG " + and;
+		
+		int i = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("sql=====" + sql);
+			
+			if (dto.getmName() != null && !dto.getmName().equals("")) {
+				pstmt.setString(++i, dto.getmName());
+			}
+			if (dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			}
+			if (dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());
+			}
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				map = new HashMap<String,Object>();
+				map.put("decrease", rs.getInt("decrease"));
+				map.put("increase", rs.getInt("increase"));
+				map.put("mlgSum", rs.getInt("mlgSum"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		return map;
 	}
 }

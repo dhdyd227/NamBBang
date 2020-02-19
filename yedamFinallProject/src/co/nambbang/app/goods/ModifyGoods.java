@@ -30,7 +30,7 @@ public class ModifyGoods implements Command {
 		dao.setAutoCommit(false);
 		
 		//결과 리턴 Map 선언
-		Map map = new HashMap();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		//파일업로드 실제 경로 구하기
 		String uploadPath = request.getSession().getServletContext().getRealPath("/uploadFile");
@@ -58,7 +58,7 @@ public class ModifyGoods implements Command {
 			
 			String photoGroupId = multi.getParameter("photo_group_id");
 			String delNo = multi.getParameter("del_no");
-			String goods_id = multi.getParameter("goods_id");
+			//String goods_id = multi.getParameter("goods_id");
 			String[] delNoAr;
 			if(delNo.indexOf(",") > -1) {
 				delNoAr = delNo.split(",");
@@ -87,6 +87,7 @@ public class ModifyGoods implements Command {
 			}
 			
 			//파일 저장
+			@SuppressWarnings("unchecked")
 			Enumeration<String> en = multi.getFileNames();
 			
 			while(en.hasMoreElements()) {

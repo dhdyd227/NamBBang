@@ -1,26 +1,37 @@
-package co.nambbang.app.seller;
+package co.nambbang.app.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import co.nambbang.app.dto.sellerDTO;
 
 public class sellerDAO extends DAO {
 
 	public int insert(sellerDTO dto) {
 		int n = 0;
-		String sql = "insert into seller (SELLER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, BSN_BEGIN_TIME, BSN_CLOS_TIME, SNS_ADRES, INTRCN_SNTNC) "
-				+ "values(TO_CHAR(s_id.nextval), ?, ?, ?, ?, to_date(?,'HH24:mi'), to_date(?,'HH24:mi'), ?, ?)";
+		String sql = "insert into seler (SELER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, BSN_BEGIN_TIME, BSN_CLOS_TIME, SNS_ADRES, INTRCN_SNTNC) "
+				+ "values (?, ?, ?, ?, ?, to_date(?,'HH24:mi'), to_date(?,'HH24:mi'), ?, ?)";
+		String sql2 = "insert into LOGIN_INFO (ID, PASSWORD) "
+				+ "values(?, ?)";
+		
 		try {
 			System.out.println();
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getSname());
-			pstmt.setString(2, dto.getLc());
-			pstmt.setString(3, dto.getName());
-			pstmt.setString(4, dto.getNo());
-			pstmt.setString(5, dto.getOpen());
-			pstmt.setString(6, dto.getClose());
-			pstmt.setString(7, dto.getSns());
-			pstmt.setString(8, dto.getIntrcn());
+			pstmt.setString(1, dto.getSid());
+			pstmt.setString(2, dto.getSname());
+			pstmt.setString(3, dto.getLc());
+			pstmt.setString(4, dto.getName());
+			pstmt.setString(5, dto.getNo());
+			pstmt.setString(6, dto.getOpen());
+			pstmt.setString(7, dto.getClose());
+			pstmt.setString(8, dto.getSns());
+			pstmt.setString(9, dto.getIntrcn());
+			n = pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, dto.getSid());
+			pstmt.setString(2, dto.getPw());
 			n = pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -30,14 +41,35 @@ public class sellerDAO extends DAO {
 		}
 		return n;
 	}
+	
+	//id(사업자번호) duplication(중복확인)
+		public int idDuplicationCheck(String id) {
+			String sql = "select * from login_info where id=? ";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				//중복;
+				if (rs.next()) {
+					return 1;
+				}
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			close();
+			//이용가능
+			return 0;
+		}
 
 	// 판매자 수정
 	public int update(sellerDTO dto) throws Exception {
 		int n = 0;
 		try {
-			String sql = "update seller set "
+			String sql = "update seler set "
 					+ "MTLTY_LC = ?, SELLER_TELNO = ?, BSN_BEGIN_TIME = ?, BSN_CLOS_TIME = ?, SNS_ADRES = ?, INTRCN_SNTNC = ? "
-					+ "where SELLER_ID = ?";
+					+ "where SELER_ID = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getLc());
 			pstmt.setString(2, dto.getNo());
@@ -59,18 +91,18 @@ public class sellerDAO extends DAO {
 	public sellerDTO boardEditSelect(int id) {
 
 		sellerDTO dto = new sellerDTO();
-		String sql = "select SELLER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, "
+		String sql = "select SELER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, "
 				+ "to_char(bsn_begin_time,'HH24:mi') bsn_begin_time, "
 				+ "to_char(bsn_clos_time,'HH24:mi') bsn_clos_time, SNS_ADRES, "
-				+ "INTRCN_SNTNC from seller"
-				+ " where SELLER_ID = ?";
+				+ "INTRCN_SNTNC from seler"
+				+ " where SELER_ID = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				dto.setId(rs.getString("SELLER_ID"));
+				dto.setSid(rs.getString("SELER_ID"));
 				dto.setSname(rs.getString("CMPNM"));
 				dto.setLc(rs.getString("MTLTY_LC"));
 				dto.setName(rs.getString("BPRPRR"));
@@ -93,14 +125,14 @@ public class sellerDAO extends DAO {
 	public ArrayList<sellerDTO> select() {
 		ArrayList<sellerDTO> list = new ArrayList<>();
 		sellerDTO dto = new sellerDTO();
-		String sql = "select * from seller";
+		String sql = "select * from seler";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				dto = new sellerDTO();
-				dto.setId(rs.getString("SELLER_ID"));
+				dto.setSid(rs.getString("SELER_ID"));
 				dto.setSname(rs.getString("CMPNM"));
 				dto.setLc(rs.getString("MTLTY_LC"));
 				dto.setName(rs.getString("BPRPRR"));

@@ -168,6 +168,25 @@
 	      console.log("finish");
 	  }
 	
+	//회원가입 비밀번호와 비밀번호확인 같은지 체크
+	  function isPwSame() {
+	  	var pw = registerForm.password.value;
+	  	var pwCheck = registerForm.password_confirmation.value;
+
+	  	if (pw == "" && pwCheck == "") {
+	  		registerForm.password.style.background = 'rgba(0, 0, 0, 0.09)';
+	  		registerForm.password_confirmation.style.background = 'rgba(0, 0, 0,0.09)';
+	  	} else {
+	  		if (pw != pwCheck) {
+	  			registerForm.password.style.background = 'red';
+	  			registerForm.password_confirmation.style.background = 'red';
+	  		} else {
+	  			registerForm.password.style.background = 'rgb(232, 240, 254)';
+	  			registerForm.password_confirmation.style.background = 'rgb(232, 240, 254)';
+	  		}
+	  	}
+	  }
+//주소 찾기 API 사용	  
 	  function fn_setAddr(){
 		  var width = 500;
 		  var height = 600;
@@ -184,6 +203,43 @@
 		        });
 		        
 	  }
+	  
+	  function id_overlap_check() {
+
+		      $('#id_check_sucess').hide();
+		      $('.id_overlap_button').show();
+		      $('.sid_input').attr("check_result", "fail");
+
+
+		    if ($('.sid_input').val() == '') {
+		      alert('ID(사업자번호)를 입력해주세요.')
+		      return;
+		    }
+
+		    id_overlap_input = document.querySelector('input[name="sid"]');
+
+		    $.ajax({
+		      url: "{% url 'lawyerAccount:id_overlap_check' %}",
+		      data: {
+		        'sid': id_overlap_input.value
+		      },
+		      datatype: 'json',
+		      success: function (data) {
+		        console.log(data['overlap']);
+		        if (data['overlap'] == "fail") {
+		          alert("이미 존재하는 아이디 입니다.");
+		          id_overlap_input.focus();
+		          return;
+		        } else {
+		          alert("사용가능한 아이디 입니다.");
+		          $('.sid_input').attr("check_result", "success");
+		          $('#id_check_sucess').show();
+		          $('.id_overlap_button').hide();
+		          return;
+		        }
+		      }
+		    });
+		  }
 	  
 	</script>
 
@@ -218,6 +274,17 @@
 		
 		<script type="text/javascript">
 	function formCheck(){
+		/* if(frm.id.value == ""){
+			alert("ID(사업자 번호)를  입력해주세요.")
+			frm.id.focus();
+			return false;
+		} */
+		if(frm.pw.value == ""){
+			alert("비밀번호를 입력해주세요.")
+			frm.pw.focus();
+			return false;
+		} 
+		
 		if(frm.sname.value == ""){
 			alert("상호명을 입력해주세요.")
 			frm.sname.focus();
@@ -275,6 +342,17 @@
 			<br><br>
 			<div><h3> 판매자 등록 </h3></div><br>
 			<table>
+				<tr height="30">
+					<th>*ID(사업자번호)</th><td><input style="width:660px;" type="text" class="sid_input" id="sid" name="sid">
+					<button type="button" onclick="id_overlap_check()" >중복확인</button>
+					<img id="id_check_sucess" style="display: none;"></td>
+				</tr>
+				<tr height="30">
+					<th>*비밀번호</th><td><input style="width:730px;" type="password" id="pw" name="pw"></td>
+				</tr>
+				<tr height="30">
+					<th>*비밀번호확인</th><td><input style="width:730px;" type="password" id="pw" name="pw"></td>
+				</tr>
 				<tr height="30">
 					<th>*상호명</th><td><input style="width:730px;" type="text" id="sname" name="sname"></td>
 				</tr>

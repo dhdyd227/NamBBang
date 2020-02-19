@@ -1,11 +1,12 @@
-package co.nambbang.app.seller;
+package co.nambbang.app.dto;
 
 import java.util.Date;
 import java.util.List;
 
 
 public class sellerDTO {
-	private String id;
+	private String sid;
+	private String pw;
 	private String sname;
 	private String lc;
 	private String name;
@@ -32,6 +33,14 @@ public class sellerDTO {
 	public sellerDTO() {
 		super();
 	}
+	
+	public String getPw() {
+		return pw;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+	
 	public String getPhotoGroupId() {
 		return photoGroupId;
 	}
@@ -88,15 +97,12 @@ public class sellerDTO {
 		this.writngDe = writngDe;
 	}
 
-
-	public String getId() {
-		return id;
+	public String getSid() {
+		return sid;
 	}
-
-	public void setId(String id) {
-		this.id = id;
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
-
 	public String getSname() {
 		return sname;
 	}
@@ -195,7 +201,7 @@ public class sellerDTO {
 
 	@Override
 	public String toString() {
-		return "sellerDTO [id=" + id + ", sname=" + sname + ", lc=" + lc + ", name=" + name + ", no=" + no + ", photo="
+		return "sellerDTO [id=" + sid + ", sname=" + sname + ", lc=" + lc + ", name=" + name + ", no=" + no + ", photo="
 				+ photo + ", open=" + open + ", close=" + close + ", start=" + start + ", " + "sns=" + sns + ", intrcn="
 				+ intrcn + ", grade=" + grade + ", status=" + status + "]";
 	}

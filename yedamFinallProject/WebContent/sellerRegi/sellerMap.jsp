@@ -32,6 +32,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
+// 주소로 좌표를 검색합니다
 geocoder.addressSearch('대구광역시 중구 국채보상로139길 1', function(result, status) { //주소란에 ${dto.lc}입력해서 DB로 주소 불러오기. 
 
     // 정상적으로 검색이 완료됐으면 

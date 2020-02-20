@@ -271,6 +271,7 @@ input[type=file] {
 		        
 	  }
 	//아이디 중복 체크  
+	//아이디 중복 체크  
 	  function id_overlap_check() {
 
 		      $('#id_check_sucess').hide();

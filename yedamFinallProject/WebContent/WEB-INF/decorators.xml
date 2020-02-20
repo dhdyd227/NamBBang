@@ -4,5 +4,8 @@
        <!--  <pattern>*.jsp</pattern> -->
         <pattern>*.ad</pattern>
     </decorator>
-    <!-- 레이아웃 구분해서 적용  일반사용자 / 관리자 --> 
+    <!-- 레이아웃 구분해서 적용  일반사용자 / 관리자 -->
+    <excludes>
+    	<pattern>/AdminAjaxSelngAnalysisDayOk.ad</pattern>
+    </excludes> 
 </decorators>

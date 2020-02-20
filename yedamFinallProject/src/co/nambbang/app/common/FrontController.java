@@ -30,6 +30,7 @@ import co.nambbang.app.admin.AdminSellerCancelOkCommand;
 import co.nambbang.app.admin.AdminSellerManageCommand;
 import co.nambbang.app.admin.AdminSellerManageOkCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisDayCommand;
+import co.nambbang.app.admin.AdminAjaxSelngAnalysisDayOkCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisMonthCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisWeekCommand;
 import co.nambbang.app.admin.AdminSetleManageCommand;
@@ -106,6 +107,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/AdminBbsReplyInsert.ad", new AdminBbsReplyInsertCommand()); // admin - QNA 답변 달기 폼
 		
 		cont.put("/AdminSelngAnalysisDay.ad", new AdminSelngAnalysisDayCommand()); // admin - 매출 통계 일별 페이지
+		cont.put("/AdminAjaxSelngAnalysisDayOk.ad", new AdminAjaxSelngAnalysisDayOkCommand()); // admin - 매출 통계 일별 페이지
 		cont.put("/AdminSelngAnalysisWeek.ad", new AdminSelngAnalysisWeekCommand()); // admin - 매출 통계 주별 페이지
 		cont.put("/AdminSelngAnalysisMonth.ad", new AdminSelngAnalysisMonthCommand()); // admin - 매출 통계 월별 페이지
 		

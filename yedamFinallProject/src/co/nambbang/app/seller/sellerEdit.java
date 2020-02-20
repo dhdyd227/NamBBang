@@ -17,8 +17,11 @@ public class sellerEdit implements Command {
 		sellerDAO dao = new sellerDAO();
 		sellerDTO dto = new sellerDTO();
 		
-			
-		dto = dao.boardEditSelect(request.getParameter("sid"));
+		String id = (String)request.getSession().getAttribute("id");
+		
+		System.out.println("id :=============" + id);
+		dto = dao.boardEditSelect(id);
+		//dto = dao.boardEditSelect(request.getParameter("sid"));
 		
 		request.setAttribute("dto", dto);
 		

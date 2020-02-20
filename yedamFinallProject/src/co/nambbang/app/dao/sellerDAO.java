@@ -11,8 +11,8 @@ public class sellerDAO extends DAO {
 		int n = 0;
 		String sql = "insert into seler (SELER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, BSN_BEGIN_TIME, BSN_CLOS_TIME, SNS_ADRES, INTRCN_SNTNC) "
 				+ "values (?, ?, ?, ?, ?, to_date(?,'HH24:mi'), to_date(?,'HH24:mi'), ?, ?)";
-		String sql2 = "insert into LOGIN_INFO (ID, PASSWORD) "
-				+ "values (?, ?)";
+		String sql2 = "insert into LOGIN_INFO (ID, PASSWORD, CONECTR_SE) "
+				+ "values (?, ?, 'SE')";
 		
 		try {
 			System.out.println();
@@ -68,20 +68,21 @@ public class sellerDAO extends DAO {
 		int n = 0;
 		try {
 			String sql = "update seler set "
-					+ "MTLTY_LC = ?, SELLER_TELNO = ?, BSN_BEGIN_TIME = to_date(?,'HH24:mi'), BSN_CLOS_TIME = to_date(?,'HH24:mi'), SNS_ADRES = ?, INTRCN_SNTNC = ? "
+					+ "CMPNM = ?, MTLTY_LC = ?, SELLER_TELNO = ?, BSN_BEGIN_TIME = to_date(?,'HH24:mi'), BSN_CLOS_TIME = to_date(?,'HH24:mi'), SNS_ADRES = ?, INTRCN_SNTNC = ? "
 					+ "where SELER_ID = ?";
 			String sql2 = "update LOGIN_INFO set "
 					+ "PASSWORD = ? "
 					+ "where id = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getLc());
-			pstmt.setString(2, dto.getNo());
-			pstmt.setString(3, dto.getOpen());
-			pstmt.setString(4, dto.getClose());
-			pstmt.setString(5, dto.getSns());
-			pstmt.setString(6, dto.getIntrcn());
-			pstmt.setString(7, dto.getSid());
+			pstmt.setString(1, dto.getSname());
+			pstmt.setString(2, dto.getLc());
+			pstmt.setString(3, dto.getNo());
+			pstmt.setString(4, dto.getOpen());
+			pstmt.setString(5, dto.getClose());
+			pstmt.setString(6, dto.getSns());
+			pstmt.setString(7, dto.getIntrcn());
+			pstmt.setString(8, dto.getSid());
 			n = pstmt.executeUpdate();
 			
 			pstmt = conn.prepareStatement(sql2);

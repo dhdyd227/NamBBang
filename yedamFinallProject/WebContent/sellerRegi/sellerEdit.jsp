@@ -1,82 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
 
-<% 
-	String imgPath = "/yedamFinallProject/sellerRegi";
-	String jsPath = "/yedamFinallProject/sellerRegi";
-	String cssPath = "/yedamFinallProject/sellerRegi";
-%>
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userstyles/bootstrap4/bootstrap.min.css">
+<link
+	href="/yedamFinallProject/userplugins/font-awesome-4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userstyles/main_styles.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userstyles/responsive.css">
 
-<head>
-	<title>판매자 수정</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="Colo Shop Template">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-	<link href="<%=cssPath %>/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-	<link rel="stylesheet" href="<%=cssPath %>/plugins/themify-icons/themify-icons.css">
-	<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
-	<link rel="stylesheet" type="text/css" href="styles/responsive.css">
-	<link rel="stylesheet" type="text/css" href="<%=cssPath %>/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-	<link rel="stylesheet" type="text/css" href="<%=cssPath %>/styles/contact_styles.css">
-	<link rel="stylesheet" type="text/css" href="<%=cssPath %>/styles/contact_responsive.css">
-	<script src="<%=jsPath %>/js/jquery-3.2.1.min.js"></script>
-	
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="styles/bootstrap4/popper.js"></script>
-	<script src="styles/bootstrap4/bootstrap.min.js"></script>
-	<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-	<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-	<script src="plugins/easing/easing.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1"%>
+
+<script src="/yedamFinallProject/userjs/jquery-3.2.1.min.js"></script>
+<script src="/yedamFinallProject/userstyles/bootstrap4/popper.js"></script>
+<script src="/yedamFinallProject/userstyles/bootstrap4/bootstrap.min.js"></script>
+<script
+	src="/yedamFinallProject/userplugins/Isotope/isotope.pkgd.min.js"></script>
+<script
+	src="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/yedamFinallProject/userplugins/easing/easing.js"></script>
+<script src="/yedamFinallProject/userjs/custom.js"></script>
 
 
-	<link href="assets/css/login-register.css" rel="stylesheet" />
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-
-	<!-- 로그인 스크립트 전체 -->
-	<script type="text/javascript" src="assets/js/login-register.js"></script>
+<script
+	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
 <style type="text/css">
-	input[type=file] {
-		display: none;
-	}
-	
-	.my_button {
-		display: inline-block;
-		width: 200px;
-		text-align: center;
-		padding: 10px;
-		background-color: #006BCC;
-		color: #fff;
-		text-decoration: none;
-		border-radius: 5px;
-	}
-	
-	.imgs_wrap {
-		border: 2px solid #D4D4D4;
-		margin-top: 30px;
-		margin-bottom: 30px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
-	
-	.imgs_wrap img {
-		max-width: 150px;
-		margin-left: 10px;
-		margin-right: 10px;
-	}
-	</style>
-	
-	<script type="text/javascript">
+input[type=file] {
+	display: none;
+}
+
+.my_button {
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+	padding: 10px;
+	background-color: #006BCC;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.imgs_wrap {
+	border: 2px solid #D4D4D4;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.imgs_wrap img {
+	max-width: 150px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+</style>
+
+<script type="text/javascript">
 	
 	  var sel_files = [];
 	
@@ -181,7 +172,6 @@
 		        });
 		        
 	  }
-	  
 	//비밀번호와 비밀번호확인 같은지 체크
 	  function isPwSame() {
 		var pw = frm.pw.value;
@@ -204,37 +194,8 @@
 	  	}
 	  }
 	  
-	</script>
-
-</head>
-
-<body>
-
-	<div class="super_container">
-
-		<!-- Header -->
-		<%@include file="header.jsp" %>
-
-<!-- Slider -->
-
-		<div class="main_slider">
-			<div class="container fill_height">
-				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
-					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-					</ol>
-											
-						<div class="carousel-item">
-							<img class="d-block w-100" src="./images/banner_3.jpg" alt="Third slide">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<script type="text/javascript">
+</script>
+<script type="text/javascript">
 	function formCheck(){
 		if(frm.sname.value == ""){
 			alert("상호명을 입력해주세요.")
@@ -276,77 +237,117 @@
 	
 	
 </script>
+
 </head>
+
 <body>
-<br><br>
-	<div align="center">
-		<form id="frm" name="frm" action="./sellerEditCommand.do" method="post" onsubmit="return formCheck()">
-			<br><br>
-			<div><h3> 판매자 수정 </h3></div><br>
-			<table>
-				<tr height="30">
-					<th>*ID(사업자번호)</th><td><input value="${dto.sid}" style="width:730px;" type="text" class="sid_input" id="sid" name="sid" readonly>
-				</tr>
-				<tr height="30">
-					<th>*비밀번호</th><td><input style="width:730px;" type="password" id="pw" name="pw"></td>
-				</tr>
-				<tr height="30">
-					<th>*비밀번호확인</th><td><input style="width:730px;" type="password" id="pw_conf" name="pw_conf"></td>
-				</tr>
-				<tr height="30">
-					<th>*상호명</th><td><input value="${dto.sname}" style="width:730px;" type="text" id="sname" name="sname"></td>
-				</tr>
-				<tr height="30">
-					<th>*가게위치</th><td><input value="${dto.lc}" style="width:690px;" type="text" id="lc" name="lc">
-					<button id="button" onclick="fn_setAddr();" >검색</button></td>
-				</tr>
-				<tr height="30">
-					<th>*사업주</th><td><input value="${dto.name}" style="width:730px;" type="text" id="name" name="name" readonly></td>
-				</tr>
-				<tr height="30">
-					<th>*전화번호</th><td><input value="${dto.no}" style="width:730px;" type="text" id="no" name="no"></td>
-				</tr>
-				<tr height="30">
-					<th>*영업시작시간</th><td><input value="${dto.open}" style="width:730px;" type="Time" id="open" name="open"></td>
-				</tr>
-				<tr height="30">
-					<th>*영업마감시간</th><td><input value="${dto.close}" style="width:730px;" type="Time" id="close" name="close"></td>
-				</tr>
-				<tr height="30">
-					<th>sns주소</th><td><input value="${dto.sns}" style="width:730px;" type="text" id="sns" name="sns"></td>
-				</tr>
-				<tr height="30">
-					<th>*가게소개글</th><td colspan="3"><textarea style="width:730px; resize:none" id="intrcn" name="intrcn" cols="60" rows="15" >${dto.intrcn}</textarea></td>
-				</tr>
-				
-			</table>
-			<div class="mt-3">
-					<div class="input_wrap">
-						<input class="btn btn-primary ml-1" type="button" value="사진변경" name="selectFile" onclick="fileUploadAction();"/>&nbsp;&nbsp;
-						<input type="file" id="input_imgs" multiple />
-						<button class="btn btn-primary ml-1" type="submit">수 정</button>&nbsp;&nbsp;
+
+	<div class="super_container">
+
+		<!-- Slider -->
+		<%@include file="/userviews/header.jsp"%>
+
+		<div class="main_slider">
+			<div align="center">
+				<form id="frm" name="frm" action="./sellerEditCommand.do"
+					method="post" onsubmit="return formCheck()">
+					<br>
+					<br>
+					<div>
+						<h3>판매자 수정</h3>
 					</div>
-				</div>
-				
-				<div>
-					<div class="imgs_wrap" style="width:500px;">
-						<img id="img" />
+					<br>
+					<table>
+						<tr height="30">
+							<th>*ID(사업자번호)</th>
+							<td><input value="${dto.sid}" style="width: 730px;"
+								type="text" class="sid_input" id="sid" name="sid" readonly>
+						</tr>
+						<tr height="30">
+							<th>*비밀번호</th>
+							<td><input style="width: 730px;" type="password" id="pw"
+								name="pw"></td>
+						</tr>
+						<tr height="30">
+							<th>*비밀번호확인</th>
+							<td><input style="width: 730px;" type="password"
+								id="pw_conf" name="pw_conf"></td>
+						</tr>
+						<tr height="30">
+							<th>*상호명</th>
+							<td><input value="${dto.sname}" style="width: 730px;"
+								type="text" id="sname" name="sname"></td>
+						</tr>
+						<tr height="30">
+							<th>*가게위치</th>
+							<td><input value="${dto.lc}" style="width: 690px;"
+								type="text" id="lc" name="lc">
+								<button id="button" onclick="fn_setAddr();">검색</button></td>
+						</tr>
+						<tr height="30">
+							<th>*사업주</th>
+							<td><input value="${dto.name}" style="width: 730px;"
+								type="text" id="name" name="name" readonly></td>
+						</tr>
+						<tr height="30">
+							<th>*전화번호</th>
+							<td><input value="${dto.no}" style="width: 730px;"
+								type="text" id="no" name="no"></td>
+						</tr>
+						<tr height="30">
+							<th>*영업시작시간</th>
+							<td><input value="${dto.open}" style="width: 730px;"
+								type="Time" id="open" name="open"></td>
+						</tr>
+						<tr height="30">
+							<th>*영업마감시간</th>
+							<td><input value="${dto.close}" style="width: 730px;"
+								type="Time" id="close" name="close"></td>
+						</tr>
+						<tr height="30">
+							<th>sns주소</th>
+							<td><input value="${dto.sns}" style="width: 730px;"
+								type="text" id="sns" name="sns"></td>
+						</tr>
+						<tr height="30">
+							<th>*가게소개글</th>
+							<td colspan="3"><textarea style="width: 730px; resize: none"
+									id="intrcn" name="intrcn" cols="60" rows="15">${dto.intrcn}</textarea></td>
+						</tr>
+
+					</table>
+					<div class="mt-3">
+						<div class="input_wrap">
+							<input class="btn btn-primary ml-1" type="button" value="사진변경"
+								name="selectFile" onclick="fileUploadAction();" />&nbsp;&nbsp; <input
+								type="file" id="input_imgs" multiple />
+							<button class="btn btn-primary ml-1" type="submit">수 정</button>
+							&nbsp;&nbsp;
+						</div>
 					</div>
-				</div>
-				
-		</form>
-		<script type="text/javascript">
+
+					<div>
+						<div class="imgs_wrap" style="width: 500px;">
+							<img id="img" />
+						</div>
+					</div>
+
+				</form>
+				<script type="text/javascript">
 			document.getElementById('date').value = new Date().toISOString().substring(0, 10);
 		</script>
+			</div>
+
+		</div>
+
+
+
+		<!-- Footer -->
+		<%@include file="/userviews/footer.jsp"%>
+
 	</div>
 
-		<!-- Modal -->
-	
-		<%@include file="modal.jsp" %>
-		
-		<!-- Footer -->
-		<%@include file="footerS.jsp" %>
-	
+
 </body>
 
 </html>

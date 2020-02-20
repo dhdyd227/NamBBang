@@ -213,7 +213,7 @@
 	<div class="super_container">
 
 		<!-- Header -->
-		<%@include file="header.jsp" %>
+		<%--  <%@include file="header.jsp" %>--%>
 
 <!-- Slider -->
 
@@ -342,11 +342,10 @@
 
 		<!-- Modal -->
 	
-		<%@include file="modal.jsp" %>
+		<%@include file="/userviews/modal.jsp" %>
 		
 		<!-- Footer -->
-		<%@include file="footerS.jsp" %>
-	
+		<%@include file="/userviews/footer.jsp" %>
 </body>
 
 </html>

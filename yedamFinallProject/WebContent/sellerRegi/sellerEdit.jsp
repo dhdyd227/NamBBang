@@ -172,7 +172,6 @@ input[type=file] {
 		        });
 		        
 	  }
-	  
 	//비밀번호와 비밀번호확인 같은지 체크
 	  function isPwSame() {
 		var pw = frm.pw.value;

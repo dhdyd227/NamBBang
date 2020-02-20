@@ -392,12 +392,11 @@ input[type=file] {
 					<div class="mt-3">
 						<div class="input_wrap">
 							<input class="btn btn-primary ml-1" type="button" value="사진등록"
-								name="selectFile" onclick="fileUploadAction();" />&nbsp;&nbsp; <input
-								type="file" id="input_imgs" multiple />
-							<button class="btn btn-primary ml-1" type="submit">저장</button>
+								name="selectFile" onclick="fileUploadAction();" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								 <input type="file" id="input_imgs" multiple />
+							<button class="btn btn-primary ml-1" type="submit">저     장</button>
 							&nbsp;&nbsp;
-							<button class="btn btn-primary ml-1" type="reset">취소</button>
-							&nbsp;&nbsp;
+							
 						</div>
 					</div>
 

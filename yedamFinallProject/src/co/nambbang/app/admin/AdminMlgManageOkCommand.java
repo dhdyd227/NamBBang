@@ -1,7 +1,10 @@
 package co.nambbang.app.admin;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,13 +28,14 @@ public class AdminMlgManageOkCommand implements Command {
 		AdminMlgSelectDto dto = new AdminMlgSelectDto();		
 		AdminDao dao = new AdminDao();
 		AdminPagingDto pDto = new AdminPagingDto();
-		
-		
+			
 		String sDate = request.getParameter("startDate");
 		String eDate = request.getParameter("endDate");
 		
 		if(sDate != null && sDate.equals("")) {
 			sDate = null;
+
+
 		}
 		if(eDate != null && eDate.equals("")) {
 			eDate = null;

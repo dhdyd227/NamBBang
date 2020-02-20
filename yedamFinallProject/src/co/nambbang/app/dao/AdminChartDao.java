@@ -17,36 +17,39 @@ public class AdminChartDao extends DAO{
 	public List<Map<String,Object>> AnalysDay(AdminSelngAnalysisDto dto){
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		String and = " where 1=1 ";
-		
+		String and2 = " and 1=1 ";
 		if(dto != null) {
 			if(dto.getsDate() != null && dto.geteDate() != null) {
 				and += " and setle_de >= ? ";
 				and += " and setle_de <= ? ";
+				and2 += " and s.setle_de >= ? ";
+				and2 += " and setle_de <= ? ";
 			}
 			if(dto.getsDate() != null && dto.geteDate() == null) {
 				and += " and setle_de >= ? ";
-				and += " and setle_de <= to_date(?)+7 ";
+				and += " and setle_de <= to_date(?,'yyyy-mm-dd')+7 ";
+				and2 += " and setle_de >= ? ";
+				and2 += " and setle_de <= to_date(?,'yyyy-mm-dd')+7 ";
 			}
 		}
 		
 		String sql = " select amount.day,  amount.setle_profit, amount.setle_refnd, qy.order_qy " + 
 				"    from  " + 
 				"        ( " + 
-				"        select to_char(setle_de ,'yy-mm-dd') day, " + 
+				"        select to_char(setle_de ,'yyyy-mm-dd') day, " + 
 				"        sum(case when setle_code = 'CC' then SETLE_AMOUNT else 0 end) setle_refnd, " + 
 				"        sum(case when setle_code = 'SC' then SETLE_AMOUNT else 0 end) setle_profit " + 
 				"        from setle " + and + 				
-				"        group by to_char(setle_de ,'yy-mm-dd') " + 
-				"        order by to_char(setle_de ,'yy-mm-dd') " + 
+				"        group by to_char(setle_de ,'yyyy-mm-dd') " + 
+				"        order by to_char(setle_de ,'yyyy-mm-dd') " + 
 				"        ) amount, " + 
 				"        ( " + 
-				"        select to_char(setle_de ,'yy-mm-dd') day, sum(o.order_qy) order_qy " + 
+				"        select to_char(setle_de ,'yyyy-mm-dd') day, sum(o.order_qy) order_qy " + 
 				"        from setle s, orders o " + 
-				"        where  s.order_group_no = o.order_group_no " + 
-				"        and s.setle_de between '20-02-01' and '20-02-07' " + 
+				"        where  s.order_group_no = o.order_group_no " + and2 +						
 				"        and s.setle_code = 'SC' " + 
-				"        group by to_char(setle_de ,'yy-mm-dd') " + 
-				"        order by to_char(setle_de ,'yy-mm-dd') " + 
+				"        group by to_char(setle_de ,'yyyy-mm-dd') " + 
+				"        order by to_char(setle_de ,'yyyy-mm-dd') " + 
 				"        ) qy " + 
 				"  where amount.day = qy.day (+) " + 
 				"  order by amount.day";
@@ -57,12 +60,16 @@ public class AdminChartDao extends DAO{
 			if(dto.getsDate() != null && dto.geteDate() != null) {
 				pstmt.setString(++i, dto.getsDate());
 				pstmt.setString(++i, dto.geteDate());
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
 			}
 			if(dto.getsDate() != null && dto.geteDate() == null) {
 				pstmt.setString(++i, dto.getsDate());
 				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.getsDate());
 			}
-			
+			System.out.println(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -79,7 +86,7 @@ public class AdminChartDao extends DAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("list+++++++"+ list);
+		
 		return list;
 	}
 	

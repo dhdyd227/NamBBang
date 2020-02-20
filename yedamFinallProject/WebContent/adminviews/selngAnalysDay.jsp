@@ -7,15 +7,15 @@
 <title>일별 매출 분석</title>
 <script>
 $(function(){	
- drawCahrt();	
+ drawChart();	
 })
 
 function drawChart(d1,d2){
 	var chart = tui.chart;	
 	// bar chart api 함수		
 	var container = document.getElementById('chart-area');
-	$.ajax("AdminAjaxSelngAnalysisDayOk.ad",{dataType:"json", data:{stardDate:d1, endDate:d2}})
-	.done(function(cData){
+	$.ajax("AdminAjaxSelngAnalysisDayOk.ad",{dataType:"json", data:{startDate:d1, endDate:d2}})
+	.done(function(cData){		
 		var day = [];
 		var profit = [];
 		var refnd = [];
@@ -107,7 +107,7 @@ function drawChart(d1,d2){
 	
 		    	
 		    
-});
+};
 
 
 window.addEventListener("load", function(){
@@ -353,9 +353,9 @@ function formCheck(){
 	    	dateFormat: 'yyyy-mm-dd'
 	    	/* ,startDate: '-10d' */
 	    	,uiLibrary: 'bootstrap4'
-	    	/* ,showOn: "both"  
+	    	 ,showOn: "both"  
 	        ,buttonImage: "../assets/icon/calendar.png"
-	        ,buttonImageOnly: true  */
+	        ,buttonImageOnly: true  
 	        ,language:"ko"
 	        ,todayHighlight : true
 	        ,autoclose: true

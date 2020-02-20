@@ -1,6 +1,9 @@
 package co.nambbang.app.admin;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,9 +24,13 @@ public class AdminAjaxSelngAnalysisDayOkCommand implements Command {
 		AdminSelngAnalysisDto dto = new AdminSelngAnalysisDto();
 		AdminChartDao dao = new AdminChartDao();
 		
-		
+				
 		String sDate = request.getParameter("startDate");
 		String eDate = request.getParameter("endDate");
+		
+ 
+		System.out.println("sDate==="+ sDate);
+		System.out.println("eDate==="+ eDate);
 		
 		if(sDate != null && sDate.equals("")) {
 			sDate = null;
@@ -33,21 +40,12 @@ public class AdminAjaxSelngAnalysisDayOkCommand implements Command {
 		}
 		
 		dto.setsDate(sDate);
+		
 		dto.seteDate(eDate);
 		
 		List<Map<String,Object>> list = dao.AnalysDay(dto);
 		String chart = JSONArray.fromObject(list).toString();
-		
-		
-//		String day="";
-//		for(int i=0; i<list.size(); i++ ) {
-//			day +="'";
-//			day +=list.get(i).get("day");
-//			day +="'";
-//			if(i != list.size() - 1)
-//				day +=",";
-//		}
-		
+						
 		System.out.println(chart);
 		String path = "ajax:" + chart;
 		return path;

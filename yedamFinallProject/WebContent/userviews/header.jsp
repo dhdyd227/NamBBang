@@ -3,9 +3,32 @@
 
 <link href="/yedamFinallProject/userassets/css/login-register.css"
 	rel="stylesheet" />
-<link rel="stylesheet"
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userstyles/bootstrap4/bootstrap.min.css">
+<link href="/yedamFinallProject/userplugins/font-awesome-4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userstyles/main_styles.css">
+<link rel="stylesheet" type="text/css"
+	href="/yedamFinallProject/userstyles/responsive.css">
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
+
+<script src="/yedamFinallProject/userjs/jquery-3.2.1.min.js"></script>
+<script src="/yedamFinallProject/userstyles/bootstrap4/popper.js"></script>
+<script src="/yedamFinallProject/userstyles/bootstrap4/bootstrap.min.js"></script>
+<script src="/yedamFinallProject/userplugins/Isotope/isotope.pkgd.min.js"></script>
+<script
+	src="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/yedamFinallProject/userplugins/easing/easing.js"></script>
+<script src="/yedamFinallProject/userjs/custom.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 
 <!-- 로그인 스크립트 전체 -->

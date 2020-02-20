@@ -180,8 +180,8 @@
     </script>
 </head>
 
-<body class="bg-light">
-    <div class="container">
+<body class="">
+    <div class="container bg-light">
         <div class="py-5 text-center"></div>
         <form class="needs-validation" method="POST" action="">
             <div class="row">
@@ -242,7 +242,7 @@
                         </div>
                         <div class="col-md-5 mb-3">
                             원 &nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp; <span id="totalMlg" style="color: crimson;">
-                                ${mlg} </span><span>원</span>
+                               ${mlg}  </span><span>원</span>
                         </div>
                     </div>
 

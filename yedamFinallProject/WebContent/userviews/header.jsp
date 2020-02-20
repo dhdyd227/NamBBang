@@ -31,7 +31,7 @@
 							<li><a href="./totalShop.do">Total Shop</a></li>
 							
 							<li><a href="./listGoods.do">상품 등록</a></li>
-							<li><a href="#">판매자 등록</a></li>
+							<li><a href="./sellerEdit.do">판매자 수정</a></li>
 							<c:if test ="${CONECTR_SE eq 'SE'}">
 							</c:if>
 							

@@ -39,12 +39,13 @@
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
 
-	<link href="assets/css/login-register.css" rel="stylesheet" />
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
-	<!-- 로그인 스크립트 전체 -->
+	<!-- 로그인 스크립트 전체
 	<script type="text/javascript" src="assets/js/login-register.js"></script>
-
+ 	<link href="assets/css/login-register.css" rel="stylesheet" />
+ 	
+ 	-->
 <style type="text/css">
 	input[type=file] {
 		display: none;
@@ -252,7 +253,7 @@
 	<div class="super_container">
 
 		<!-- Header -->
-		<%@include file="header.jsp" %>
+		<%@include file="/userviews/header.jsp" %>
 
 <!-- Slider -->
 
@@ -411,10 +412,10 @@
 		
 		<!-- Modal -->
 	
-		<%@include file="modal.jsp" %>
+		<%@include file="/userviews/modal.jsp" %>
 		
 		<!-- Footer -->
-		<%@include file="footerS.jsp" %>
+		<%@include file="/userviews/footer.jsp" %>
 	
 </body>
 

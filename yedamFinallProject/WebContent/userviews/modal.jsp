@@ -14,7 +14,9 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">Login Owith</h4>
 				</div>
+				
 				<div class="modal-body">
+				
 					<div class="box">
 						<div class="content">
 							<div class="social">
@@ -27,10 +29,10 @@
 							</div>
 							<div class="error"></div>
 							
-							
 							<!-- 로그인 화면 -->
 							<div class="form loginBox">
 								<form  id ="loginForm" action="./logIn.do" method="post" onsubmit="return LoginClick();" accept-charset="UTF-8">
+									<c:if test ="${empty CONECTR_SE}">
 									<input id="userid" class="form-control" type="text" placeholder="id"
 										name="userid"><br />
 									<input id="password" class="form-control" type="password" placeholder="Password"
@@ -38,23 +40,29 @@
 									
 									<input class="btn btn-default btn-login" type="submit" value="Login"
 										name="submit">
-								</form>
-								<img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg"
-									class="mt-3" width="100%" />
-							</div>
-							
-							
-							<!-- 로그아웃 화면-->
-							<div class="form logoutBox">
-								<form  id ="logoutForm" action="./index.do" method="post" onsubmit="return LogoutClick();" accept-charset="UTF-8">
+									</c:if>
 									
+									<c:if test ="${not empty CONECTR_SE}">
+									<!-- 로그아웃 화면-->
+									<input class="btn btn-default btn-login" type="submit" value="회원정보수정"
+										name="submit">
+									<br/>
+									<input class="btn btn-default btn-login" type="submit" value="마이페이지"
+										name="submit">
+									<br/>
+									<input class="btn btn-default btn-login" type="submit" value="Login"
+										name="submit">
+									<br/>
+									</c:if>
 								</form>
+								
 							</div>
+							
 						</div>
 					</div>
 
 
-
+					
 					<!-- 회원가입  -->
 					<div class="box">
 						<div class="content registerBox" style="display:none;">
@@ -85,18 +93,23 @@
 										name="birth" onkeyup="birthdayDateCheck()" value="1111-11-11">
 									
 									<br />
-									<label><input id="gender" class="form-control" type="radio" placeholder="gender"
-											name="gender" value="M" checked="checked">man</label>
-									<label><input id="gender" class="form-control" type="radio" name="gender"
-											value="W">woman</label>
+									<div>
+									<label><input id="gender"  type="radio" name="gender"
+											value="M" checked="checked"> Men </label>
+									<br />
+									<label><input id="gender"  type="radio" name="gender"
+											value="W"> Women</label>
 
 									<input class="btn btn-default btn-register" type="button" value="Create account"
 										name="submit" onclick="location.href='javascript: registerClick();'" >
+									</div>
 								</form>
 							</div>
 						</div>
 					</div>
-				
+					
+					
+							
 					<!-- 회원가입 축하메시지 -->
 					<div class="box">
 						<div class="content registerCheckBox" style="display:none;">
@@ -210,14 +223,25 @@
 				
 				
 				<div class="modal-footer">
-
 					<div class="forgot login-footer">
 						<span>
-							<a href="javascript: showRegisterForm();">회원가입</a>&nbsp;&nbsp;&nbsp;
+							<c:if test ="${empty CONECTR_SE}">
+							<a href="boardSellRegist.do">판매자 가입</a>
+							<a href="javascript: showRegisterForm();">회원 가입</a>&nbsp;&nbsp;&nbsp;
 							<a href="javascript: showFindIdForm();">아이디찾기</a>&nbsp;&nbsp;&nbsp;
 							<a href="javascript: showFindPwForm();">비번찾기</a>
+							
+							
+							</c:if>
+							
+							<c:if test ="${not empty CONECTR_SE}">
+							<!-- 로그아웃  -->
+							<a href="./logOut.do">Logout</a>
+							</c:if>
 						</span>
 					</div>
+					
+					
 
 					<div class="forgot register-footer" style="display:none">
 						<span>Already have an account?</span>
@@ -246,11 +270,7 @@
 						<span>로그인창으로돌아가기</span>
 						<a href="javascript: findPwResult_Login();">Login</a>
 					</div>
-					<!-- 로그아웃  -->
-					<div class="forgot logout-footer" style="display:none">
-						<span>로그아웃</span>
-						<a href="./logOut.do">Logout</a>
-					</div>
+					
 				</div>
 			</div>
 		</div>

@@ -55,6 +55,7 @@ import co.nambbang.app.main.MainCommandLogOut;
 import co.nambbang.app.main.MainCommandLogin;
 import co.nambbang.app.main.TotalShopCommandList;
 import co.nambbang.app.seller.BoardList;
+import co.nambbang.app.seller.BoardSellRegist;
 import co.nambbang.app.seller.BoardWrite;
 import co.nambbang.app.seller.BoardWriteOK;
 import co.nambbang.app.seller.SellerEditCommand;
@@ -134,7 +135,8 @@ public class FrontController extends HttpServlet {
 		cont.put("/detailSellGoods.do", new DetailSellGoods()); //상품판대 등록
 		cont.put("/modifySellGoods.do", new ModifySellGoods()); //상품판대 수정		
 		
-		// 시현
+		// 시현 sellerRegi/sellerindex.jsp
+		cont.put("/boardSellRegist.do", new BoardSellRegist());
 		cont.put("/boardWrite.do", new BoardWrite()); 
 		cont.put("/boardWriteOK.do", new BoardWriteOK());
 		cont.put("/boardlist.do", new BoardList());

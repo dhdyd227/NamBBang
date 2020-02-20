@@ -1,17 +1,11 @@
 //로그아웃 모달창
 function openLogoutModal(){
+
 	setTimeout(function() {
 		$('#loginModal').modal('show');
 	}, 230);
 	
-	$('#loginModal .loginBox').fadeOut('fast', function() {
-		$('.logout').fadeIn('fast');
-		$('.login-footer').fadeOut('fast', function() {
-			$('.logout-footer').fadeIn('fast');
-		});
-		$('.modal-title').html('Login out');
-	});
-	$('.error').removeClass('alert alert-danger').html('');
+
 	
 }
 

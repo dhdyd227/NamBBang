@@ -218,9 +218,9 @@ function formCheck(){
 							</div>
 							<div class="col-2 row-st">
 								<select class="custom-select" id="sort" name="sort">
-									<option value="srbde desc" selected>최신 가입일순</option>
-									<option value="srbde">가입일순</option>
-									<option value="setle_amount">구매금액순</option>
+									<option value="u.srbde desc" selected>최신 가입일순</option>
+									<option value="u.srbde desc">가입일순</option>
+									<option value="s.setle_amount desc">구매금액순</option>
 									<option value="age">나이순</option>
 									
 								</select>								

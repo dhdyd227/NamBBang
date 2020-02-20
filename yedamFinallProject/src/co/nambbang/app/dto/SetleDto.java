@@ -1,7 +1,7 @@
 package co.nambbang.app.dto;
 
 public class SetleDto {
-	private int setleNo;
+	private Long setleNo;
 	private String orderMn;
 	private String setleConfmCode;
 	private int setleAmount;
@@ -9,10 +9,10 @@ public class SetleDto {
 	private int orderGroupNo;
 	private String orderTelno;
 	
-	public int getSetleNo() {
+	public Long getSetleNo() {
 		return setleNo;
 	}
-	public void setSetleNo(int setleNo) {
+	public void setSetleNo(Long setleNo) {
 		this.setleNo = setleNo;
 	}
 	public String getOrderMn() {
@@ -52,7 +52,7 @@ public class SetleDto {
 		this.orderTelno = orderTelno;
 	}
 	
-	public SetleDto(int setleNo, String orderMn, String setleConfmCode, int setleAmount, int mlgUseAmount,
+	public SetleDto(Long setleNo, String orderMn, String setleConfmCode, int setleAmount, int mlgUseAmount,
 			int orderGroupNo, String orderTelno) {
 		super();
 		this.setleNo = setleNo;

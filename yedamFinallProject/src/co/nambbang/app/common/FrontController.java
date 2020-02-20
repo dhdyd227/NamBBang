@@ -26,7 +26,9 @@ import co.nambbang.app.admin.AdminRefundCommand;
 import co.nambbang.app.admin.AdminRefundOkCommand;
 import co.nambbang.app.admin.AdminSellerAnalysisCommand;
 import co.nambbang.app.admin.AdminSellerCancelCommand;
+import co.nambbang.app.admin.AdminSellerCancelOkCommand;
 import co.nambbang.app.admin.AdminSellerManageCommand;
+import co.nambbang.app.admin.AdminSellerManageOkCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisDayCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisMonthCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisWeekCommand;
@@ -45,6 +47,7 @@ import co.nambbang.app.goods.RegisterGoods;
 import co.nambbang.app.goods.RegisterGoodsForm;
 import co.nambbang.app.goods.SellGoods;
 import co.nambbang.app.goods.SellGoodsForm;
+import co.nambbang.app.goods.Single;
 import co.nambbang.app.login.AjaxIdDuplicationCheck;
 import co.nambbang.app.login.AjaxIdFindClick;
 import co.nambbang.app.login.AjaxIdPwCheck;
@@ -90,7 +93,9 @@ public class FrontController extends HttpServlet {
 		cont.put("/AdminUserManageOk.ad", new AdminUserManageOkCommand()); // admin - 유저 관리 페이지
 		
 		cont.put("/AdminSellerManage.ad", new AdminSellerManageCommand()); // admin - 판매자 관리 페이지
+		cont.put("/AdminSellerManageOk.ad", new AdminSellerManageOkCommand()); // admin - 판매자 관리 필터 검색 커맨드
 		cont.put("/AdminSellerCancel.ad", new AdminSellerCancelCommand()); // admin - 판매자 판매 취소 관리 페이지
+		cont.put("/AdminSellerCancelOk.ad", new AdminSellerCancelOkCommand()); // admin - 판매자 판매 취소 관리 페이지
 		
 		cont.put("/AdminMlgManage.ad", new AdminMlgManageCommand()); // admin - 마일리지 관리 페이지
 		cont.put("/AdminMlgManageOk.ad", new AdminMlgManageOkCommand()); // admin - 마일리지 관리 페이지
@@ -134,6 +139,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/listSellGoods.do", new ListSellGoods()); //상품판매 정보보기
 		cont.put("/detailSellGoods.do", new DetailSellGoods()); //상품판대 등록
 		cont.put("/modifySellGoods.do", new ModifySellGoods()); //상품판대 수정		
+		cont.put("/single.do", new Single()); //싱글페이지
 		
 		// 시현 sellerRegi/sellerindex.jsp
 		cont.put("/boardSellRegist.do", new BoardSellRegist());

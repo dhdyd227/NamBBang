@@ -310,11 +310,11 @@ window.addEventListener("load", function(){
 							</div>
 							<div class="col-2 row-st">
 								<select class="custom-select" id="sort" name="sort">
-									<option value="order_setlede" selected>등록일순</option>
-									<option value="order_setlede desc">등록일 역순</option>
-									<option value="order_id">주문번호순</option>
-									<option value="otime">주문시간순</option>
-									<option value="goods_name">상품명 순</option>									
+									<option value="ur.refnd_de desc" selected>최신순</option>
+									<option value="ur.refnd_de">환불일순</option>																	
+									<option value="to_char(ur.refnd_de,'hh24mi')">환불시간순</option>
+									<option value="o.order_id">주문번호순</option>
+									<option value="gr.goods_name">상품명 순</option>						
 								</select>								
 							</div>
 							<div class="col-2 row-st">

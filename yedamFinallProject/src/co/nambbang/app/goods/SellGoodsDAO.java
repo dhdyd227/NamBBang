@@ -125,6 +125,11 @@ public class SellGoodsDAO extends DAO {
 	}		
 	
 	//상품상세
+	public SellGoodsDTO selectSellGoodsDetail(String sleId) {
+		return this.selectSellGoodsDetail(sleId, null);
+	}
+	
+	//상품상세
 	public SellGoodsDTO selectSellGoodsDetail(String sleId, String goodsId) {
 		SellGoodsDTO dto = new SellGoodsDTO();
 		StringBuffer sql = new StringBuffer();
@@ -165,10 +170,14 @@ public class SellGoodsDAO extends DAO {
 			sql.append("		FROM GOODS_REGIST GR INNER JOIN GOODS_SLE GS ON GR.GOODS_ID = GS.GOODS_ID ");
 			sql.append("										LEFT OUTER JOIN GOODS_CANCL GC ON GS.SLE_ID = GC.SLE_ID ");
 			sql.append("    WHERE GS.SLE_ID = ? ");
-			sql.append("    AND GR.GOODS_ID = ? ");
+			if(goodsId != null && goodsId.length() > 0) {
+				sql.append("    AND GR.GOODS_ID = ? ");
+			}
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, sleId);
-			pstmt.setString(2, goodsId);
+			if(goodsId != null && goodsId.length() > 0) {
+				pstmt.setString(2, goodsId);
+			}			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				dto.setGoodsId(rs.getString("goods_id"));

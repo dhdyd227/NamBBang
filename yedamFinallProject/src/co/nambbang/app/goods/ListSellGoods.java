@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.nambbang.app.common.Command;
 
@@ -24,9 +25,11 @@ public class ListSellGoods implements Command {
 			return (String)sessionMap.get("returnPage");
 		}		
 		
+		//세션생성
+		HttpSession session = request.getSession();		
+		
 		SellGoodsDAO dao = new SellGoodsDAO();
 		Paging paging = new Paging();
-		
 		
 		try {
 			Map<String, Object> param = Utils.getParameterMap(request);
@@ -38,6 +41,9 @@ public class ListSellGoods implements Command {
 			}else {
 				paging.makeBlock(1);
 			}			
+			
+			// 세션ID 설정
+			param.put("id", session.getAttribute("id"));
 			
 			// 전체건수 조회
 			int cnt = dao.selectSellGoodsCount(param);

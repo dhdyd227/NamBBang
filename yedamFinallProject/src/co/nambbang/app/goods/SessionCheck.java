@@ -15,7 +15,6 @@ public class SessionCheck {
 		String conectrSe = (String)session.getAttribute("CONECTR_SE");
 		
 		//세션체크
-		System.out.println("### session0 id : " + id);
 		if(id == null) {
 			sessionMap.put("isSession", false);
 			sessionMap.put("isAuth", false);

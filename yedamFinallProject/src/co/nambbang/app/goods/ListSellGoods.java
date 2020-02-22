@@ -17,6 +17,13 @@ public class ListSellGoods implements Command {
 			throws ServletException, IOException {
 		System.out.println("======== ListSellGoods 진입!!!");
 		
+		//세션체크
+		Map<String, Object> sessionMap = SessionCheck.checkSession(request);
+		if(!(boolean)sessionMap.get("isSession") || !(boolean)sessionMap.get("isAuth")) {
+			request.setAttribute("sessionMap", sessionMap);
+			return (String)sessionMap.get("returnPage");
+		}		
+		
 		SellGoodsDAO dao = new SellGoodsDAO();
 		Paging paging = new Paging();
 		

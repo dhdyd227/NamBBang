@@ -16,6 +16,14 @@ public class ListGoods implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("======== ListGoods 진입!!!");
+
+		//세션체크
+		Map<String, Object> sessionMap = SessionCheck.checkSession(request);
+		if(!(boolean)sessionMap.get("isSession") || !(boolean)sessionMap.get("isAuth")) {
+			request.setAttribute("sessionMap", sessionMap);
+			return (String)sessionMap.get("returnPage");
+		}
+		
 		GoodsDAO dao = new GoodsDAO();
 		Paging paging = new Paging();
 

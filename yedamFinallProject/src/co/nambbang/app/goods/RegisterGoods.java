@@ -24,6 +24,14 @@ public class RegisterGoods implements Command {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("======== RegisterGoods 진입!!!");
+		
+		//세션체크
+		Map<String, Object> sessionMap = SessionCheck.checkSession(request);
+		if(!(boolean)sessionMap.get("isSession") || !(boolean)sessionMap.get("isAuth")) {
+			request.setAttribute("sessionMap", sessionMap);
+			return (String)sessionMap.get("returnPage");
+		}
+		
 		//세션생성
 		HttpSession session = request.getSession();
 		

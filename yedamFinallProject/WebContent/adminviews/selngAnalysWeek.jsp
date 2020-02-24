@@ -6,42 +6,116 @@
 <meta charset="UTF-8">
 <title>주별 매출 분석</title>
 <script>
-$(function(){
-	var chart = tui.chart;	
-	// bar chart api 함수			    
-		    	var container = document.getElementById('chart-area');
-		    	var data = {
-		    			// x 카테고리 - 오늘 기준으로 1주일 얻어내기
-		    	    categories: ['Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct'],
-		    	    	// 적용할 데이터
-		    	    series: {
-		    	        column: [
-		    	            {
-		    	                name: '매출',
-		    	                data: [11.3, 17.0, 21.0, 24.4, 25.2, 20.4, 13.9]
-		    	            },
-		    	            {
-		    	                name: '판매량',
-		    	                data: [9.9, 16.0, 21.2, 24.2, 23.2, 19.4, 13.3]
-		    	            },
-		    	            {
-		    	                name: '환불',
-		    	                data: [18.3, 15.2, 12.8, 11.8, 13.0, 15.2, 17.6]
-		    	            },
-		    	            {
-		    	                name: '취소',
-		    	                data: [4.4, 12.2, 16.3, 18.5, 16.7, 10.9, 4.2]
-		    	            }
-		    	        ],
-		    	        line: [
-		    	            {
-		    	                name: 'Average',
-		    	                data: [11, 15.1, 17.8, 19.7, 19.5, 16.5, 12.3]
-		    	            }
-		    	        ]
-		    	    }
-		    	};
-		    	var options = {
+$(function(){	
+	 drawChart();	
+	});
+	function drawChart(d1,d2){
+		var chart = tui.chart;	
+		// bar chart api 함수
+		if(d1 == null && d2 == null){
+			  var date = new Date();
+			  var start = new Date(Date.parse(date) - 28 * 1000 * 60 * 60 * 24);
+			  var today = new Date(Date.parse(date) - 0 * 1000 * 60 * 60 * 24);	
+			  
+			  var start_yyyy = start.getFullYear();
+				var start_mm = start.getMonth()+1;
+				var start_dd = start.getDate();
+					  
+					  if(start_mm<10){
+						  start_mm = "0" + start_mm; //10 보다 작으면 숫자앞에 0을 붙임
+					  }if(d1_dd<10){
+						  start_dd = "0" + start_dd;
+					  }
+					  
+				var today_yyyy = today.getFullYear();
+				var today_mm = today.getMonth()+1;
+				var today_dd = today.getDate();
+					  
+					  if(today_mm<10){
+						  today_mm = "0" + today_mm; 
+					  }if(today_dd<10){
+						  today_dd = "0" + today_dd;
+					  }
+					  
+				d1 = start_yyyy + "-" + start_mm + "-" + start_dd;
+				d2 = today_yyyy + "-" + today_mm + "-" + today_dd;
+				
+		}
+		
+		var date1 = new Date(d1);
+		var date2 = new Date(d2);
+		 
+		var d1_yyyy = date1.getFullYear();
+		var d1_mm = date1.getMonth()+1;
+		var d1_dd = date1.getDate();
+			  
+			  if(d1_mm<10){
+			   d1_mm = "0" + d1_mm; //10 보다 작으면 숫자앞에 0을 붙임
+			  }if(d1_dd<10){
+			   d2_dd = "0" + d1_dd;
+			  }
+			  
+		var d2_yyyy = date2.getFullYear();
+		var d2_mm = date2.getMonth()+1;
+		var d2_dd = date2.getDate();
+			  
+			  if(d2_mm<10){
+			   d2_mm = "0" + d2_mm; 
+			  }if(d2_dd<10){
+			   d2_dd = "0" + d2_dd;
+			  }
+			  
+		d1 = d1_yyyy + "-" + d1_mm + "-" + d1_dd;
+		d2 = d2_yyyy + "-" + d2_mm + "-" + d2_dd;
+		
+
+		console.log("d1= " + d1);
+		console.log("d2= " + d2);
+		
+		var container = document.getElementById('chart-area');
+		$.ajax("AdminAjaxSelngAnalysisWeekOk.ad",{dataType:"json", data:{startDate:d1, endDate:d2}})
+		.done(function(cData){		
+			var week = [];
+			var profit = [];
+			var refnd = [];
+			var order_qy = [];
+			for (i=0; i<cData.length; i++){
+				week.push(cData[i].week);
+				profit.push(cData[i].profit);
+				refnd.push(cData[i].refnd);
+				order_qy.push(cData[i].order_qy);			
+			}
+			
+			
+	    	var data = {
+	    		
+	    	    categories: week,
+	    	    	// 적용할 데이터
+	    	    series: {
+	    	        column: [
+	    	            {
+	    	                name: '매출',
+	    	                data: profit
+	    	            },
+	    	            {
+	    	                name: '판매량',
+	    	                data: order_qy
+	    	            },
+	    	            {
+	    	                name: '환불',
+	    	                data: refnd
+	    	            },		    	            		    	           
+	    	        ],
+	    	         line: [
+	    	            {
+	    	                name: 'Average',
+	    	                data: [11, 15.1, 17.8, 19.7, 19.5, 16.5, 12.3]
+	    	            }
+	    	        ]
+	    	    }
+	    	};
+			
+	    	var options = {
 		    	    chart: {
 		    	        width: 1600,
 		    	        height: 500,
@@ -85,8 +159,88 @@ $(function(){
 		    	// tui.chart.registerTheme('myTheme', theme);
 		    	// options.theme = 'myTheme';
 		    	var chart = tui.chart.comboChart(container, data, options);	
-});
+			
+		});
+		    
+	};
 
+
+window.addEventListener("load", function(){
+	
+	one_week.addEventListener("click",function(){
+		dateInput(7,0);			
+		if(startDate.disabled == true && endDate.disabled == true){
+			startDate.disabled = false;
+			endDate.disabled = false;
+		}
+	});
+	two_week.addEventListener("click",function(){
+		dateInput(14,0);
+		if(startDate.disabled == true && endDate.disabled == true){
+			startDate.disabled = false;
+			endDate.disabled = false;
+		}
+	});
+	three_week.addEventListener("click",function(){			
+		dateInput(21,0);
+		if(startDate.disabled == true && endDate.disabled == true){
+			startDate.disabled = false;
+			endDate.disabled = false;
+		}
+	});
+	four_week.addEventListener("click",function(){			
+		dateInput(28,0);
+		if(startDate.disabled == true && endDate.disabled == true){
+			startDate.disabled = false;
+			endDate.disabled = false;
+		}
+	});
+	
+});
+//날짜 계산
+function dateInput(n,m){
+	  startDate.value = "";
+	  endDate.value = "";
+	  
+	  var date = new Date();
+	  var start = new Date(Date.parse(date) - n * 1000 * 60 * 60 * 24);
+	  var today = new Date(Date.parse(date) - m * 1000 * 60 * 60 * 24);
+	  
+	  var yyyy = start.getFullYear();
+	  var mm = start.getMonth()+1;
+	  var dd = start.getDate();
+	  
+	  if(mm<10){
+	   mm = "0" + mm; //10 보다 작으면 숫자앞에 0을 붙임
+	  }if(dd<10){
+	   dd = "0" + dd;
+	  }
+	  
+	  var t_yyyy = today.getFullYear();
+	  var t_mm = today.getMonth()+1;
+	  var t_dd = today.getDate();
+	  
+	  if(t_mm<10){
+	   t_mm = "0" + t_mm;
+	  }if(t_dd<10){
+	   t_dd = "0" + t_dd;
+	  }
+	  
+	  startDate.value = yyyy + "-" + mm + "-" + dd;
+	  endDate.value = t_yyyy + "-" + t_mm + "-" + t_dd;
+	  
+	 }
+//submit 유효성 검사
+function formCheck(){
+	 var d1 = new Date(startDate.value);
+	 var d2 = new Date(endDate.value);
+    if(frm.startDate.value > frm.endDate.value) {	             
+        alert("시작날짜와 종료날짜를 확인해 주세요.");
+        frm.startDate.focus();
+        return false;	            	        	        	
+    }
+   drawChart(d1,d2);
+}
 </script>
 </head>
 <body>
@@ -126,16 +280,16 @@ $(function(){
 					<div class="row ">
 							<div class="col-md-1 pt-3 text-center row-st">검색기간</div>
 							<div class="col-md-3 pt-1 row-st">
-								<button type="button" class="btn btn-primary btn-sm">1주</button>											
-								<button type="button" class="btn btn-primary btn-sm">2주</button>
-								<button type="button" class="btn btn-primary btn-sm">3주</button>
-								<button type="button" class="btn btn-primary btn-sm">4주</button>											
+								<button type="button" class="btn btn-primary btn-sm" id="one_week" name="one_week">1주</button>											
+								<button type="button" class="btn btn-primary btn-sm" id="two_week" name="two_week">2주</button>
+								<button type="button" class="btn btn-primary btn-sm" id="three_week" name="three_week">3주</button>
+								<button type="button" class="btn btn-primary btn-sm" id="four_week" name="four_week">4주</button>											
 							</div>
 							<!-- datepicker -->
 							<div class="col-md-2 pt-1 row-st"> 						
 								<!-- <input type="text" class="form-con	trol" id="startDate" style="width:150px"> -->								
 								<div class="input-group date" >								  
-								    <input type="text" class="form-control" id="startDate" placeholder="시작일">
+								    <input type="text" class="form-control" id="startDate" name="startDate" placeholder="시작일">
 								    <div class="input-group-append">								    	
 								    	<div class="input-group-text">
 								    		<label for="startDate" class="fa fa-calendar" style="cursor:pointer;">
@@ -153,7 +307,7 @@ $(function(){
 							<div class="col-md-2 pt-1 row-st"> 
 								<!-- <input type="text" class="form-control" id="endDate" style="width:150px"> -->
 								<div class="input-group date" >								  
-								    <input type="text" class="form-control" id="endDate" placeholder="종료일">
+								    <input type="text" class="form-control" id="endDate" name="endDate" placeholder="종료일">
 								    <div class="input-group-append">								    	
 								    	<div class="input-group-text">
 								    		<label for="endDate" class="fa fa-calendar" style="cursor:pointer;">
@@ -170,7 +324,7 @@ $(function(){
 					<hr>
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<button type="submit" class="btn btn-primary btn-sm">검색</button>											
+							<button type="button" class="btn btn-primary btn-sm" onclick="formCheck()">검색</button>											
 							<button type="reset" class="btn btn-primary btn-sm">초기화</button>
 						</div>
 					</div>
@@ -209,10 +363,10 @@ $(function(){
 																
 							</div>
 							<div class="col-2 row-st">
-								<select class="custom-select">
-									<option selected>10개씩보기</option>
-									<option>20개씩보기</option>
-									<option>30개씩보기</option>															
+								<select class="custom-select" id="pageCnt" name="pageCnt">
+									<option value="10" selected>10개씩보기</option>
+									<option value="10">20개씩보기</option>
+									<option value="10">30개씩보기</option>															
 								</select>									
 							</div>
 						</div>
@@ -281,7 +435,7 @@ $(function(){
 	<script>	
 	 $( "#startDate" ).datepicker({
 	    	dateFormat: 'yyyy-mm-dd'
-	    	,startDate: '-10d'
+	    	/* ,startDate: '-10d' */
 	    	,uiLibrary: 'bootstrap4'
 	    	/* ,showOn: "both"  
 	        ,buttonImage: "../assets/icon/calendar.png"
@@ -293,7 +447,7 @@ $(function(){
 	    
 	    $( "#endDate" ).datepicker({
 	    	dateFormat: 'yyyy-mm-dd'
-	    	,startDate: '-10d'
+	    	/* ,startDate: '-10d' */
 	    	,uiLibrary: 'bootstrap4'
 	    	,showOn: "both"  
 	        ,buttonImage: "../assets/icon/calendar.png" 
@@ -301,7 +455,13 @@ $(function(){
 	        ,language:"ko"
 	        ,todayHighlight : true
 	        ,autoclose: true
-	    });		
+	    });	
+	  //검색 조건 고정
+	    if(${adDto != null}){			    	
+	    	$("[name='startDate']").val(['${adDto.sDate}']);
+	    	$("[name='endDate']").val(['${adDto.eDate}']);	    					    		 	 		    	 	    	
+	    	$("[name='pageCnt']").val(['${pDto.pageUnit}']);
+	    	};  
 	</script>
 </body>
 </html>

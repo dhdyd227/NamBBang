@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,70 @@ $(function(){
 
 function drawChart(d1,d2){
 	var chart = tui.chart;	
-	// bar chart api 함수		
+	// bar chart api 함수
+	
+	//parameter d1, d2 설정 (d1, d2가 null 이면 d1은 현재날짜 -7, d2는 현재날짜)
+	if(d1 == null && d2 == null){
+		  var date = new Date();
+		  var start = new Date(Date.parse(date) - 7 * 1000 * 60 * 60 * 24);
+		  var today = new Date(Date.parse(date) - 0 * 1000 * 60 * 60 * 24);	
+		  
+		  var start_yyyy = start.getFullYear();
+			var start_mm = start.getMonth()+1;
+			var start_dd = start.getDate();
+				  
+				  if(start_mm<10){
+					  start_mm = "0" + start_mm; 
+				  }if(d1_dd<10){
+					  start_dd = "0" + start_dd;
+				  }
+				  
+			var today_yyyy = today.getFullYear();
+			var today_mm = today.getMonth()+1;
+			var today_dd = today.getDate();
+				  
+				  if(today_mm<10){
+					  today_mm = "0" + today_mm; 
+				  }if(today_dd<10){
+					  today_dd = "0" + today_dd;
+				  }
+				  
+			d1 = start_yyyy + "-" + start_mm + "-" + start_dd;
+			d2 = today_yyyy + "-" + today_mm + "-" + today_dd;
+			
+	}
+	//parameter d1, d2 설정 (startDate, endDate에서 받아온 날짜를 'yyyy-mm-dd' 형식으로 변환)
+	var date1 = new Date(d1);
+	var date2 = new Date(d2);
+	 
+	var d1_yyyy = date1.getFullYear();
+	var d1_mm = date1.getMonth()+1;
+	var d1_dd = date1.getDate();
+		  
+		  if(d1_mm<10){
+		   d1_mm = "0" + d1_mm; 
+		  }if(d1_dd<10){
+		   d2_dd = "0" + d1_dd;
+		  }
+		  
+	var d2_yyyy = date2.getFullYear();
+	var d2_mm = date2.getMonth()+1;
+	var d2_dd = date2.getDate();
+		  
+		  if(d2_mm<10){
+		   d2_mm = "0" + d2_mm; 
+		  }if(d2_dd<10){
+		   d2_dd = "0" + d2_dd;
+		  }
+		  
+	d1 = d1_yyyy + "-" + d1_mm + "-" + d1_dd;
+	d2 = d2_yyyy + "-" + d2_mm + "-" + d2_dd;
+	
+
+	console.log("d1= " + d1);
+	console.log("d2= " + d2);
+	
+	// ajax로 AdminAjaxSelngAnalysisDayOk.ad 실행, 결과값 불러옴
 	var container = document.getElementById('chart-area');
 	$.ajax("AdminAjaxSelngAnalysisDayOk.ad",{dataType:"json", data:{startDate:d1, endDate:d2}})
 	.done(function(cData){		
@@ -24,7 +88,7 @@ function drawChart(d1,d2){
 			day.push(cData[i].day);
 			profit.push(cData[i].profit);
 			refnd.push(cData[i].refnd);
-			order_qy.push(cData[i].order_qy);
+			order_qy.push(cData[i].order_qy);			
 		}
 		
 		
@@ -47,10 +111,10 @@ function drawChart(d1,d2){
     	                data: refnd
     	            },		    	            		    	           
     	        ],
-    	        line: [
+    	         line: [
     	            {
-    	                name: 'Average',
-    	                data: [11, 15.1, 17.8, 19.7, 19.5, 16.5, 12.3]
+    	                name: '매출추이',
+    	                data: profit
     	            }
     	        ]
     	    }
@@ -67,7 +131,7 @@ function drawChart(d1,d2){
 	    	       chartType: 'column',
 	    	       labelMargin: 15
 	    	    }, {
-	    	       title: 'Average',
+	    	       title: '매출추이',
 	    	       chartType: 'line',
 	    	       labelMargin: 15
 	    	    }],
@@ -102,11 +166,7 @@ function drawChart(d1,d2){
 	    	var chart = tui.chart.comboChart(container, data, options);	
 		
 	});
-	
-	
-	
-		    	
-		    
+	    
 };
 
 
@@ -286,7 +346,7 @@ function formCheck(){
 			<div class="card">
 				<div class="card-header">
 					<div class="row">
-							<div class="col-1 row-st text-center">
+							<div class="col-1 row-st">
 								<h6 class="h6">[총 n 건]</h6>								
 							</div>
 							<div class="col-7">								
@@ -325,19 +385,13 @@ function formCheck(){
 		                    <thead class="text-primary text-center">
 		                    <tr>		                     
 		                      <th>일자</th>
-		                      <th>주문수</th>		
-		                      <th>상품 구매금액</th>
-		                      <th>할인 금액</th>
-		                      <th>마일리지 사용액</th>
-		                      <th>상품명</th>
-		                      <th>결제 금액합계</th>
-		                      <th>환불액 합계</th>
-		                      <th>순매출</th>
+		                      <th>판매수량</th>
+		                      <th>환불</th>
+		                      <th>매출</th>
 		                    </tr>  
 		                    </thead>
 		                    <tbody>
-		                     <tr>
-		                     </tr>		              
+		                   		              
 		                    </tbody>
 		                  </table>
                 		</div>
@@ -380,7 +434,6 @@ function formCheck(){
 	    if(${adDto != null}){			    	
 	    	$("[name='startDate']").val(['${adDto.sDate}']);
 	    	$("[name='endDate']").val(['${adDto.eDate}']);	    					    		 	 		    	 
-	    	$("[name='sort']").val(['${adDto.sort}']);
 	    	$("[name='pageCnt']").val(['${pDto.pageUnit}']);
 	    	};    	    		   
 	</script>

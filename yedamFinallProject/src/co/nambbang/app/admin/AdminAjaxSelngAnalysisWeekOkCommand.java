@@ -1,9 +1,6 @@
 package co.nambbang.app.admin;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +13,7 @@ import co.nambbang.app.dao.AdminChartDao;
 import co.nambbang.app.dto.AdminSelngAnalysisDto;
 import net.sf.json.JSONArray;
 
-public class AdminAjaxSelngAnalysisDayOkCommand implements Command {
+public class AdminAjaxSelngAnalysisWeekOkCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -44,8 +41,7 @@ public class AdminAjaxSelngAnalysisDayOkCommand implements Command {
 		dto.setsDate(sDate);		
 		dto.seteDate(eDate);
 		
-		List<Map<String,Object>> list = dao.AnalysDay(dto);
-		
+		List<Map<String,Object>> list = dao.AnalysWeek(dto);
 		String chart = JSONArray.fromObject(list).toString();
 						
 		System.out.println(chart);

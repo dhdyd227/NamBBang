@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.nambbang.app.admin.AdminAjaxSelngAnalysisDayOkCommand;
+import co.nambbang.app.admin.AdminAjaxSelngAnalysisMonthOkCommand;
+import co.nambbang.app.admin.AdminAjaxSelngAnalysisWeekOkCommand;
 import co.nambbang.app.admin.AdminBbsNoticeManageCommand;
 import co.nambbang.app.admin.AdminBbsReplyInsertCommand;
 import co.nambbang.app.admin.AdminGoodsAnalysisCommand;
@@ -30,7 +33,6 @@ import co.nambbang.app.admin.AdminSellerCancelOkCommand;
 import co.nambbang.app.admin.AdminSellerManageCommand;
 import co.nambbang.app.admin.AdminSellerManageOkCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisDayCommand;
-import co.nambbang.app.admin.AdminAjaxSelngAnalysisDayOkCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisMonthCommand;
 import co.nambbang.app.admin.AdminSelngAnalysisWeekCommand;
 import co.nambbang.app.admin.AdminSetleManageCommand;
@@ -110,7 +112,9 @@ public class FrontController extends HttpServlet {
 		cont.put("/AdminSelngAnalysisDay.ad", new AdminSelngAnalysisDayCommand()); // admin - 매출 통계 일별 페이지
 		cont.put("/AdminAjaxSelngAnalysisDayOk.ad", new AdminAjaxSelngAnalysisDayOkCommand()); // admin - 매출 통계 일별 페이지
 		cont.put("/AdminSelngAnalysisWeek.ad", new AdminSelngAnalysisWeekCommand()); // admin - 매출 통계 주별 페이지
+		cont.put("/AdminAjaxSelngAnalysisWeekOk.ad", new AdminAjaxSelngAnalysisWeekOkCommand()); // admin - 매출 통계 주별 페이지
 		cont.put("/AdminSelngAnalysisMonth.ad", new AdminSelngAnalysisMonthCommand()); // admin - 매출 통계 월별 페이지
+		cont.put("/AdminAjaxSelngAnalysisMonthOk.ad", new AdminAjaxSelngAnalysisMonthOkCommand()); // admin - 매출 통계 월별 페이지
 		
 		cont.put("/AdminSellerAnalysis.ad", new AdminSellerAnalysisCommand()); // admin - 판매별 통계 분석 페이지
 		cont.put("/AdminGoodsAnalysis.ad", new AdminGoodsAnalysisCommand()); // admin - 상품별 통계 분석 페이지	

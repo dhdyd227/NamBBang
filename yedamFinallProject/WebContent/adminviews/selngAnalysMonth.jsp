@@ -80,9 +80,10 @@ $(function(){
 			var refnd = [];
 			var order_qy = [];
 			for (i=0; i<cData.length; i++){
-				month.push(cData[i].month);
-				profit.push(cData[i].profit);
-				refnd.push(cData[i].refnd);
+				//month.push(cData[i].month);
+				month.push(cData[i].month.substr(0,2)+"년 "+cData[i].month.substr(4,1)+"월 ");
+				profit.push(cData[i].profit/1000);
+				refnd.push(cData[i].refnd/1000);
 				order_qy.push(cData[i].order_qy);			
 			}
 			
@@ -94,13 +95,13 @@ $(function(){
 	    	    series: {
 	    	        column: [
 	    	            {
-	    	                name: '매출',
+	    	                name: '매출(*1000원)',
 	    	                data: profit
 	    	            },
-	    	            {
+	    	           /*  {
 	    	                name: '판매량',
 	    	                data: order_qy
-	    	            },
+	    	            }, */
 	    	            {
 	    	                name: '환불',
 	    	                data: refnd
@@ -108,8 +109,8 @@ $(function(){
 	    	        ],
 	    	         line: [
 	    	            {
-	    	                name: '매출추이',
-	    	                data: profit
+	    	                name: '판매량(개)',
+	    	                data: order_qy
 	    	            }
 	    	        ]
 	    	    }
@@ -122,11 +123,11 @@ $(function(){
 		    	        title: '월별 매출'
 		    	    },
 		    	    yAxis: [{
-		    	       title: '매출',
+		    	       title: '매출(*1000원)',
 		    	       chartType: 'column',
 		    	       labelMargin: 15
 		    	    }, {
-		    	       title: '매출추이',
+		    	       title: '판매량(개)',
 		    	       chartType: 'line',
 		    	       labelMargin: 15
 		    	    }],
@@ -140,7 +141,7 @@ $(function(){
 		    	    },
 		    	    tooltip: {
 		    	        grouped: true,
-		    	        suffix: '원'
+		    	        suffix: '*1000원/개'
 		    	    }
 		    	};
 		    	var theme = {
@@ -158,8 +159,25 @@ $(function(){
 		    	// For apply theme
 		    	// tui.chart.registerTheme('myTheme', theme);
 		    	// options.theme = 'myTheme';
-		    	var chart = tui.chart.comboChart(container, data, options);	
-			
+		    	if($('#chart-area').children() != null){
+		    		$('#chart-area').children().hide();	
+		    	}
+		    	var chart = tui.chart.comboChart(container, data, options);	   
+		    	var tbody = $("<tbody>").attr("align","center");
+		    	
+		    	for(var i = 0; i <cData.length; i++){
+		    		var tr1 = $("<tr>");
+		    		var num = $("<td>").text(i+1);	    		
+		    		var td1 = $("<td>").text(cData[i].month.substr(0,2)+"년 "+cData[i].month.substr(4,1)+"월 ");
+		    		var td2 = $("<td>").text(cData[i].order_qy +" 개");
+		    		var td3 = $("<td>").text(cData[i].refnd + " 원");
+		    		var td4 = $("<td>").text(cData[i].profit + " 원");	    		
+		    		tbody.append(tr1,num,td1,td2,td3,td4);
+		    	}
+		    	if($('#tbl tbody') != null){
+		    		$('#tbl tbody').hide();
+		    	}
+		    	$("#tbl").append(tbody);
 		});
 		    
 	};
@@ -354,7 +372,7 @@ function formCheck(){
 				<div class="card-header">
 					<div class="row">
 							<div class="col-1 row-st text-center">
-								<h6 class="h6">[총 n 건]</h6>								
+								<h6 class="h6" id="cnt" name="cnt"></h6>								
 							</div>
 							<div class="col-7">								
 							</div>
@@ -388,41 +406,17 @@ function formCheck(){
 				</div>
 				<div class="card-body">
 						<div class="table-responsive" style="overflow:hidden;">
-		                  <table class="table table-hover table-condensed">
+		                  <table class="table table-hover table-condensed" id="tbl" name="tbl">
 		                    <thead class="text-primary text-center">
-		                      
-		                      <th>
-		                      		일자
-		                      </th>
-		                      <th>
-		                        	주문수
-		                      </th>
-		                      <th>
-		                        	상품 구매금액
-		                      </th>
-		                      <th>
-		                        	할인금액
-		                      </th>
-		                      <th>
-		                        	마일리지 사용액
-		                      </th>
-		                      <th>
-		                      		상품명
-		                      </th>
-		                      <th>
-		                      		결제 금액 합계
-		                      </th>
-		                      <th>
-		                      		환불액 합계
-		                      </th>
-		                      <th>
-		                      		순매출
-		                      </th>
+		                     <tr>	
+		                      <th>번호</th>	                     
+		                      <th>일자</th>
+		                      <th>판매수량</th>
+		                      <th>환불액</th>
+		                      <th>매출액</th>
+		                    </tr>
 		                    </thead>
-		                    <tbody>
-		                     <tr>
-		                     </tr>		              
-		                    </tbody>
+		                   
 		                  </table>
                 		</div>
 				</div>
@@ -456,11 +450,11 @@ function formCheck(){
 	        ,autoclose: true
 	    });		
 	  //검색 조건 고정
-	    if(${adDto != null}){			    	
+/* 	    if(${adDto != null}){			    	
 	    	$("[name='startDate']").val(['${adDto.sDate}']);
 	    	$("[name='endDate']").val(['${adDto.eDate}']);	    					    		 	 		    	 	    	
 	    	$("[name='pageCnt']").val(['${pDto.pageUnit}']);
-	    	};  	    	    		   
+	    	};  	    	  */   		   
 	</script>
 </body>
 </html>

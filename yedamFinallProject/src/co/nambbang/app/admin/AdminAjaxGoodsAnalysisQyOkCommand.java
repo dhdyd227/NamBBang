@@ -1,9 +1,6 @@
 package co.nambbang.app.admin;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,12 +13,13 @@ import co.nambbang.app.dao.AdminChartDao;
 import co.nambbang.app.dto.AdminSelngAnalysisDto;
 import net.sf.json.JSONArray;
 
-public class AdminAjaxSelngAnalysisDayOkCommand implements Command {
+public class AdminAjaxGoodsAnalysisQyOkCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		AdminSelngAnalysisDto dto = new AdminSelngAnalysisDto();
+
 		AdminChartDao dao = new AdminChartDao();
 								
 		
@@ -44,13 +42,18 @@ public class AdminAjaxSelngAnalysisDayOkCommand implements Command {
 		dto.setsDate(sDate);		
 		dto.seteDate(eDate);
 		
-		List<Map<String,Object>> list = dao.AnalysDay(dto);
-							
+		List<Map<String,Object>> list = dao.goodsAnalysQy(dto);
 		String chart = JSONArray.fromObject(list).toString();
-				
-		System.out.println(chart);
+		
+//		List<Map<String,Object>> list2 = dao.goodsAnalysAmount(dto);
+//		String chart2 = JSONArray.fromObject(list2).toString();
+		
+		System.out.println("chart == " + chart);
+
+		
 		String path = "ajax:" + chart;
-		return path;
+		
+		return path;		
 	}
 
 }

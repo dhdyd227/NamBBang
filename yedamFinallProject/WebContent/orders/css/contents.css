@@ -1489,7 +1489,7 @@
 .sumTotalWrap .sumPrice .stxt{display:block;margin-top:3px;color:#de4f41;}
 .sumTotalWrap .sumPrice.total .txt strong{color:#de4f41;}
 .sumTotalWrap .mark{display:table-cell;width:50px;vertical-align:middle;}
-.sumTotalWrap .mark > span{display:inline-block;width:50px;height:160px;background:url('/asset/images/common/ico_sum.png') no-repeat 0 0;text-indent:-9999px;}
+.sumTotalWrap .mark>span{display:inline-block;width:50px;height:160px;background: url(image/ico_sum.png) no-repeat 0 0;text-indent:-9999px;}
 .sumTotalWrap .mark > span.plus{background-position:-60px 0}
 .sumTotalWrap .mark > span.equal{background-position:-120px 0}
 .sumTotalWrap.sum4 .sumPrice{width:250px;}

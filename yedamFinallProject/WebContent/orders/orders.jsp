@@ -30,7 +30,7 @@
 	<link href="setle/css/form-validation.css" rel="stylesheet">
 	<script src="setle/js/form-validation.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 	<style>
 		.bd-placeholder-img {
@@ -48,14 +48,47 @@
 			}
 		}
 
-		ul {
-			list-style: none;
-			display: table;
+
+		label.ckbox:before {
+			content: "\f0c8";
+			font-family: "Font Awesome 5 Free";
+			margin-right: 10px;
+			color: #cccccc;
+			font-size: 24px;
 		}
 
-		li {
-			list-style: none;
-			display: table-cell;
+		input#ckboxAll:checked+label.ckbox:before {
+			content: "\f14a";
+			color: #000000;
+		}
+
+		input#ckboxAll {
+			display: none;
+		}
+
+		div#listHead>div {
+			padding: 2px;
+			margin-top: 20px;
+			padding-bottom: 10px;
+			font-weight: bold;
+			font-size: large;
+		}
+
+		span#ckboxSpan {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.sumTotalWrap .mark>span.plus {
+			background-position: -60px 0;
+		}
+
+		.sumTotalWrap .mark>span {
+			display: inline-block;
+			width: 50px;
+			height: 160px;
+			background: url(image/ico_sum.png) no-repeat 0 0;
+			text-indent: -9999px;
 		}
 	</style>
 	<!-- Custom styles for this template -->
@@ -85,11 +118,11 @@
 		<div class="py-5 text-center">
 			<form class="needs-validation" method="POST" action="">
 				<h2 class="mb-3">장바구니</h2>
-				<div class="row alert-secondary">
-					<div class="col-md-1">
-						<span>
-							<input type="checkbox" id="cart_check_all" checked>
-							<label for="cart_check_all">전체선택</label>
+				<div class="row alert-secondary" id="listHead">
+					<div class="col-md-1" style="margin-top: 10px;">
+						<span id="ckboxSpan">
+							<input type="checkbox" id="ckboxAll" checked>
+							<label for="ckboxAll" class="ckbox"></label>
 						</span>
 					</div>
 					<div class="col-md-5">
@@ -125,7 +158,27 @@
 				<div class="row">
 					<!--선택제품 삭제-->
 					<button type="button" class="btn btn-outline-dark">선택 제품
-						삭제</button>
+						삭제
+					</button>
+
+					<!-- //장바구니 목록 -->
+
+					<div class="sumTotalWrap">
+						<div class="sumPrice">
+							<span class="tit">총 주문 금액</span>
+							<span class="txt"><strong id="cart_total_goods_amt">899,000</strong> 원</span>
+						</div>
+						<span class="mark"><span class="plus">더하기</span></span>
+						<div class="sumPrice">
+							<span class="tit">배송비</span>
+							<span class="txt"><strong id="cart_total_dlvr_amt">0</strong> 원</span>
+						</div>
+						<span class="mark"><span class="equal">총합계</span></span>
+						<div class="sumPrice total">
+							<span class="tit">결제 예정 금액</span>
+							<span class="txt"><strong id="cart_total_amt">899,000</strong> 원</span>
+						</div>
+					</div>
 
 
 					<div class="row">

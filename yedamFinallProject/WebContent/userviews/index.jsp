@@ -40,15 +40,11 @@
 <script src="/yedamFinallProject/userplugins/easing/easing.js"></script>
 <script src="/yedamFinallProject/userjs/custom.js"></script>
 
-
-
 </head>
 
 <body>
 
 	<div class="super_container">
-
-		
 
 			<!-- Header -->
 			<%@include file="header.jsp"%>
@@ -137,8 +133,8 @@
 									<div class="product-item ${list.goodsCl }">
 										<div class="product discount product_filter">
 											<div class="product_image">
-												<img src="${list.stringImage }" width="30px" height="200px"
-													alt="">
+												<a href="single.do?sleId=${list.sleId }"><img src="${list.stringImage }" 
+												width="30px" height="200px" alt=""></a>
 											</div>
 											<div class="favorite favorite_left"></div>
 											<div

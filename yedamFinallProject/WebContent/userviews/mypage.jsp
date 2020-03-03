@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +26,6 @@
 <link rel="stylesheet" type="text/css"
 	href="/yedamFinallProject/userstyles/responsive.css">
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1"%>
 
 <script src="/yedamFinallProject/userjs/jquery-3.2.1.min.js"></script>
 <script src="/yedamFinallProject/userstyles/bootstrap4/popper.js"></script>
@@ -51,29 +52,31 @@
 
 		<div class="main_slider">
 			<div class="container contact_container">
-				<table class="table table-hover table-bordered results align-items-center">
+				<table
+					class="table table-hover table-bordered results align-items-center">
+					<c:forEach var="list" items="${MyPageList }">
 					<tr>
-						<td>asdadsadadasd</td>
-						<td>asdadsadadasd</td>
-						<td>asdadsadadasd</td>
-						<td>asdadsadadasd</td>
-						<td>asdadsadadasd</td>
-						<td>asdadsadadasd</td>
-						<td>asdadsadadasd</td>
+						<td width="150px">
+						<a href="single.do?sleId=${list.sleId }"><img src="${list.photoString}" width="150px" height="150px" alt="">
+						</a>
 						
+						</td>
+						<td>
+							<div>상품명: ${list.goodsName }</div>
+							<div>가격/수량 : ${list.orderQy }</div>
+						</td>
+						<td>
+							<div>결제상태 : ${list.setleCode }</div>
+							<div><input type="button" id="refund" name="refund" value="환불신청"> </div>
+						</td>
 					</tr>
-					<tr>
-						<td>asdadsadadasd</td>
-					</tr>
-					
-					
-					
+					</c:forEach>
 				</table>
-					
-					
+
+
 			</div>
 		</div>
-		
+
 
 		<!-- Footer -->
 		<%@include file="footer.jsp"%>

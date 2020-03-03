@@ -32,7 +32,6 @@ public class MainCommandList implements Command{
 			String changeString ="data:image/jpg;base64, "+imageString;
 			list.get(i).setStringImage(changeString);
 			
-			//System.out.println(list.get(i).getSleEndTime());
 		}
 			
 		request.setAttribute("GoodsMain", list);

@@ -23,21 +23,25 @@ public class GoodsSellDao extends DAO {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				GoodsMainSellDto dto = new GoodsMainSellDto();
-				dto.setSleId(rs.getString("SLE_ID"));
-				dto.setGoodsName(rs.getString("GOODS_NAME"));
 				
-				dto.setSleBeginTime(rs.getTimestamp("SLE_BEGIN_TIME"));
-				dto.setSleEndTime(rs.getTimestamp("SLE_END_TIME"));
+				if(rs.getBlob("PHOTO_NAME")==null) {
+				}
+				else {
+					GoodsMainSellDto dto = new GoodsMainSellDto();
+					dto.setSleId(rs.getString("SLE_ID"));
+					dto.setGoodsName(rs.getString("GOODS_NAME"));
+					dto.setSleBeginTime(rs.getTimestamp("SLE_BEGIN_TIME"));
+					dto.setSleEndTime(rs.getTimestamp("SLE_END_TIME"));
+					dto.setSlePc(rs.getInt("SLE_PC"));
+					dto.setSleQy(rs.getInt("SLE_QY"));
+					dto.setNetPrc(rs.getInt("NETPRC"));
+					dto.setGoodsCl(rs.getString("GOODS_CL"));
 				
-				dto.setSlePc(rs.getInt("SLE_PC"));
-				dto.setSleQy(rs.getInt("SLE_QY"));
-				dto.setNetPrc(rs.getInt("NETPRC"));
-				dto.setGoodsCl(rs.getString("GOODS_CL"));
-				Blob blob = rs.getBlob("PHOTO_NAME");
-				dto.setPhotoFile(blob.getBytes(1, (int)blob.length()));
+					Blob blob = rs.getBlob("PHOTO_NAME");
+					dto.setPhotoFile(blob.getBytes(1, (int)blob.length()));
+					list.add(dto);
+				}
 				
-				list.add(dto);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

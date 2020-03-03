@@ -43,7 +43,9 @@ public class AdminAjaxSelngAnalysisMonthOkCommand implements Command {
 		
 		List<Map<String,Object>> list = dao.AnalysMonth(dto);
 		String chart = JSONArray.fromObject(list).toString();
-						
+		
+		
+		
 		System.out.println("chart= " + chart);
 		String path = "ajax:" + chart;
 		return path;

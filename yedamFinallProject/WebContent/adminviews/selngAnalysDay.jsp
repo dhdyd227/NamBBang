@@ -80,14 +80,17 @@ function drawChart(d1,d2){
 	var container = document.getElementById('chart-area');
 	$.ajax("AdminAjaxSelngAnalysisDayOk.ad",{dataType:"json", data:{startDate:d1, endDate:d2}})
 	.done(function(cData){		
+	
+		
 		var day = [];
 		var profit = [];
 		var refnd = [];
 		var order_qy = [];
 		for (i=0; i<cData.length; i++){
-			day.push(cData[i].day);
-			profit.push(cData[i].profit);
-			refnd.push(cData[i].refnd);
+			//day.push(cData[i].day);
+			day.push(cData[i].day.substr(0,2)+"년 "+cData[i].day.substr(5,2)+"월 "+cData[i].day.substr(8,2)+" 일");
+			profit.push(cData[i].profit/1000);
+			refnd.push(cData[i].refnd/1000);
 			order_qy.push(cData[i].order_qy);			
 		}
 		
@@ -102,10 +105,10 @@ function drawChart(d1,d2){
     	                name: '매출',
     	                data: profit
     	            },
-    	            {
+    	           /*  {
     	                name: '판매량',
     	                data: order_qy
-    	            },
+    	            }, */
     	            {
     	                name: '환불',
     	                data: refnd
@@ -113,8 +116,8 @@ function drawChart(d1,d2){
     	        ],
     	         line: [
     	            {
-    	                name: '매출추이',
-    	                data: profit
+    	                name: '판매량(개)',
+    	                data: order_qy
     	            }
     	        ]
     	    }
@@ -127,11 +130,11 @@ function drawChart(d1,d2){
 	    	        title: '일별 매출'
 	    	    },
 	    	    yAxis: [{
-	    	       title: '매출',
+	    	       title: '매출(*1000원)',
 	    	       chartType: 'column',
 	    	       labelMargin: 15
 	    	    }, {
-	    	       title: '매출추이',
+	    	       title: '판매추이(개)',
 	    	       chartType: 'line',
 	    	       labelMargin: 15
 	    	    }],
@@ -145,7 +148,7 @@ function drawChart(d1,d2){
 	    	    },
 	    	    tooltip: {
 	    	        grouped: true,
-	    	        suffix: '원'
+	    	        suffix: '*1000원/개'
 	    	    }
 	    	};
 	    	var theme = {
@@ -163,8 +166,27 @@ function drawChart(d1,d2){
 	    	// For apply theme
 	    	// tui.chart.registerTheme('myTheme', theme);
 	    	// options.theme = 'myTheme';
-	    	var chart = tui.chart.comboChart(container, data, options);	
-		
+	    	if($('#chart-area').children() != null){
+	    		$('#chart-area').children().hide();	
+	    	}
+	    	var chart = tui.chart.comboChart(container, data, options);	    		
+	    	$("#cnt").text("[총 " + cData.length +"건]");
+	    	
+	    	var tbody = $("<tbody>").attr("align","center");
+	    	
+	    	for(var i = 0; i <cData.length; i++){
+	    		var tr1 = $("<tr>");
+	    		var num = $("<td>").text(i+1);	    		
+	    		var td1 = $("<td>").text(cData[i].day.substr(0,2)+"년 "+cData[i].day.substr(5,2)+"월 "+cData[i].day.substr(8,2)+" 일");
+	    		var td2 = $("<td>").text(cData[i].order_qy +" 개");
+	    		var td3 = $("<td>").text(cData[i].refnd + " 원");
+	    		var td4 = $("<td>").text(cData[i].profit + " 원");	    		
+	    		tbody.append(tr1,num,td1,td2,td3,td4);
+	    	}
+	    	if($('#tbl tbody') != null){
+	    		$('#tbl tbody').hide();
+	    	}
+	    	$("#tbl").append(tbody);
 	});
 	    
 };
@@ -173,7 +195,7 @@ function drawChart(d1,d2){
 window.addEventListener("load", function(){
 	
 	 day.addEventListener("click",function(){
-		dateInput(0,0);			
+		dateInput(1,0);			
 		if(startDate.disabled == true && endDate.disabled == true){
 			startDate.disabled = false;
 			endDate.disabled = false;
@@ -230,8 +252,13 @@ function dateInput(n,m){
 	 }
 //submit 유효성 검사
 function formCheck(){
-	 var d1 = new Date(startDate.value);
-	 var d2 = new Date(endDate.value);
+	var d1 = new Date(startDate.value);
+	var d2 = new Date(endDate.value);
+	/* if(d1 == null && d2 == null){
+		alert("시작날짜와 종료날짜를 입력해 주세요.");
+        frm.startDate.focus();
+        return false;	      
+	} */
     if(frm.startDate.value > frm.endDate.value) {	             
         alert("시작날짜와 종료날짜를 확인해 주세요.");
         frm.startDate.focus();
@@ -243,7 +270,7 @@ function formCheck(){
 </script>
 </head>
 <body>
-<form id="frm" name="frm" method="post"  >
+<form id="frm" name="frm" method="post">
 	<input type="hidden" name="page" value="1">
 	<div class="row">
 		<div class="col-md-12">
@@ -347,20 +374,20 @@ function formCheck(){
 				<div class="card-header">
 					<div class="row">
 							<div class="col-1 row-st">
-								<h6 class="h6">[총 n 건]</h6>								
+								<h6 class="h6" id="cnt" name="cnt"></h6>								
 							</div>
 							<div class="col-7">								
 							</div>
 							<div class="col-2 row-st">
 																
 							</div>
-							<div class="col-2 row-st">
+							<!-- <div class="col-2 row-st">
 								<select class="custom-select" id="pageCnt" name="pageCnt">
 									<option value="10" selected>10개씩보기</option>
 									<option value="20">20개씩보기</option>
 									<option value="30">30개씩보기</option>															
 								</select>									
-							</div>
+							</div> -->
 						</div>
 						<div class="row">
 							<div class="col-md-1 row-st text-center">
@@ -381,18 +408,17 @@ function formCheck(){
 				</div>
 				<div class="card-body">
 						<div class="table-responsive" style="overflow:hidden;">
-		                  <table class="table table-hover table-condensed">
+		                  <table class="table table-hover table-condensed" id="tbl" name="tbl">
 		                    <thead class="text-primary text-center">
-		                    <tr>		                     
+		                    <tr>	
+		                      <th>번호</th>	                     
 		                      <th>일자</th>
 		                      <th>판매수량</th>
-		                      <th>환불</th>
-		                      <th>매출</th>
+		                      <th>환불액</th>
+		                      <th>매출액</th>
 		                    </tr>  
 		                    </thead>
-		                    <tbody>
-		                   		              
-		                    </tbody>
+		                   
 		                  </table>
                 		</div>
 				</div>
@@ -431,11 +457,11 @@ function formCheck(){
 			frm.submit();
 		};
 		//검색 조건 고정
-	    if(${adDto != null}){			    	
+	   /*  if(${adDto != null}){			    	
 	    	$("[name='startDate']").val(['${adDto.sDate}']);
 	    	$("[name='endDate']").val(['${adDto.eDate}']);	    					    		 	 		    	 
 	    	$("[name='pageCnt']").val(['${pDto.pageUnit}']);
-	    	};    	    		   
+	    	};  */   	    		   
 	</script>
 </body>
 </html>

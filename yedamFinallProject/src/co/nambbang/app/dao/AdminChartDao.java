@@ -243,4 +243,253 @@ public class AdminChartDao extends DAO{
 		
 		return list;
 	}
+	//상품별 수량별 판매 통계 
+	public List<Map<String,Object>> goodsAnalysQy(AdminSelngAnalysisDto dto){
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();		
+		String and = " and 1=1 ";
+		
+		if(dto != null) {
+			if (dto.getsDate() != null && dto.geteDate() != null){
+				and += " and s.setle_de between ? and ? ";				
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {				
+				and += " and s.setle_de between ? and sysdate ";
+				
+			}
+		}
+		
+		String sql = "select rank_rn.rn, rank_rn.goods_name, rank_rn.qy_sum, round(ratio_to_report(rank_rn.qy_sum) over () * 100, 1) as percent " + 
+				"from  " + 
+				"    ( " + 
+				"    select rownum rn, goods_qy_rank.goods_name, goods_qy_rank.qy_sum " + 
+				"    from " + 
+				"           ( select gr.goods_name, sum(o.order_qy) qy_sum " + 
+				"            from orders o, goods_sle gs, goods_regist gr,setle s " + 
+				"            where o.sle_id = gs.sle_id " + 
+				"            and o.order_group_no = s.order_group_no " + 
+				"            and gs.goods_id = gr.goods_id " + 
+							 and +
+				"            and s.setle_code = 'SC' " + 
+				"            group by gr.goods_name " + 
+				"            order by qy_sum desc " + 
+				"            ) goods_qy_rank " + 
+				"     ) rank_rn " + 
+				"where rn between 1 and 10";
+		
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+			if(dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());								
+			}
+						
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();			
+				map.put("goods_name", rs.getString("goods_name"));
+				map.put("qy_sum", rs.getInt("qy_sum"));
+				map.put("percent", rs.getDouble("percent"));				
+				list.add(map);		
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	//상품 판매금액별 판매 통계 
+	public List<Map<String,Object>> goodsAnalysAmount(AdminSelngAnalysisDto dto){
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();		
+		String and = " and 1=1 ";
+		
+		if(dto != null) {
+			if (dto.getsDate() != null && dto.geteDate() != null){
+				and += " and s.setle_de between ? and ? ";				
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {				
+				and += " and s.setle_de between ? and sysdate ";
+				
+			}
+		}
+		
+		String sql = "select rank_rn.rn, rank_rn.goods_name, rank_rn.amount_sum, round(ratio_to_report(rank_rn.amount_sum) over () * 100, 1) as percent " + 
+				"from " + 
+				"    ( " + 
+				"    select rownum rn, goods_profit_rank.*  " + 
+				"    from " + 
+				"          ( " + 
+				"            select gr.goods_name, sum(s.setle_amount) amount_sum " + 
+				"            from orders o, goods_sle gs, goods_regist gr,setle s " + 
+				"            where o.sle_id = gs.sle_id " + 
+				"            and o.order_group_no = s.order_group_no " + 
+				"            and gs.goods_id = gr.goods_id " + 
+							 and +
+				"            and s.setle_code = 'SC' " + 
+				"            group by gr.goods_name " + 
+				"            order by amount_sum desc " + 
+				"          ) goods_profit_rank " + 
+				"     ) rank_rn " + 
+				"where rn between 1 and 10";
+		
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+			if(dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());								
+			}
+						
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();			
+				map.put("goods_name", rs.getString("goods_name"));
+				map.put("amount_sum", rs.getInt("amount_sum"));
+				map.put("percent", rs.getDouble("percent"));				
+				list.add(map);		
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	// 판매자 판매수량별 통계 
+	public List<Map<String,Object>> sellerAnalysQy(AdminSelngAnalysisDto dto){
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();		
+		String and = " and 1=1 ";
+		
+		if(dto != null) {
+			if (dto.getsDate() != null && dto.geteDate() != null){
+				and += " and s.setle_de between ? and ? ";				
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {				
+				and += " and s.setle_de between ? and sysdate ";
+				
+			}
+		}
+	
+		String sql = "select rank_rn.rn, rank_rn.cmpnm, rank_rn.order_qy, round(ratio_to_report(rank_rn.order_qy) over () * 100, 1) as percent " + 
+				"from  " + 
+				"    ( " + 
+				"    select rownum rn, seler_qy_rank.*  " + 
+				"    from " + 
+				"          ( " + 
+				"            select sr.cmpnm, sum(o.order_qy) order_qy " + 
+				"            from orders o, goods_sle gs, goods_regist gr,setle s, seler sr " + 
+				"            where o.sle_id = gs.sle_id " + 
+				"            and o.order_group_no = s.order_group_no " + 
+				"            and gs.goods_id = gr.goods_id " + 
+				"            and gr.seler_id = sr.seler_id " + 
+							 and +
+				"            and s.setle_code = 'SC' " + 
+				"            group by sr.cmpnm " + 
+				"            order by order_qy desc " + 
+				"        ) seler_qy_rank " + 
+				"     ) rank_rn " + 
+				"where rn between 1 and 10";
+		
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+			if(dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());								
+			}
+						
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();			
+				map.put("cmpnm", rs.getString("cmpnm"));
+				map.put("order_qy", rs.getInt("order_qy"));
+				map.put("percent", rs.getDouble("percent"));				
+				list.add(map);		
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	//판매자 판매금액별 통계
+	public List<Map<String,Object>> sellerAnalysAmount(AdminSelngAnalysisDto dto){
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();		
+		String and = " and 1=1 ";
+		
+		if(dto != null) {
+			if (dto.getsDate() != null && dto.geteDate() != null){
+				and += " and s.setle_de between ? and ? ";				
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {				
+				and += " and s.setle_de between ? and sysdate ";
+				
+			}
+		}
+		
+		String sql = "select rank_rn.rn, rank_rn.cmpnm, rank_rn.amount_sum, round(ratio_to_report(rank_rn.amount_sum) over () * 100, 1) as percent " + 
+				" from " + 
+				"    ( " + 
+				"    select rownum rn, seler_profit_rank.* " + 
+				"    from " + 
+				"          ( " + 
+				"            select sr.cmpnm, sum(s.setle_amount) amount_sum " + 
+				"            from orders o, goods_sle gs, goods_regist gr,setle s, seler sr " + 
+				"            where o.sle_id = gs.sle_id " + 
+				"            and o.order_group_no = s.order_group_no " + 
+				"            and gs.goods_id = gr.goods_id " + 
+				"            and gr.seler_id = sr.seler_id " + 
+							 and +
+				"            and s.setle_code = 'SC' " + 
+				"            group by sr.cmpnm " + 
+				"            order by amount_sum desc " + 
+				"        ) seler_profit_rank " + 
+				"     ) rank_rn " + 
+				"where rn between 1 and 10";
+		
+		try {
+			int i = 0;
+			pstmt = conn.prepareStatement(sql);
+			if(dto.getsDate() != null && dto.geteDate() != null) {
+				pstmt.setString(++i, dto.getsDate());
+				pstmt.setString(++i, dto.geteDate());
+			
+			}
+			if(dto.getsDate() != null && dto.geteDate() == null) {
+				pstmt.setString(++i, dto.getsDate());								
+			}
+						
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();			
+				map.put("cmpnm", rs.getString("cmpnm"));
+				map.put("amount_sum", rs.getInt("amount_sum"));
+				map.put("percent", rs.getDouble("percent"));				
+				list.add(map);		
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 }
+
+

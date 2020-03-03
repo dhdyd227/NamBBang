@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.nambbang.app.admin.AdminAjaxGoodsAnalysisAmountOkCommand;
+import co.nambbang.app.admin.AdminAjaxGoodsAnalysisQyOkCommand;
+import co.nambbang.app.admin.AdminAjaxSellerAnalysisAmountOkCommand;
+import co.nambbang.app.admin.AdminAjaxSellerAnalysisQyOkCommand;
 import co.nambbang.app.admin.AdminAjaxSelngAnalysisDayOkCommand;
 import co.nambbang.app.admin.AdminAjaxSelngAnalysisMonthOkCommand;
 import co.nambbang.app.admin.AdminAjaxSelngAnalysisWeekOkCommand;
@@ -117,8 +121,14 @@ public class FrontController extends HttpServlet {
 		cont.put("/AdminSelngAnalysisMonth.ad", new AdminSelngAnalysisMonthCommand()); // admin - 매출 통계 월별 페이지
 		cont.put("/AdminAjaxSelngAnalysisMonthOk.ad", new AdminAjaxSelngAnalysisMonthOkCommand()); // admin - 매출 통계 월별 페이지
 		
-		cont.put("/AdminSellerAnalysis.ad", new AdminSellerAnalysisCommand()); // admin - 판매별 통계 분석 페이지
-		cont.put("/AdminGoodsAnalysis.ad", new AdminGoodsAnalysisCommand()); // admin - 상품별 통계 분석 페이지	
+		
+		cont.put("/AdminGoodsAnalysis.ad", new AdminGoodsAnalysisCommand()); // admin - 상품별 통계 분석 페이지
+		cont.put("/AdminAjaxGoodsAnalysQyOk.ad", new AdminAjaxGoodsAnalysisQyOkCommand()); // admin - 상품 판매량별 분석 페이지 ajax
+		cont.put("/AdminAjaxGoodsAnalysAmountOk.ad", new AdminAjaxGoodsAnalysisAmountOkCommand()); // admin - 상품 판매액합계별 통계 분석 페이지 ajax
+		
+		cont.put("/AdminSellerAnalysis.ad", new AdminSellerAnalysisCommand()); // admin - 판매자별 통계 분석 페이지
+		cont.put("/AdminAjaxSellerAnalysQyOk.ad", new AdminAjaxSellerAnalysisQyOkCommand()); // admin - 판매자 판매량별 통계 분석 페이지 ajax
+		cont.put("/AdminAjaxSellerAnalysAmountOk.ad", new AdminAjaxSellerAnalysisAmountOkCommand()); // admin - 판매자 판매액합계별 통계 분석 페이지 ajax
 		
 		
 		//오용

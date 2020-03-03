@@ -80,9 +80,10 @@ $(function(){
 			var refnd = [];
 			var order_qy = [];
 			for (i=0; i<cData.length; i++){
-				week.push(cData[i].week);
-				profit.push(cData[i].profit);
-				refnd.push(cData[i].refnd);
+				//week.push(cData[i].week);
+				week.push(cData[i].week.substr(0,2)+"년 "+cData[i].week.substr(4,1)+"월 "+cData[i].week.substr(6,1)+"번째 주");
+				profit.push(cData[i].profit/1000);
+				refnd.push(cData[i].refnd/1000);
 				order_qy.push(cData[i].order_qy);			
 			}
 			
@@ -94,13 +95,13 @@ $(function(){
 	    	    series: {
 	    	        column: [
 	    	            {
-	    	                name: '매출',
+	    	                name: '매출(*1000원)',
 	    	                data: profit
 	    	            },
-	    	            {
+	    	           /*  {
 	    	                name: '판매량',
 	    	                data: order_qy
-	    	            },
+	    	            }, */
 	    	            {
 	    	                name: '환불',
 	    	                data: refnd
@@ -108,8 +109,8 @@ $(function(){
 	    	        ],
 	    	         line: [
 	    	            {
-	    	                name: 'Average',
-	    	                data: [11, 15.1, 17.8, 19.7, 19.5, 16.5, 12.3]
+	    	                name: '판매량(개)',
+	    	                data: order_qy
 	    	            }
 	    	        ]
 	    	    }
@@ -126,7 +127,7 @@ $(function(){
 		    	       chartType: 'column',
 		    	       labelMargin: 15
 		    	    }, {
-		    	       title: 'Average',
+		    	       title: '판매량',
 		    	       chartType: 'line',
 		    	       labelMargin: 15
 		    	    }],
@@ -140,7 +141,7 @@ $(function(){
 		    	    },
 		    	    tooltip: {
 		    	        grouped: true,
-		    	        suffix: '원'
+		    	        suffix: '*1000원/개'
 		    	    }
 		    	};
 		    	var theme = {
@@ -158,8 +159,27 @@ $(function(){
 		    	// For apply theme
 		    	// tui.chart.registerTheme('myTheme', theme);
 		    	// options.theme = 'myTheme';
-		    	var chart = tui.chart.comboChart(container, data, options);	
-			
+		    	if($('#chart-area').children() != null){
+		    		$('#chart-area').children().hide();	
+		    	}
+		    	var chart = tui.chart.comboChart(container, data, options);	   
+		    	$("#cnt").text("[총 " + cData.length +"건]");
+		    	
+		    	var tbody = $("<tbody>").attr("align","center");
+		    	
+		    	for(var i = 0; i <cData.length; i++){
+		    		var tr1 = $("<tr>");
+		    		var num = $("<td>").text(i+1);	    		
+		    		var td1 = $("<td>").text(cData[i].week.substr(0,2)+"년 "+cData[i].week.substr(4,1)+"월 "+cData[i].week.substr(6,1)+"번째 주");
+		    		var td2 = $("<td>").text(cData[i].order_qy +" 개");
+		    		var td3 = $("<td>").text(cData[i].refnd + " 원");
+		    		var td4 = $("<td>").text(cData[i].profit + " 원");	    		
+		    		tbody.append(tr1,num,td1,td2,td3,td4);
+		    	}
+		    	if($('#tbl tbody') != null){
+		    		$('#tbl tbody').hide();
+		    	}
+		    	$("#tbl").append(tbody);
 		});
 		    
 	};
@@ -355,20 +375,20 @@ function formCheck(){
 				<div class="card-header">
 					<div class="row">
 							<div class="col-1 row-st">
-								<h6 class="h6">[총 n 건]</h6>								
+								<h6 class="h6" id="cnt" name="cnt"></h6>								
 							</div>
 							<div class="col-7">								
 							</div>
 							<div class="col-2 row-st">
 																
 							</div>
-							<div class="col-2 row-st">
+							<!-- <div class="col-2 row-st">
 								<select class="custom-select" id="pageCnt" name="pageCnt">
 									<option value="10" selected>10개씩보기</option>
 									<option value="10">20개씩보기</option>
 									<option value="10">30개씩보기</option>															
 								</select>									
-							</div>
+							</div> -->
 						</div>
 						<div class="row">
 							<div class="col-md-1 row-st text-center">
@@ -389,41 +409,17 @@ function formCheck(){
 				</div>
 				<div class="card-body">
 						<div class="table-responsive" style="overflow:hidden;">
-		                  <table class="table table-hover table-condensed">
+		                  <table class="table table-hover table-condensed" id="tbl" name="tbl">
 		                    <thead class="text-primary text-center">
-		                      
-		                      <th>
-		                      		일자
-		                      </th>
-		                      <th>
-		                        	주문수
-		                      </th>
-		                      <th>
-		                        	상품 구매금액
-		                      </th>
-		                      <th>
-		                        	할인금액
-		                      </th>
-		                      <th>
-		                        	마일리지 사용액
-		                      </th>
-		                      <th>
-		                      		상품명
-		                      </th>
-		                      <th>
-		                      		결제 금액 합계
-		                      </th>
-		                      <th>
-		                      		환불액 합계
-		                      </th>
-		                      <th>
-		                      		순매출
-		                      </th>
+		                    <tr>	
+		                      <th>번호</th>	                     
+		                      <th>일자</th>
+		                      <th>판매수량</th>
+		                      <th>환불액</th>
+		                      <th>매출액</th>
+		                    </tr>		                      
 		                    </thead>
-		                    <tbody>
-		                     <tr>
-		                     </tr>		              
-		                    </tbody>
+		                   
 		                  </table>
                 		</div>
 				</div>

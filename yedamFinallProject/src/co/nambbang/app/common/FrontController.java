@@ -136,7 +136,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/logIn.do", new MainCommandLogin());
 		cont.put("/logOut.do", new MainCommandLogOut());
 		cont.put("/totalShop.do", new TotalShopCommandList());
-		cont.put("/myPage.do",new MyPageCommandList());
+		cont.put("/myPage.do",new MyPageCommandList()); //mypage 
 		cont.put("/ajaxLoginCheck.do",new AjaxLoginCheck());//login Check
 		cont.put("/ajaxIdDuplicationCheck.do", new AjaxIdDuplicationCheck());//id Check
 		cont.put("/ajaxRegisterDB.do",new AjaxRegisterDB());//register DB transport

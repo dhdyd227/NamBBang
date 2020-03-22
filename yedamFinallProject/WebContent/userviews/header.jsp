@@ -50,12 +50,11 @@
 					<nav class="navbar">
 						<ul class="navbar_menu">
 							<li><a href="/yedamFinallProject/index.do">Home</a></li>
-							
 							<li><a href="./totalShop.do">Total Shop</a></li>
 							
+							<c:if test ="${CONECTR_SE eq 'SE'}">
 							<li><a href="./listGoods.do">상품 등록</a></li>
 							<li><a href="./sellerEdit.do">판매자 수정</a></li>
-							<c:if test ="${CONECTR_SE eq 'SE'}">
 							</c:if>
 							
 						</ul>
@@ -89,10 +88,10 @@
 							<%=sa%>
 							<%="안녕하세요"%>
 							
-							<li class="checkout"><a href="#"> <i
-									class="fa fa-shopping-cart" aria-hidden="true"></i> <span
-									id="checkout_items" class="checkout_items">2</span>
-							</a></li>
+							<li class="checkout"><a href="myPage.do"> <i
+									class="fa fa-shopping-cart" aria-hidden="true"></i> 
+							</a>
+							</li>
 						</ul>
 						<div class="hamburger_container">
 							<i class="fa fa-bars" aria-hidden="true"></i>

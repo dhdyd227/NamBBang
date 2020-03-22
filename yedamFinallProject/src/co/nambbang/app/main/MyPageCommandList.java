@@ -21,7 +21,8 @@ public class MyPageCommandList implements Command {
 		// 메인 화면 상품 리스트 출력
 		UsersMyPageDao Dao = new UsersMyPageDao();
 		String id = (String) request.getSession().getAttribute("id");
-
+		System.out.println("MypageCommandList:  "+id);
+		
 		ArrayList<UsersMyPageDto> list = Dao.myPageList(id);
 
 		for (int i = 0; i < list.size(); i++) {

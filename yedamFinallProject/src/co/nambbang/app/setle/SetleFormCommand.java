@@ -16,11 +16,16 @@ import co.nambbang.app.dto.SetleFormDTO;
 public class SetleFormCommand implements Command {
 
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response)
+	public String execute(HttpServletRequest request, HttpServletResponse response)			
 			throws ServletException, IOException {
+			SetleFormDTO dto = new SetleFormDTO();
 			List<SetleFormDTO> list = new ArrayList<SetleFormDTO>();
 //			String id = request.getParameter("userId");
 //			int groupno = (Integer.parseInt(request.getParameter("orderGroupNo")));
+			
+		/* dto.getSleId(request.getParameter("")); */
+			
+			
 			
 			SetleDAO dao = new SetleDAO();
 			

@@ -133,9 +133,9 @@
 												</div>
 											</div>
 										</div>
-										<div class="red_button add_to_cart_button">
+										<!-- <div class="red_button add_to_cart_button">
 											<a href="#">add to cart</a>
-										</div>
+										</div> -->
 									</div>
 
 								</c:forEach>

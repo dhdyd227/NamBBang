@@ -68,15 +68,15 @@ jQuery(document).ready(function($)
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
+						<li><a href="index.do">Nam Bang</a></li>
+						<!-- <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li> -->
+						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>${sell.goodsName }</a></li>
 					</ul>
 				</div>
 
 			</div>
 		</div>
-
+		<form id="frm" name="frm" method="post" action="SetleForm.do">
 		<div class="row">
 			<div class="col-lg-7">
 				<div class="single_product_pics">
@@ -102,17 +102,19 @@ jQuery(document).ready(function($)
 				<div class="product_details">
 					<div class="product_details_title">
 						<h2>${sell.goodsName }</h2>
+						<input type="hidden" id="g_name" name="g_name" value="${sell.goodsName }">
 						<p>${fn:replace(sell.goodsInfo, newLineChar, "<br/>")  }</p>
 					</div>
 					<div class="original_price">${sell.netprc } 원</div>
 					<div class="product_price">${sell.slePc } 원</div>
-					<ul class="star_rating">
+					<input type="hidden" id="g_price" name="g_price" value="${sell.slePc }">
+					<!-- <ul class="star_rating">
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star" aria-hidden="true"></i></li>
 						<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-					</ul>
+					</ul> -->
 					<div class="product_color">
 						<span>판매수량:</span>
 						<ul>
@@ -122,22 +124,25 @@ jQuery(document).ready(function($)
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 						<span style="min-width: 70px;">구매수량:</span>
 						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							<span id="quantity_value">1</span>
+							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>							
+							<span id="q_value">1</span>							
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
-						<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+						<!-- <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div> -->						
+					</div>
+					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+						<input type="submit" value="구매">
 					</div>
 				</div>
-			</div>
+			</div>			
 		</div>
-
+		</form>
 	</div>
 
 
 	<!-- Tabs -->
-	<div class="tabs_section_container">
+	<!-- <div class="tabs_section_container">
 
 		<div class="container">
 			<div class="row">
@@ -154,7 +159,7 @@ jQuery(document).ready(function($)
 			<div class="row">
 				<div class="col">
 
-					<!-- Tab Description -->
+					Tab Description
 
 					<div id="tab_1" class="tab_container active">
 						<div class="row">
@@ -189,7 +194,7 @@ jQuery(document).ready(function($)
 						</div>
 					</div>
 
-					<!-- Tab Additional Info -->
+					Tab Additional Info
 
 					<div id="tab_2" class="tab_container">
 						<div class="row">
@@ -203,19 +208,19 @@ jQuery(document).ready(function($)
 						</div>
 					</div>
 
-					<!-- Tab Reviews -->
+					Tab Reviews
 
 					<div id="tab_3" class="tab_container">
 						<div class="row">
 
-							<!-- User Reviews -->
+							User Reviews
 
 							<div class="col-lg-6 reviews_col">
 								<div class="tab_title reviews_title">
 									<h4>Reviews (2)</h4>
 								</div>
 
-								<!-- User Review -->
+								User Review
 
 								<div class="user_review_container d-flex flex-column flex-sm-row">
 									<div class="user">
@@ -237,7 +242,7 @@ jQuery(document).ready(function($)
 									</div>
 								</div>
 
-								<!-- User Review -->
+								User Review
 
 								<div class="user_review_container d-flex flex-column flex-sm-row">
 									<div class="user">
@@ -260,7 +265,7 @@ jQuery(document).ready(function($)
 								</div>
 							</div>
 
-							<!-- Add Review -->
+							Add Review
 
 							<div class="col-lg-6 add_review_col">
 
@@ -297,11 +302,11 @@ jQuery(document).ready(function($)
 			</div>
 		</div>
 
-	</div>
+	</div> -->
 
 
 	<!-- Benefit(맨밑에 주의사항) -->
-	<div class="benefit">
+	<!-- <div class="benefit">
 		<div class="container">
 			<div class="row benefit_row">
 				<div class="col-lg-3 benefit_col">
@@ -343,7 +348,7 @@ jQuery(document).ready(function($)
 			</div>
 		</div>
 	</div>
-
+ -->
 
 	<!-- Footer -->
 	<%@include file="../userviews/footer.jsp" %>

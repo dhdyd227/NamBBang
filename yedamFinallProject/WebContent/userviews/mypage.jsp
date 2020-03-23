@@ -53,7 +53,9 @@
 						</td>
 						<td>
 							<div>결제상태 : ${list.setleCode }</div>
+							<c:if var="list" test="${list.setleCode == '결제완료' }">
 							<div><input type="button" id="refund" name="refund" value="환불신청"> </div>
+							</c:if>
 						</td>
 					</tr>
 					</c:forEach>

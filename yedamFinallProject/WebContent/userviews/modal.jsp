@@ -44,15 +44,13 @@
 									
 									<c:if test ="${not empty CONECTR_SE}">
 									<!-- 로그아웃 화면-->
-									<input class="btn btn-default btn-login" type="submit" value="회원정보수정"
+									<!--  <input class="btn btn-default btn-login" type="submit" value="회원정보수정"
 										name="submit">
 									<br/>
-									<input class="btn btn-default btn-login" type="submit" value="마이페이지"
-										name="submit">
+									-->
+									<input class="btn btn-default btn-login" type="button" onclick="location.href='myPage.do'" value="구매내역">
 									<br/>
-									<input class="btn btn-default btn-login" type="submit" value="Login"
-										name="submit">
-									<br/>
+									
 									</c:if>
 								</form>
 								

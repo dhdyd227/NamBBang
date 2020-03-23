@@ -22,12 +22,12 @@ public class UsersMyPageDao extends DAO {
 				" (select order_id,order_qy,sle_id,order_group_no,SETLE_CODE" + 
 				" from ORDERS ord,(select se.ORDER_GROUP_NO ORDER_GROUP_NO_1,SETLE_CODE" + 
 				"                 from SETLE se, ORDER_GROUP og" + 
-				"                 where se.ORDER_GROUP_NO =og.ORDER_GROUP_NO and user_id='fxskAA418913') seog  " + 
+				"                 where se.ORDER_GROUP_NO =og.ORDER_GROUP_NO and user_id=?) seog  " + 
 				" where ord.ORDER_GROUP_NO = seog.ORDER_GROUP_NO_1) orderlist" + 
 				" where imglist.SLE_ID = orderlist.SLE_ID";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			//pstmt.setString(1, id);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

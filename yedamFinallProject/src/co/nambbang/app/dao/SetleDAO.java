@@ -96,6 +96,35 @@ public class SetleDAO extends DAO {
 
 	}
 	
+	public int insertOrders(String id,int orderQy,String sleId) {
+		// 주문그룹번호 생성후 주문 그룹번호 리턴, 주문 생성
+		int orderGroupNo = 0;
+	
+		try {
+			conn.setAutoCommit(false);
+
+			cstmt = conn.prepareCall("{call order_group_insert_pr(?,?,?,?)}");
+			cstmt.setString(1, id);
+			cstmt.setInt(2, orderQy);
+			cstmt.setString(3, sleId);
+			cstmt.registerOutParameter(4, OracleTypes.NUMBER);
+			cstmt.executeUpdate();
+
+			orderGroupNo = cstmt.getInt(4);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			close();
+		}
+
+		return orderGroupNo;
+	}
 	
 
 }

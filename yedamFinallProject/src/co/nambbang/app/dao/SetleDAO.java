@@ -44,7 +44,6 @@ public class SetleDAO extends DAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			close();
 		}
 
 		return result;
@@ -120,7 +119,6 @@ public class SetleDAO extends DAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			close();
 		}
 
 		return orderGroupNo;

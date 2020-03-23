@@ -50,10 +50,11 @@ jQuery(document).ready(function($)
 	}	
 });
 
-function q_valueChk(){
+function FormChk(){
 	var q_val;
 	q_val = document.getElementById("quantity_value").innerHTML;	
-	document.getElementById("q_value").value = q_val;
+	document.getElementById("q_value").value = q_val;	
+	
 }
 </script>
 </head>
@@ -74,15 +75,15 @@ function q_valueChk(){
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.html">Nam Bang</a></li>
+						<li><a href="index.do">Nam Bang</a></li>
 						<!-- <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li> -->
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>${sell.goodsName }</a></li>
+						<li class="active"><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>${sell.goodsName }</a></li>
 					</ul>
 				</div>
 
 			</div>
 		</div>
-		<form id="frm" name="frm" method="post" action="SetleForm.do">
+		<form id="frm" name="frm" method="post" action="SetleForm.do" onsubmit="return FormChk()">
 		<div class="row">
 			<div class="col-lg-7">
 				<div class="single_product_pics">
@@ -134,7 +135,7 @@ function q_valueChk(){
 							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>							
 							<span id="quantity_value">1</span>							
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
-							<input type="hidden" id="q_value" name="q_value" value="q_valueChk()">
+							<input type="hidden" id="q_value" name="q_value" value="">
 						</div>
 						<!-- <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div> -->						

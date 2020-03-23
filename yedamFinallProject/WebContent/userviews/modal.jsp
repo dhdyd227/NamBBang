@@ -11,8 +11,8 @@
 
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Login Owith</h4>
+				<h4 class="modal-title">Login Owith</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>					
 				</div>
 				
 				<div class="modal-body">
@@ -225,9 +225,9 @@
 						<span>
 							<c:if test ="${empty CONECTR_SE}">
 							<a href="boardSellRegist.do">판매자 가입</a>
-							<a href="javascript: showRegisterForm();">회원 가입</a>&nbsp;&nbsp;&nbsp;
-							<a href="javascript: showFindIdForm();">아이디찾기</a>&nbsp;&nbsp;&nbsp;
-							<a href="javascript: showFindPwForm();">비번찾기</a>
+							<a href="javascript: showRegisterForm();">회원 가입</a>
+							<!-- <a href="javascript: showFindIdForm();">아이디찾기</a>&nbsp;&nbsp;&nbsp;
+							<a href="javascript: showFindPwForm();">비번찾기</a> -->
 							
 							
 							</c:if>

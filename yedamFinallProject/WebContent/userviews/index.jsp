@@ -80,7 +80,7 @@
 					<div class="row">
 						<div class="col text-center">
 							<div class="section_title new_arrivals_title">
-								<h2>New Arrivals</h2>
+								<h2>판매 중인 상품</h2>
 							</div>
 						</div>
 					</div>
@@ -118,18 +118,16 @@
 												width="30px" height="200px" alt=""></a>
 											</div>
 											<div class="favorite favorite_left"></div>
-											<div
-												class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+ 											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
 												<span>${list.sleEndTime.getHours() } : 00</span>
 												<!-- 할인율 -->
 											</div>
 											<div class="product_info">
 												<h6 class="product_name">
-													<a href="single.do?sleId=${list.sleId }">${list.goodsName}
-													</a>
+													<a href="single.do?sleId=${list.sleId }">${list.goodsName}</a>
 												</h6>
 												<div class="product_price">
-													${list.slePc}<span>${list.netPrc }</span>
+													${list.slePc}원<span>${list.netPrc }원</span>
 												</div>
 											</div>
 										</div>

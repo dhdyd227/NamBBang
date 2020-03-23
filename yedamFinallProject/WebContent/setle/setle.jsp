@@ -70,13 +70,14 @@
             btncancel.addEventListener("click", function () {
 
                 $.ajax({
-                    url: "ajaxSetleCancel.do", 
+                    url: "ajaxSetleCancel.do",
                     type: 'POST',
                     data: {
                         order_group_no: document.getElementById('groupNo').innerHTML //주문그룹번호
                         //기타 필요한 데이터가 있으면 추가 전달
                     }
-                })                
+                }).done();
+                location.href = 'index.do';
             });
 
             btn.addEventListener("click", function () {
@@ -151,7 +152,7 @@
                                 //실패시 이동할 페이지
 
                             }
-
+                            location.href = 'index.do';
                             // 성공시 이동할 페이지
                         } else {
                             var msg = '결제에 실패하였습니다.';

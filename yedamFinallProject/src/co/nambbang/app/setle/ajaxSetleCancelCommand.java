@@ -18,12 +18,12 @@ public class ajaxSetleCancelCommand implements Command {
 		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
-		int orderId = (int) request.getAttribute("order_group_no");
+		int orderId = Integer.parseInt(request.getParameter("order_group_no"));
 		
 		SetleDAO dao = new SetleDAO();
 		dao.deleteOrders(id, orderId);
 		
-		return "/index.do";
+		return "ajax:";
 		
 	}
 

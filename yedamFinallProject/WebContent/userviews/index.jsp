@@ -110,7 +110,7 @@
 							<div class="product-grid"
 								data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
 
-								<c:forEach begin="1" end="12" var="list" items="${GoodsMain }">
+								<c:forEach var="list" items="${GoodsMain }">
 									<div class="product-item ${list.goodsCl }">
 										<div class="product discount product_filter">
 											<div class="product_image">

@@ -18,6 +18,7 @@ public class GoodsSellDao extends DAO {
 				",(select photo_file from photo_stre where photo_group_id = a.PHOTO_GROUP_ID and rownum = 1 ) as PHOTO_NAME"+
 				" from GOODS_REGIST a, goods_sle c "+
 				" where a.GOODS_ID = c.GOODS_ID";
+		System.out.println(sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();

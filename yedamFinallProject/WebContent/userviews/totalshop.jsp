@@ -65,8 +65,6 @@
 						<div id="slider-range"></div>
 						<div class="filter_button"><span>filter</span></div>
 					</div>
-					
-					
 
 				</div>
 
@@ -135,7 +133,7 @@
 										</div>
 									<div class="favorite favorite_left"></div>
 									<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-										<span></span><!-- 할인율 -->
+										<span>${list.sleEndTime.getHours() } : 00 </span>
 									</div>
 									<div class="product_info">
 										<h6 class="product_name">

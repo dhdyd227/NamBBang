@@ -27,6 +27,10 @@ public class GoodsDAO extends DAO {
 			sql.append("    FROM GOODS_REGIST A ");
 			sql.append("    WHERE 1=1 ");
 			
+			//id 추가
+			if(param.get("id") != null && ((String)param.get("id")).length() > 0) {
+				sql.append("and SELER_ID = '" + param.get("id") + "' ");
+			}			
 			//검색조건 추가
 			if(param.get("schGoodsId") != null && ((String)param.get("schGoodsId")).length() > 0) {
 				sql.append("and GOODS_ID like '" + param.get("schGoodsId") + "%' ");
@@ -72,6 +76,10 @@ public class GoodsDAO extends DAO {
 			sql.append("    FROM GOODS_REGIST A ");
 			sql.append("    WHERE 1=1 ");
 			
+			//id 추가
+			if(param.get("id") != null && ((String)param.get("id")).length() > 0) {
+				sql.append("and SELER_ID = '" + param.get("id") + "' ");
+			}
 			//검색조건 추가
 			if(param.get("schGoodsId") != null && ((String)param.get("schGoodsId")).length() > 0) {
 				sql.append("and GOODS_ID like '" + param.get("schGoodsId") + "%' ");

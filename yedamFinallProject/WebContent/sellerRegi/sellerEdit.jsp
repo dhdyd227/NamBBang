@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
-
+<!--
 <link rel="stylesheet" type="text/css"
 	href="/yedamFinallProject/userstyles/bootstrap4/bootstrap.min.css">
 <link
@@ -19,9 +19,9 @@
 	href="/yedamFinallProject/userstyles/main_styles.css">
 <link rel="stylesheet" type="text/css"
 	href="/yedamFinallProject/userstyles/responsive.css">
-
+ -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1"%>
-
+<!-- 
 <script src="/yedamFinallProject/userjs/jquery-3.2.1.min.js"></script>
 <script src="/yedamFinallProject/userstyles/bootstrap4/popper.js"></script>
 <script src="/yedamFinallProject/userstyles/bootstrap4/bootstrap.min.js"></script>
@@ -31,7 +31,7 @@
 	src="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="/yedamFinallProject/userplugins/easing/easing.js"></script>
 <script src="/yedamFinallProject/userjs/custom.js"></script>
-
+ -->
 
 <script
 	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
@@ -257,6 +257,7 @@ input[type=file] {
 						<h3>판매자 수정</h3>
 					</div>
 					<br>
+					<div>
 					<table>
 						<tr height="30">
 							<th>*ID(사업자번호)</th>
@@ -316,6 +317,7 @@ input[type=file] {
 						</tr>
 
 					</table>
+					</div>
 					<div class="mt-3">
 						<div class="input_wrap">
 							<input class="btn btn-primary ml-1" type="button" value="사진변경"
@@ -340,11 +342,10 @@ input[type=file] {
 
 		</div>
 
-
-
 		<!-- Footer -->
+		
 		<%@include file="/userviews/footer.jsp"%>
-
+		
 	</div>
 
 

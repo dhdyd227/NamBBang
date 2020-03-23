@@ -14,6 +14,7 @@ public class GoodsMainSellDto {
 	
 	//빵이미지 가져오기
 	private byte[] photoFile;
+	
 	private String stringPhotoFile;
 	
 	

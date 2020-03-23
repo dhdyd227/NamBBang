@@ -10,6 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import co.nambbang.app.admin.AdminAjaxGoodsAnalysisAmountOkCommand;
+import co.nambbang.app.admin.AdminAjaxGoodsAnalysisQyOkCommand;
+import co.nambbang.app.admin.AdminAjaxSellerAnalysisAmountOkCommand;
+import co.nambbang.app.admin.AdminAjaxSellerAnalysisQyOkCommand;
+import co.nambbang.app.admin.AdminAjaxSelngAnalysisDayOkCommand;
+import co.nambbang.app.admin.AdminAjaxSelngAnalysisMonthOkCommand;
+import co.nambbang.app.admin.AdminAjaxSelngAnalysisWeekOkCommand;
 import co.nambbang.app.admin.AdminBbsNoticeManageCommand;
 import co.nambbang.app.admin.AdminBbsReplyInsertCommand;
 import co.nambbang.app.admin.AdminGoodsAnalysisCommand;
@@ -56,6 +63,7 @@ import co.nambbang.app.login.AjaxRegisterDB;
 import co.nambbang.app.main.MainCommandList;
 import co.nambbang.app.main.MainCommandLogOut;
 import co.nambbang.app.main.MainCommandLogin;
+import co.nambbang.app.main.MyPageCommandList;
 import co.nambbang.app.main.TotalShopCommandList;
 import co.nambbang.app.seller.BoardList;
 import co.nambbang.app.seller.BoardSellRegist;
@@ -107,11 +115,20 @@ public class FrontController extends HttpServlet {
 		cont.put("/AdminBbsReplyInsert.ad", new AdminBbsReplyInsertCommand()); // admin - QNA 답변 달기 폼
 		
 		cont.put("/AdminSelngAnalysisDay.ad", new AdminSelngAnalysisDayCommand()); // admin - 매출 통계 일별 페이지
+		cont.put("/AdminAjaxSelngAnalysisDayOk.ad", new AdminAjaxSelngAnalysisDayOkCommand()); // admin - 매출 통계 일별 페이지
 		cont.put("/AdminSelngAnalysisWeek.ad", new AdminSelngAnalysisWeekCommand()); // admin - 매출 통계 주별 페이지
+		cont.put("/AdminAjaxSelngAnalysisWeekOk.ad", new AdminAjaxSelngAnalysisWeekOkCommand()); // admin - 매출 통계 주별 페이지
 		cont.put("/AdminSelngAnalysisMonth.ad", new AdminSelngAnalysisMonthCommand()); // admin - 매출 통계 월별 페이지
+		cont.put("/AdminAjaxSelngAnalysisMonthOk.ad", new AdminAjaxSelngAnalysisMonthOkCommand()); // admin - 매출 통계 월별 페이지
 		
-		cont.put("/AdminSellerAnalysis.ad", new AdminSellerAnalysisCommand()); // admin - 판매별 통계 분석 페이지
-		cont.put("/AdminGoodsAnalysis.ad", new AdminGoodsAnalysisCommand()); // admin - 상품별 통계 분석 페이지	
+		
+		cont.put("/AdminGoodsAnalysis.ad", new AdminGoodsAnalysisCommand()); // admin - 상품별 통계 분석 페이지
+		cont.put("/AdminAjaxGoodsAnalysQyOk.ad", new AdminAjaxGoodsAnalysisQyOkCommand()); // admin - 상품 판매량별 분석 페이지 ajax
+		cont.put("/AdminAjaxGoodsAnalysAmountOk.ad", new AdminAjaxGoodsAnalysisAmountOkCommand()); // admin - 상품 판매액합계별 통계 분석 페이지 ajax
+		
+		cont.put("/AdminSellerAnalysis.ad", new AdminSellerAnalysisCommand()); // admin - 판매자별 통계 분석 페이지
+		cont.put("/AdminAjaxSellerAnalysQyOk.ad", new AdminAjaxSellerAnalysisQyOkCommand()); // admin - 판매자 판매량별 통계 분석 페이지 ajax
+		cont.put("/AdminAjaxSellerAnalysAmountOk.ad", new AdminAjaxSellerAnalysisAmountOkCommand()); // admin - 판매자 판매액합계별 통계 분석 페이지 ajax
 		
 		
 		//오용
@@ -119,6 +136,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/logIn.do", new MainCommandLogin());
 		cont.put("/logOut.do", new MainCommandLogOut());
 		cont.put("/totalShop.do", new TotalShopCommandList());
+		cont.put("/myPage.do",new MyPageCommandList()); //mypage 
 		cont.put("/ajaxLoginCheck.do",new AjaxLoginCheck());//login Check
 		cont.put("/ajaxIdDuplicationCheck.do", new AjaxIdDuplicationCheck());//id Check
 		cont.put("/ajaxRegisterDB.do",new AjaxRegisterDB());//register DB transport

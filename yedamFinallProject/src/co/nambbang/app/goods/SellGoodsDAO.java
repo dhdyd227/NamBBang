@@ -43,6 +43,10 @@ public class SellGoodsDAO extends DAO {
 			sql.append("										LEFT OUTER JOIN GOODS_CANCL GC ON GS.SLE_ID = GC.SLE_ID ");
 			sql.append("    WHERE 1=1 ");
 			
+			//id 추가
+			if(param.get("id") != null && ((String)param.get("id")).length() > 0) {
+				sql.append("and GR.SELER_ID = '" + param.get("id") + "' ");
+			}				
 			//검색조건 추가
 			if(param.get("schSleId") != null && ((String)param.get("schSleId")).length() > 0) {
 				sql.append("and GS.SLE_ID like '" + param.get("schSleId") + "%' ");
@@ -100,6 +104,10 @@ public class SellGoodsDAO extends DAO {
 			sql.append("						LEFT OUTER JOIN GOODS_CANCL GC ON GS.SLE_ID = GC.SLE_ID ");
 			sql.append("    WHERE 1=1 ");
 			
+			//id 추가
+			if(param.get("id") != null && ((String)param.get("id")).length() > 0) {
+				sql.append("and GR.SELER_ID = '" + param.get("id") + "' ");
+			}				
 			//검색조건 추가
 			if(param.get("schSleId") != null && ((String)param.get("schSleId")).length() > 0) {
 				sql.append("and GS.SLE_ID like '" + param.get("schSleId") + "%' ");

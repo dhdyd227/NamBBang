@@ -15,6 +15,14 @@ public class ModifySellGoods implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("======== ModifySellGoods 진입!!!");
+		
+		//세션체크
+		Map<String, Object> sessionMap = SessionCheck.checkSession(request);
+		if(!(boolean)sessionMap.get("isSession") || !(boolean)sessionMap.get("isAuth")) {
+			request.setAttribute("sessionMap", sessionMap);
+			return (String)sessionMap.get("returnPage");
+		}		
+		
 		Map<String, Object> param = Utils.getParameterMap(request);
 		
 		SellGoodsDAO dao = new SellGoodsDAO();

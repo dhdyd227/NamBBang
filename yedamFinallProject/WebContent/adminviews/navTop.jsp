@@ -275,13 +275,13 @@
             <nav class="footer-nav">
               <ul>
                 <li>
-                  <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
+                  <a href="#" target="_blank">Nambbang</a>
                 </li>
                 <li>
-                  <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
+                  <a href="#" target="_blank"></a>
                 </li>
                 <li>
-                  <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
+                  <a href="#" target="_blank">Licenses</a>
                 </li>
               </ul>
             </nav>
@@ -290,7 +290,7 @@
                 ©
                 <script>
                   document.write(new Date().getFullYear())
-                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+                </script>, made with by Team LeftOver
               </span>
             </div>
           </div>
@@ -318,7 +318,7 @@
       // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
       
      
-      demo.initChartsPages();
+      //demo.initChartsPages();
     });
     
   </script>

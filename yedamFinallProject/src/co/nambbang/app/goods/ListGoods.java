@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import co.nambbang.app.common.Command;
 
@@ -16,6 +17,17 @@ public class ListGoods implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("======== ListGoods 진입!!!");
+
+		//세션체크
+		Map<String, Object> sessionMap = SessionCheck.checkSession(request);
+		if(!(boolean)sessionMap.get("isSession") || !(boolean)sessionMap.get("isAuth")) {
+			request.setAttribute("sessionMap", sessionMap);
+			return (String)sessionMap.get("returnPage");
+		}
+		
+		//세션생성
+		HttpSession session = request.getSession();
+		
 		GoodsDAO dao = new GoodsDAO();
 		Paging paging = new Paging();
 
@@ -29,6 +41,8 @@ public class ListGoods implements Command {
 			}else {
 				paging.makeBlock(1);
 			}
+			// 세션ID 설정
+			param.put("id", session.getAttribute("id"));
 			
 			// 전체건수 조회
 			int cnt = dao.selectGoodsCount(param);

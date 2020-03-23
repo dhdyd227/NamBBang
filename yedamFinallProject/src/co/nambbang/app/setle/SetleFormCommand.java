@@ -23,10 +23,7 @@ public class SetleFormCommand implements Command {
 //			String id = request.getParameter("userId");
 //			int groupno = (Integer.parseInt(request.getParameter("orderGroupNo")));
 			
-		/* dto.getSleId(request.getParameter("")); */
-			
-			
-			
+		   			
 			SetleDAO dao = new SetleDAO();
 			
 			list = dao.getSetleForm("bkTEFE996082", 579 );

@@ -68,7 +68,7 @@ jQuery(document).ready(function($)
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.do">Nam Bang</a></li>
+						<li><a href="index.html">Nam Bang</a></li>
 						<!-- <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li> -->
 						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>${sell.goodsName }</a></li>
 					</ul>
@@ -124,8 +124,10 @@ jQuery(document).ready(function($)
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 						<span style="min-width: 70px;">구매수량:</span>
 						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>							
-							<span id="q_value">1</span>							
+							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
+							
+							<span id="quantity_value">1</span>
+							
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
 						</div>
 						<!-- <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>

@@ -3,7 +3,15 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
-    
+<style>
+#btn {
+	background-color: #fe4c50;
+}
+#btn:hover {
+	background-color: #ff8c8f;
+	transition: 0.5s;
+}
+</style>    
 <div class="container">
 
 	<div class="modal fade login" id="loginModal">
@@ -37,18 +45,23 @@
 										name="userid"><br />
 									<input id="password" class="form-control" type="password" placeholder="Password"
 										name="password"><br />
-									
-									<input class="btn btn-default btn-login" type="submit" value="Login"
-										name="submit">
+									<!-- LOGIN 버튼 --> 
+									<input class="btn btn-default btn-login" id="btn" type="submit" value="Login" name="submit">  
 									</c:if>
 									
-									<c:if test ="${not empty CONECTR_SE}">
+									<c:if test ="${not empty CONECTR_SE && CONECTR_SE == 'US'}">
 									<!-- 로그아웃 화면-->
 									<!--  <input class="btn btn-default btn-login" type="submit" value="회원정보수정"
 										name="submit">
 									<br/>
 									-->
 									<input class="btn btn-default btn-login" type="button" onclick="location.href='myPage.do'" value="구매내역">
+									<br/>
+									
+									</c:if>
+									<c:if test ="${not empty CONECTR_SE && CONECTR_SE == 'SE'}">
+									
+									<input class="btn btn-default btn-login" type="button" onclick="location.href='listSellGoods.do'" value="판매내역">
 									<br/>
 									
 									</c:if>
@@ -227,8 +240,8 @@
 					<div class="forgot login-footer">
 						<span>
 							<c:if test ="${empty CONECTR_SE}">
-							<a href="boardSellRegist.do">판매자 가입</a>
-							<a href="javascript: showRegisterForm();">회원 가입</a>
+							<button type="button" class="btn btn-default btn-login" id="btn" style="display:inline; padding:5px; width:100px" onclick="location.href='boardSellRegist.do'">판매자가입</button>&nbsp;&nbsp;
+							<button type="button" class="btn btn-default btn-login" id="btn" style="display:inline; padding:5px; width:100px" onclick="javascript: showRegisterForm();">회원가입</button>
 							<!-- <a href="javascript: showFindIdForm();">아이디찾기</a>&nbsp;&nbsp;&nbsp;
 							<a href="javascript: showFindPwForm();">비번찾기</a> -->
 							

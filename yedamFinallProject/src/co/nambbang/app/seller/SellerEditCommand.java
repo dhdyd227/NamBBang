@@ -40,9 +40,10 @@ public class SellerEditCommand implements Command {
 		
 		String path = null;
 		if (n != 0) {
-			return "redirect:boardlist.do"; // 성공시 목록 보여주기
+			return "redirect:index.do"; // 성공시 목록 보여주기
 		} else {
-			return "sellerRegi/view/boardinsertfail.jsp"; // 실패시 실패 페이지 보여주기
+			
+			return "redirect:sellerEdit.do"; // 실패시 실패 페이지 보여주기
 
 		}
 	

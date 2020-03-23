@@ -60,8 +60,7 @@
 						</ul>
 						
 						<ul class="navbar_user">
-							<li><a href="#"><i class="fa fa-search"
-									aria-hidden="true"></i></a></li>
+							
 									
 							<!-- <li><a data-toggle="modal" href="javascript:void(0)"> <i
 									onclick="javascript: openLoginModal();" class="fa fa-user" aria-hidden="true"></i></a></li>

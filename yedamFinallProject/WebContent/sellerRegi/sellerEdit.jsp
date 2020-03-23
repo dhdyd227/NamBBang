@@ -33,8 +33,7 @@
 <script src="/yedamFinallProject/userjs/custom.js"></script>
  -->
 
-<script
-	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 
 <style type="text/css">
 input[type=file] {
@@ -202,6 +201,16 @@ input[type=file] {
 			frm.sname.focus();
 			return false;
 		}
+		if(frm.pw.value == ""){
+			alert("비밀 번호를 입력해주세요.")
+			frm.pw.focus();
+			return false;
+		}
+		if(frm.pw_conf.value == ""){
+			alert("비밀번호를 확인해 주세요.")
+			frm.pw_conf.focus();
+			return false;
+		}
 		if(frm.lc.value == ""){
 			alert("가게 위치를 입력해주세요.")
 			frm.lc.focus();
@@ -232,7 +241,9 @@ input[type=file] {
 			frm.intrcn.focus();
 			return false;
 		}
+		alert("판매자 정보가 수정 되었습니다.")
 		return true;
+		
 	}
 	
 	
@@ -249,8 +260,7 @@ input[type=file] {
 
 		<div class="main_slider">
 			<div align="center">
-				<form id="frm" name="frm" action="./sellerEditCommand.do"
-					method="post" onsubmit="return formCheck()">
+				<form id="frm" name="frm" action="./sellerEditCommand.do" method="post" onsubmit="return formCheck()">
 					<br>
 					<br>
 					<div>
@@ -320,9 +330,8 @@ input[type=file] {
 					</div>
 					<div class="mt-3">
 						<div class="input_wrap">
-							<input class="btn btn-primary ml-1" type="button" value="사진변경"
-								name="selectFile" onclick="fileUploadAction();" />&nbsp;&nbsp; <input
-								type="file" id="input_imgs" multiple />
+							<input class="btn btn-primary ml-1" type="button" value="사진변경" name="selectFile" onclick="fileUploadAction();" />&nbsp;&nbsp;
+							<input type="file" id="input_imgs" multiple />
 							<button class="btn btn-primary ml-1" type="submit">수 정</button>
 							&nbsp;&nbsp;
 						</div>

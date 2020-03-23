@@ -32,13 +32,13 @@
 						class='fab fa-instagram' style='font-size: 36px'></i>
 				</div>
 				<div
-					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">회원정보</div>
+					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs" style="border:none;">회원정보</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4 text-center cell-med">대표자 : 권 오 용</div>
 				<div class="col-md-4 text-center cell-tall"></div>
 				<div
-					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">사장님사이트</div>
+					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs" style="border:none;">사장님사이트</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4 text-center cell-med">사업자 번호:
@@ -47,15 +47,14 @@
 					<h5>고객 센터 : 1588-8700</h5>
 				</div>
 				<div
-					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">입점
-					문의</div>
+					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs" style="border:none;">입점문의</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4 text-center cell-med">이메일:
 					cs@nambbang.co.kr</div>
 				<div class="col-md-4 text-center cell-tall"></div>
 				<div
-					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs">주문/결제</div>
+					class="col-md-4 text-center cell-med btn btn-outline-warning btn-default btn-xs" style="border:none;">주문/결제</div>
 			</div>
 			</br>
 			<div class="row">

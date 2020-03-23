@@ -69,26 +69,26 @@
 								<form id ="registerForm"  method="post" accept-charset="UTF-8">
 									<div class="input-group">
 										<input id="userid" class="form-control" type="text" placeholder="id"
-											name="userid" onkeyup  ="isIdDuplicationSame()" value="asd">
+											name="userid" onkeyup  ="isIdDuplicationSame()" value="">
 										<span class="input-group-btn">
 											<button id="idDuplication" class="btn btn-success" type="button"
 												style="height: 46px;" onclick="location.href='javascript: duplicationCheck();'" value="unCheck">중복확인</button>
 										</span>
 									</div>
 									<input id="username" class="form-control" type="text" placeholder="name"
-										name="username" value="asd">
+										name="username" value="">
 									<input id="email" class="form-control" type="email" placeholder="Email(abc@naver.com)"
-										name="email" onkeyup  ="registerEmailCheck()" value="asd@naver.com">
+										name="email" onkeyup  ="registerEmailCheck()" value="">
 									<input id="password" class="form-control" type="password" placeholder="Password"
-										name="password" onkeyup  ="isPwSame()" value="asd">
+										name="password" onkeyup  ="isPwSame()" value="">
 									<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" 
-										name="password_confirmation" onkeyup  ="isPwSame()" value="asd">
+										name="password_confirmation" onkeyup  ="isPwSame()" value="">
 
 									<input id="usertel" class="form-control" type="tel" placeholder="phone(ex)010-0000-0000)"
-										name="usertel" onkeyup="registerTelCheck()" value="010-1111-1111">
+										name="usertel" onkeyup="registerTelCheck()" value="">
 
 									<input id="birth" class="form-control" type="text" placeholder="birthday(ex)2000-01-01)"
-										name="birth" onkeyup="birthdayDateCheck()" value="1111-11-11">
+										name="birth" onkeyup="birthdayDateCheck()" value="">
 									
 									<br />
 									<div>
@@ -117,7 +117,10 @@
 								<span id="registerCongratulation">
 								<h3></h3>
 								</span><br /> 
+								<div class="row justify-content-center">
+								
 								<input class="btn btn-danger" type="button" onclick="location.href='javascript: createCheckForm();'" value="홈" name="goHome">
+								</div>
 								</form>
 							</div>
 						</div>

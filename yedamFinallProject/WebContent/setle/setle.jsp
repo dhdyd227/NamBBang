@@ -67,6 +67,18 @@
             var IMP = window.IMP; // 생략가능
             IMP.init('imp73961880'); //"가맹점 식별코드"를 사용
 
+            btncancel.addEventListener("click", function () {
+
+                $.ajax({
+                    url: "ajaxSetleCancel.do", 
+                    type: 'POST',
+                    data: {
+                        order_group_no: document.getElementById('groupNo').innerHTML //주문그룹번호
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    }
+                })                
+            });
+
             btn.addEventListener("click", function () {
                 var phon = document.getElementById('phon')
 
@@ -88,7 +100,7 @@
                         if (rsp.success) {
                             //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 
-                           // [2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                            // [2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                             var everythings_fine = rsp; //true, false로 전달
                             if (everythings_fine) {
                                 var msg = '결제가 완료되었습니다.';
@@ -119,7 +131,7 @@
                                         ,
                                         order_tel_no: document.getElementById('phon').value
                                         //기타 필요한 데이터가 있으면 추가 전달
-                                    } 
+                                    }
                                 }).done(function (data) {
                                     if (data == 'true') {
                                         alert('결제가 완료되었습니다.');
@@ -140,7 +152,7 @@
 
                             }
 
-                           // 성공시 이동할 페이지
+                            // 성공시 이동할 페이지
                         } else {
                             var msg = '결제에 실패하였습니다.';
                             msg += '에러내용 : ' + rsp.error_msg;
@@ -242,7 +254,7 @@
                         </div>
                         <div class="col-md-5 mb-3">
                             원 &nbsp;&nbsp;&nbsp; / &nbsp;&nbsp;&nbsp; <span id="totalMlg" style="color: crimson;">
-                               ${mlg}  </span><span>원</span>
+                                ${mlg} </span><span>원</span>
                         </div>
                     </div>
 
@@ -297,6 +309,8 @@
                     <div class="input-group">
                         <hr class="mb-4">
                         <button id="btn" name="btn" class="btn btn-primary btn-lg btn-block" type="button">결제하기</button>
+                        <button id="btncancel" name="btncancel" class="btn btn btn-danger btn-lg btn-block"
+                            type="button">주문 취소</button>
                     </div>
 
                 </div>

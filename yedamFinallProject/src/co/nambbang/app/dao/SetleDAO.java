@@ -124,5 +124,27 @@ public class SetleDAO extends DAO {
 		return orderGroupNo;
 	}
 	
+	public void deleteOrders(String id,int orderId) {
+		// 주문삭제, 주문그룹삭제
+		
+		try {
+			conn.setAutoCommit(false);
+
+			cstmt = conn.prepareCall("{call order_group_delete_pr(?,?)}");
+			cstmt.setString(1, id);
+			cstmt.setInt(2, orderId);
+			cstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
 }

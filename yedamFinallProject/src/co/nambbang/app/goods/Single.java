@@ -28,7 +28,7 @@ public class Single implements Command {
 		if(sell != null && sell.getPhotoGroupId() != null && sell.getPhotoGroupId().length() > 0) {
 			photoList = goodsDAO.selectPhotoList(sell.getPhotoGroupId());
 		}
-
+		
 		request.setAttribute("sell", sell);
 		request.setAttribute("photoList", photoList);
 		

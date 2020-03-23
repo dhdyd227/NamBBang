@@ -49,6 +49,12 @@ jQuery(document).ready(function($)
 		});
 	}	
 });
+
+function q_valueChk(){
+	var q_val;
+	q_val = document.getElementById("quantity_value").innerHTML;	
+	document.getElementById("q_value").value = q_val;
+}
 </script>
 </head>
 
@@ -103,6 +109,7 @@ jQuery(document).ready(function($)
 					<div class="product_details_title">
 						<h2>${sell.goodsName }</h2>
 						<input type="hidden" id="g_name" name="g_name" value="${sell.goodsName }">
+						<input type="hidden" id="s_id" name="s_id" value="${sell.sleId }">
 						<p>${fn:replace(sell.goodsInfo, newLineChar, "<br/>")  }</p>
 					</div>
 					<div class="original_price">${sell.netprc } 원</div>
@@ -124,11 +131,10 @@ jQuery(document).ready(function($)
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 						<span style="min-width: 70px;">구매수량:</span>
 						<div class="quantity_selector">
-							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
-							
-							<span id="quantity_value">1</span>
-							
+							<span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>							
+							<span id="quantity_value">1</span>							
 							<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
+							<input type="hidden" id="q_value" name="q_value" value="q_valueChk()">
 						</div>
 						<!-- <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div> -->						

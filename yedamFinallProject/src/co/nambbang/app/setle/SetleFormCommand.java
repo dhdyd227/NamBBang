@@ -20,20 +20,25 @@ public class SetleFormCommand implements Command {
 			throws ServletException, IOException {
 			SetleFormDTO dto = new SetleFormDTO();
 			List<SetleFormDTO> list = new ArrayList<SetleFormDTO>();
-//			String id = request.getParameter("userId");
-//			int groupno = (Integer.parseInt(request.getParameter("orderGroupNo")));
+			HttpSession session = request.getSession();
 			
-		   			
+//			int groupno = (Integer.parseInt(request.getParameter("orderGroupNo")));
+//		   	dto.setGoodsName(request.getParameter("g_name"));
+			
+			// user id, 판매 id, 구매수량 
+			String id = (String)session.getAttribute("id"); 
+			dto.setSleId(request.getParameter("s_id"));
+		   	dto.setOrderQy(Integer.parseInt(request.getParameter("q_value")));
+		   	
+			
+			
+			
 			SetleDAO dao = new SetleDAO();
 			
 			list = dao.getSetleForm("bkTEFE996082", 579 );
 	
 			request.setAttribute("list", list);
-			request.setAttribute("groupno", 579);  //("groupno", groupno);
-			
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("mlg", 2300);
+			request.setAttribute("groupno", 579);  //("groupno", groupno);						
 			
 		return "setle/setle.jsp";
 	}

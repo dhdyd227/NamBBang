@@ -1,10 +1,13 @@
 package co.nambbang.app.dao;
 
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 
 import co.nambbang.app.dto.CertificationDto;
 import co.nambbang.app.dto.LoginInfoDto;
+import co.nambbang.app.dto.SetleDto;
 import co.nambbang.app.dto.UsersDto;
+import oracle.jdbc.OracleTypes;
 
 public class UsersDao extends DAO {
 	//email 로 id 값 가져오기
@@ -241,4 +244,39 @@ public class UsersDao extends DAO {
 		close();
 		return conectrSe;
 	}
+	
+	
+	public int getMlg(String id) {
+		CallableStatement cstmt;
+		// 결재 값을 주고 받는 메소드
+		int result = 0;
+
+		try {
+			conn.setAutoCommit(false);
+
+			cstmt = conn.prepareCall("{call mlg_select_pr(?,?)}");
+			cstmt.setString(1, id);						
+			cstmt.registerOutParameter(2, OracleTypes.NUMBER);
+			cstmt.execute();
+
+			result = cstmt.getInt(2);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			close();
+		}
+
+		return result;
+	}
+	
+	
+	
+	
+	
 }

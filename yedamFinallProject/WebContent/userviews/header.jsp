@@ -88,10 +88,11 @@
 							<%=sa%>
 							<%="안녕하세요"%>
 							
-							<li class="checkout"><a href="myPage.do"> <i
-									class="fa fa-shopping-cart" aria-hidden="true"></i> 
+							<!-- <li class="checkout">
+							<a href="myPage.do"> 
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i> 
 							</a>
-							</li>
+							</li> -->
 						</ul>
 						<div class="hamburger_container">
 							<i class="fa fa-bars" aria-hidden="true"></i>

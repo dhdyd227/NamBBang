@@ -92,8 +92,7 @@
 							%>
 									
 							<%=ss%>
-							<%=sa%>
-							<%="안녕하세요"%>
+														
 							</c:if>
 							<!-- <li class="checkout">
 							<a href="myPage.do"> 

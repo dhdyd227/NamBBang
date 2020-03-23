@@ -131,7 +131,7 @@
 			<div class="col">
 
 				<table class="table table-bordered">
-					<tbody>
+					<tbody align="center">
 						<tr>
 							<td rowspan="10" style="width: 20%;">
 								<div class="slider">
@@ -153,11 +153,11 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="table-secondary">상품ID</th>
+							<th class="table-secondary" style="width:10%">상품ID</th>
 							<td>${goodsDetail.goodsId }</td>
 						</tr>						
 						<tr>
-							<th class="table-secondary" style="width: 20%;">상품명</th>
+							<th class="table-secondary">상품명</th>
 							<td class="success">${goodsDetail.goodsName }</td>
 						</tr>
 						<tr>
@@ -184,16 +184,17 @@
 							<th class="table-secondary">제조일</th>
 							<td>
 								<div class="form-inline form-group">
-									<input type="text" class="form-control" id="mnfctur_de" name="mnfctur_de" readonly="readonly"/>
+									<input type="text" class="form-control" id="mnfctur_de" name="mnfctur_de" style="width:167px" readonly="readonly"/>
+									<br>&nbsp;&nbsp;&nbsp;									
 									<select class="form-control" id="mnfctur_hh" name="mnfctur_hh">
 										<%=CommonUtils.printHourList()%>
-									</select>
+									</select>&nbsp;&nbsp;
 									<select class="form-control" id="mnfctur_mm" name="mnfctur_mm">
 										<%=CommonUtils.printMinuteList()%>	
 									</select>
-									<select class="form-control" id="mnfctur_ss" name="mnfctur_ss">
+									<%-- <select class="form-control" id="mnfctur_ss" name="mnfctur_ss">
 										<%=CommonUtils.printSecondList()%>	
-									</select>
+									</select> --%>
 								</div>
 							</td>
 						</tr>
@@ -203,14 +204,14 @@
 								<div class="form-inline form-group">
 								<select class="form-control" id="sle_begin_time_hh" name="sle_begin_time_hh">
 									<%=CommonUtils.printHourList()%>								
-								</select>
+								</select>&nbsp;&nbsp;
 								<select class="form-control" id="sle_begin_time_mm" name="sle_begin_time_mm">
 									<%=CommonUtils.printMinuteList()%>	
 								</select>
-								-
+								~
 								<select class="form-control" id="sle_end_time_hh" name="sle_end_time_hh">
 									<%=CommonUtils.printHourList()%>								
-								</select>
+								</select>&nbsp;&nbsp;
 								<select class="form-control" id="sle_end_time_mm" name="sle_end_time_mm">
 									<%=CommonUtils.printMinuteList()%>	
 								</select>

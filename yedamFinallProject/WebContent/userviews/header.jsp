@@ -84,15 +84,17 @@
 								<li><a data-toggle="modal" href="" onclick="javascript: openLogoutModal();"> <i class="fa fa-user"
 									  aria-hidden="true" ></i></a></li>
 							</c:if>
+							<c:if test ="${not empty CONECTR_SE}">
 							<%
 								String ss = (String) session.getAttribute("id");
 								String sa = (String) session.getAttribute("CONECTR_SE");		
 			
 							%>
+									
 							<%=ss%>
 							<%=sa%>
 							<%="안녕하세요"%>
-							
+							</c:if>
 							<!-- <li class="checkout">
 							<a href="myPage.do"> 
 							<i class="fa fa-shopping-cart" aria-hidden="true"></i> 

@@ -119,7 +119,7 @@
                                         ,
                                         order_tel_no: document.getElementById('phon').value
                                         //기타 필요한 데이터가 있으면 추가 전달
-                                    } 
+                                    }
                                 }).done(function (data) {
                                     if (data == 'true') {
                                         alert('결제가 완료되었습니다.');

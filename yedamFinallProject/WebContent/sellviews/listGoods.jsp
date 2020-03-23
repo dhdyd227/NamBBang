@@ -103,7 +103,7 @@
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="index.do">Home</a></li>
 						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>상품목록</a></li>
 					</ul>
 				</div>
@@ -145,8 +145,8 @@
 					
 				<table class="table table-hover table-bordered results mt-3 align-items-center">
 					<thead class="thead-light">
-						<tr class="text-center">
-							<th style="width: 10%"></th>
+						<tr class="text-center">							
+							<th width="10%">상품 이미지</th>
 							<th>상품ID</th>
 							<th>상품분류</th>
 							<th>상품명</th>
@@ -154,7 +154,7 @@
 							<th>등록일시</th>
 							<th>판매자</th>
 							<th>판매상태</th>
-							<th></th>
+							<th>상태 선택</th>
 					  	</tr>
 					</thead>
 					<tbody>

@@ -197,27 +197,25 @@
 				</div> -->
 				<div class="form-inline form-group">
 					<label for="goods_name" class="col-sm-2 control-label">상품명</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="text" class="form-control" id="goods_name" name="goods_name"/>
 					</div>
-				</div>
-				<div class="form-inline form-group">
 					<label for="netprc" class="col-sm-2 control-label">상품가격</label>
-					<div class="col-sm-10">
+					<div class="col-sm-4">
 						<input type="text" class="form-control" id="netprc" name="netprc"/>
 					</div>
-				</div>
+				</div>				
 				<div class="form-inline form-group">
 					<label for="goods_info" class="col-sm-2 control-label">상품설명</label>
 					<div class="col-sm-10">
-						<textarea name="goods_info" id="goods_info" class="form-control col-sm-7" rows="5"></textarea>
+						<textarea name="goods_info" id="goods_info" class="form-control" rows="5" cols="90" style="max-width:100%"></textarea>
 					</div>
 				</div>
 				
  				<div class="form-inline form-group">
  					<label for="goods_info" class="col-sm-2 control-label">상품구분</label>
 					<div class="col-sm-10">
-						<div class="row">
+						<div class="row pr-3">
 						<label><input id="goods_cl" class="form-control" type="radio" name="goods_cl" value="식빵류">식빵류</label>
 						<label><input id="goods_cl" class="form-control ml-3" type="radio" name="goods_cl" value="과자빵류">과자빵류</label>
 						<label><input id="goods_cl" class="form-control ml-3" type="radio" name="goods_cl" value="조리빵류">조리빵류</label>

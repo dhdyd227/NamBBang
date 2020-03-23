@@ -163,7 +163,7 @@ function registerClick() {
 	$.post(url, data, callback);
 	
 	console.log($('#registerCongratulation'));
-	$('#registerCongratulation')[0].innerHTML="<h3>"+registerForm.userid.value+"<br>님 회원 가입을 축하합니다 </h3>";
+	$('#registerCongratulation')[0].innerHTML=registerForm.userid.value+"<br> 님 회원 가입을 축하합니다";
 	showMemberForm();
 	registerForm.userid.value = "";
 	registerForm.username.value = "";

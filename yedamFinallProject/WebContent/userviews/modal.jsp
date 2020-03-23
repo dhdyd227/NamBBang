@@ -81,37 +81,37 @@
 								<!-- <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">-->
 								<form id ="registerForm"  method="post" accept-charset="UTF-8">
 									<div class="input-group">
-										<input id="userid" class="form-control" type="text" placeholder="id"
-											name="userid" onkeyup  ="isIdDuplicationSame()" value="asd">
+										<input id="userid" class="form-control" type="text" placeholder="아이디를 입력해주세요."
+											name="userid" onkeyup  ="isIdDuplicationSame()" value="">
 										<span class="input-group-btn">
 											<button id="idDuplication" class="btn btn-success" type="button"
 												style="height: 46px;" onclick="location.href='javascript: duplicationCheck();'" value="unCheck">중복확인</button>
 										</span>
 									</div>
-									<input id="username" class="form-control" type="text" placeholder="name"
-										name="username" value="asd">
-									<input id="email" class="form-control" type="email" placeholder="Email(abc@naver.com)"
-										name="email" onkeyup  ="registerEmailCheck()" value="asd@naver.com">
-									<input id="password" class="form-control" type="password" placeholder="Password"
-										name="password" onkeyup  ="isPwSame()" value="asd">
-									<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" 
-										name="password_confirmation" onkeyup  ="isPwSame()" value="asd">
+									<input id="username" class="form-control" type="text" placeholder="이름을 입력해주세요."
+										name="username" value="">
+									<input id="email" class="form-control" type="email" placeholder="이메일 abc@abc.com"
+										name="email" onkeyup  ="registerEmailCheck()" value="">
+									<input id="password" class="form-control" type="password" placeholder="비밀번호를 입력하세요."
+										name="password" onkeyup  ="isPwSame()" value="">
+									<input id="password_confirmation" class="form-control" type="password" placeholder="비밀번호를 확인해주세요." 
+										name="password_confirmation" onkeyup  ="isPwSame()" value="">
 
-									<input id="usertel" class="form-control" type="tel" placeholder="phone(ex)010-0000-0000)"
-										name="usertel" onkeyup="registerTelCheck()" value="010-1111-1111">
+									<input id="usertel" class="form-control" type="tel" placeholder="010-0000-0000"
+										name="usertel" onkeyup="registerTelCheck()" value="">
 
-									<input id="birth" class="form-control" type="text" placeholder="birthday(ex)2000-01-01)"
-										name="birth" onkeyup="birthdayDateCheck()" value="1111-11-11">
+									<input id="birth" class="form-control" type="text" placeholder="2000-01-01"
+										name="birth" onkeyup="birthdayDateCheck()" value="">
 									
 									<br />
 									<div>
 									<label><input id="gender"  type="radio" name="gender"
-											value="M" checked="checked"> Men </label>
+											value="M" checked="checked"> 남자 </label>
 									<br />
 									<label><input id="gender"  type="radio" name="gender"
-											value="W"> Women</label>
+											value="W"> 여자 </label>
 
-									<input class="btn btn-default btn-register" type="button" value="Create account"
+									<input class="btn btn-default btn-register" id="btn" type="button" value="가입 신청"
 										name="submit" onclick="location.href='javascript: registerClick();'" >
 									</div>
 								</form>
@@ -255,7 +255,7 @@
 					
 
 					<div class="forgot register-footer" style="display:none">
-						<span>Already have an account?</span>
+						<span>이미 회원이신가요?</span>
 						<a href="javascript: showLoginForm();">Login</a>
 					</div>
 					<!-- 아이디 가입축하  -->

@@ -14,13 +14,36 @@
 <script src="/yedamFinallProject/userjs/jquery-3.2.1.min.js"></script>
 <script src="/yedamFinallProject/userstyles/bootstrap4/popper.js"></script>
 <script src="/yedamFinallProject/userstyles/bootstrap4/bootstrap.min.js"></script>
-<script
-	src="/yedamFinallProject/userplugins/Isotope/isotope.pkgd.min.js"></script>
-<script
-	src="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/yedamFinallProject/userplugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="/yedamFinallProject/userplugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="/yedamFinallProject/userplugins/easing/easing.js"></script>
 <script src="/yedamFinallProject/userjs/custom.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2084a98791b71389462cf829531808b2&libraries=services,clusterer,drawing"></script>
+<script>
+$(function(){
+	getLocation();
+	
+});
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+	var us_x = position.coords.latitude;
+	var us_y = position.coords.longititude;
+  console.log("Latitude: " + position.coords.latitude);
+  console.log("Longitude: " + position.coords.longitude);
+}
+
+
+
+
+</script>
 </head>
 
 <body>
@@ -44,27 +67,26 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img class="d-block w-100" src="./userimages/a1.jpg"
-									height="500px" alt="First slide">
+								<img class="d-block w-100" src="./userimages/breads1.png"
+									height="500px" alt="First slide" style="border-radius:20px">
 								<div class="carousel-caption d-none d-md-block"></div>
 							</div>
 							<div class="carousel-item">
-								<img class="d-block w-100" src="./userimages/a2.jpg"
-									height="500px" alt="Second slide">
+								<img class="d-block w-100" src="./userimages/breads2.png"
+									height="500px" alt="Second slide" style="border-radius:20px">
 
 							</div>
 							<div class="carousel-item">
-								<img class="d-block w-100" src="./userimages/a3.jpg"
-									height="500px" alt="Third slide">
+								<img class="d-block w-100" src="./userimages/breads3.jpg"
+									height="500px" alt="Third slide" style="border-radius:20px">
 
 							</div>
 						</div>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators"
-							role="button" data-slide="prev"> <span
-							class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-							class="sr-only">Previous</span>
-						</a> <a class="carousel-control-next"
-							href="#carouselExampleIndicators" role="button" data-slide="next">
+						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> 
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a> 
+						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>
@@ -87,20 +109,11 @@
 					<div class="row align-items-center">
 						<div class="col text-center">
 							<div class="new_arrivals_sorting">
-								<ul
-									class="arrivals_grid_sorting clearfix button-group filters-button-group">
-									<li
-										class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked"
-										data-filter="*">all</li>
-									<li
-										class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
-										data-filter=".식빵류">식빵류</li>
-									<li
-										class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
-										data-filter=".과자빵류">과자빵류</li>
-									<li
-										class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center"
-										data-filter=".조리빵류">조리빵류</li>
+								<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
+									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".식빵류">식빵류</li>
+									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".과자빵류">과자빵류</li>
+									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".조리빵류">조리빵류</li>
 								</ul>
 							</div>
 						</div>
@@ -129,11 +142,15 @@
 												<div class="product_price">
 													${list.slePc}원<span>${list.netPrc }원</span>
 												</div>
+												<br>
+												<h8 class="product_name">
+													${list.cmpnm }
+												</h8>
 											</div>
 										</div>
-										<!-- <div class="red_button add_to_cart_button">
-											<a href="#">add to cart</a>
-										</div> -->
+										<div class="red_button add_to_cart_button">											
+											<p style="color:white; padding-top:7px">${list.mtlty_lc }</p>
+										</div>
 									</div>
 
 								</c:forEach>
@@ -142,7 +159,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>				
 			</div>
 
 			<!-- Footer -->

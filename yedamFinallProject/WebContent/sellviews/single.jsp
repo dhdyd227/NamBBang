@@ -27,7 +27,8 @@
 <script src="/yedamFinallProject/userplugins/easing/easing.js"></script>
 <script src="/yedamFinallProject/userplugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 <script src="/yedamFinallProject/userjs/single_custom.js"></script>
-
+<!--지도 api script -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2084a98791b71389462cf829531808b2&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
 jQuery(document).ready(function($)
 {
@@ -56,7 +57,61 @@ function FormChk(){
 	document.getElementById("q_value").value = q_val;	
 	
 }
+$(function(){
+	
+	
+	var container = document.getElementById('SelerLocation'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('${seller.lc}', function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	        map.setCenter(coords);
+	     }
+	     
+	     var iwContent = '<div style="padding:5px;">${seller.sname}</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	     iwPosition = coords //인포윈도우 표시 위치입니다
+
+	 // 인포윈도우를 생성합니다
+	 var infowindow = new kakao.maps.InfoWindow({
+	     position : iwPosition, 
+	     content : iwContent 
+	    
+	    
+	 });
+	     infowindow.open(map, marker); 
+	});	
+	
+});
+
 </script>
+<style>
+#btn {
+	background-color: #fe4c50;
+}
+#btn:hover {
+	background-color: #cc272a;
+	transition: 0.5s;
+}
+</style>
+ 
 </head>
 
 <body>
@@ -141,7 +196,7 @@ function FormChk(){
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div> -->						
 					</div>
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<input type="submit" value="구매">
+						<input type="submit" id="btn" name="btn" class="btn btn-default btn-login" style="color:white;" value="구매">
 					</div>
 				</div>
 			</div>			
@@ -151,167 +206,32 @@ function FormChk(){
 
 
 	<!-- Tabs -->
-	<!-- <div class="tabs_section_container">
+	<div class="tabs_section_container">
 
 		<div class="container">
 			<div class="row">
 				<div class="col">
 					<div class="tabs_container">
 						<ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
-							<li class="tab active" data-active-tab="tab_1"><span>Description</span></li>
-							<li class="tab" data-active-tab="tab_2"><span>Additional Information</span></li>
-							<li class="tab" data-active-tab="tab_3"><span>Reviews (2)</span></li>
+							<li class="tab active" data-active-tab="tab_1"><span>판매점 위치</span></li>
+							<!-- <li class="tab" data-active-tab="tab_2"><span>Additional Information</span></li>
+							<li class="tab" data-active-tab="tab_3"><span>Reviews (2)</span></li> -->
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">
-
-					Tab Description
-
-					<div id="tab_1" class="tab_container active">
-						<div class="row">
-							<div class="col-lg-5 desc_col">
-								<div class="tab_title">
-									<h4>Description</h4>
-								</div>
-								<div class="tab_text_block">
-									<h2>Pocket cotton sweatshirt</h2>
-									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-								</div>
-								<div class="tab_image">
-									<img src="/yedamFinallProject/sellviews/images/desc_1.jpg" alt="">
-								</div>
-								<div class="tab_text_block">
-									<h2>Pocket cotton sweatshirt</h2>
-									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-								</div>
-							</div>
-							<div class="col-lg-5 offset-lg-2 desc_col">
-								<div class="tab_image">
-									<img src="/yedamFinallProject/sellviews/images/desc_2.jpg" alt="">
-								</div>
-								<div class="tab_text_block">
-									<h2>Pocket cotton sweatshirt</h2>
-									<p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-								</div>
-								<div class="tab_image desc_last">
-									<img src="/yedamFinallProject/sellviews/images/desc_3.jpg" alt="">
-								</div>
-							</div>
-						</div>
-					</div>
-
-					Tab Additional Info
-
-					<div id="tab_2" class="tab_container">
-						<div class="row">
-							<div class="col additional_info_col">
-								<div class="tab_title additional_info_title">
-									<h4>Additional Information</h4>
-								</div>
-								<p>COLOR:<span>Gold, Red</span></p>
-								<p>SIZE:<span>L,M,XL</span></p>
-							</div>
-						</div>
-					</div>
-
-					Tab Reviews
-
-					<div id="tab_3" class="tab_container">
-						<div class="row">
-
-							User Reviews
-
-							<div class="col-lg-6 reviews_col">
-								<div class="tab_title reviews_title">
-									<h4>Reviews (2)</h4>
-								</div>
-
-								User Review
-
-								<div class="user_review_container d-flex flex-column flex-sm-row">
-									<div class="user">
-										<div class="user_pic"></div>
-										<div class="user_rating">
-											<ul class="star_rating">
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-											</ul>
-										</div>
-									</div>
-									<div class="review">
-										<div class="review_date">27 Aug 2016</div>
-										<div class="user_name">Brandon William</div>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									</div>
-								</div>
-
-								User Review
-
-								<div class="user_review_container d-flex flex-column flex-sm-row">
-									<div class="user">
-										<div class="user_pic"></div>
-										<div class="user_rating">
-											<ul class="star_rating">
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-											</ul>
-										</div>
-									</div>
-									<div class="review">
-										<div class="review_date">27 Aug 2016</div>
-										<div class="user_name">Brandon William</div>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-									</div>
-								</div>
-							</div>
-
-							Add Review
-
-							<div class="col-lg-6 add_review_col">
-
-								<div class="add_review">
-									<form id="review_form" action="post">
-										<div>
-											<h1>Add Review</h1>
-											<input id="review_name" class="form_input input_name" type="text" name="name" placeholder="Name*" required="required" data-error="Name is required.">
-											<input id="review_email" class="form_input input_email" type="email" name="email" placeholder="Email*" required="required" data-error="Valid email is required.">
-										</div>
-										<div>
-											<h1>Your Rating:</h1>
-											<ul class="user_star_rating">
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star" aria-hidden="true"></i></li>
-												<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-											</ul>
-											<textarea id="review_message" class="input_review" name="message"  placeholder="Your Review" rows="4" required data-error="Please, leave us a review."></textarea>
-										</div>
-										<div class="text-left text-sm-right">
-											<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
-										</div>
-									</form>
-								</div>
-
-							</div>
-
-						</div>
-					</div>
-
+				<div class="col-12" id="SelerLocation" name="SelerLocation" style="width:500px;height:400px; border-radius: 10px">					
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-12" id="LocationRoadview" name="LocationRoadview" style="width:500px;height:400px; border-radius: 10px">					
 				</div>
 			</div>
 		</div>
 
-	</div> -->
+	</div> 
 
 
 	<!-- Benefit(맨밑에 주의사항) -->

@@ -1,10 +1,12 @@
 package co.nambbang.app.goods;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import co.nambbang.app.dao.DAO;
+import co.nambbang.app.dto.sellerDTO;
 
 public class SellGoodsDAO extends DAO {
 	//상품목록
@@ -131,7 +133,30 @@ public class SellGoodsDAO extends DAO {
 		}
 		return result;
 	}		
-	
+	public sellerDTO selectSelerLocation(String sleId) {
+		sellerDTO sDto = new sellerDTO();
+		
+		String sql = "select s.mtlty_lc, s.cmpnm " + 
+				"from goods_sle gs, goods_regist gr, seler s " + 
+				"where gs.goods_id = gr.goods_id " + 
+				"and gr.seler_id = s.seler_id " + 
+				"and gs.sle_id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sleId);			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sDto = new sellerDTO();
+				sDto.setSname(rs.getString("cmpnm"));
+				sDto.setLc(rs.getString("mtlty_lc"));
+			}
+		} catch (SQLException e) { 
+			e.printStackTrace();
+		}
+				
+		return sDto;
+	}
 	//상품상세
 	public SellGoodsDTO selectSellGoodsDetail(String sleId) {
 		return this.selectSellGoodsDetail(sleId, null);

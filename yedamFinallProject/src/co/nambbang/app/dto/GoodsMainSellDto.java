@@ -11,6 +11,10 @@ public class GoodsMainSellDto {
 	private Timestamp sleEndTime; //판매종료 시간
 	private String goodsCl; //카테고리
 	private int netPrc;  //빵판매가격
+	private String mtlty_lc; // 판매점포 주소 
+	private String cmpnm; // 판매점포명
+	
+	
 	
 	//빵이미지 가져오기
 	private byte[] photoFile;
@@ -78,7 +82,17 @@ public class GoodsMainSellDto {
 	public void setPhotoFile(byte[] photoFile) {
 		this.photoFile = photoFile;
 	}
-
-
+	public String getMtlty_lc() {
+		return mtlty_lc;
+	}
+	public void setMtlty_lc(String mtlty_lc) {
+		this.mtlty_lc = mtlty_lc;
+	}
+	public String getCmpnm() {
+		return cmpnm;
+	}
+	public void setCmpnm(String cmpnm) {
+		this.cmpnm = cmpnm;
+	}
 	
 }

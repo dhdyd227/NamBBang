@@ -62,8 +62,8 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-12 text-center text-white cell-med bg-warning">
-					<h6>© 2020&nbsp;by NamBBang.&nbsp;All rights&nbsp;reserved.</h6>
+				<div class="col-md-12 text-center cell-med" style="background-color:#fe4c50">
+					<h6 style="color:white">© 2020&nbsp;by NamBBang.&nbsp;All rights&nbsp;reserved.</h6>
 				</div>
 			</div>
 		</div>

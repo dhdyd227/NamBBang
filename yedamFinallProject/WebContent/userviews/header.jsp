@@ -50,7 +50,7 @@
 					<nav class="navbar">
 						<ul class="navbar_menu">
 							<li><a href="/yedamFinallProject/index.do">Home</a></li>
-							<li><a href="./totalShop.do">Total Shop</a></li>
+							<!-- <li><a href="./totalShop.do">Total Shop</a></li> -->
 							
 							<c:if test ="${CONECTR_SE eq 'SE'}">
 							<li><a href="./listGoods.do">상품 등록</a></li>

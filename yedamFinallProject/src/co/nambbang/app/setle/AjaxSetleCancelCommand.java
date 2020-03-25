@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import co.nambbang.app.common.Command;
 import co.nambbang.app.dao.SetleDAO;
 
-public class ajaxSetleCancelCommand implements Command {
+public class AjaxSetleCancelCommand implements Command {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)

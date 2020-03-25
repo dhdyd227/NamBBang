@@ -20,6 +20,7 @@ public class SellerIdCheck implements Command {
 		
 		int Check = dao.idDuplicationCheck(request.getParameter("sid"));
 		System.out.println("---"+request.getParameter("sid"));
+		System.out.println("check  "+Check);
 		return "ajax:"+Check;
 		
 		//request.setAttribute("dto", dto);

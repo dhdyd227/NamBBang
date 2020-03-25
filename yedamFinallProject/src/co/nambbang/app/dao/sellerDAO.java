@@ -1,12 +1,14 @@
 package co.nambbang.app.dao;
 
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import co.nambbang.app.dto.sellerDTO;
 
 public class sellerDAO extends DAO {
-
+	CallableStatement cstmt;
+	
 	public int insert(sellerDTO dto) {
 		int n = 0;
 		String sql = "insert into seler (SELER_ID, CMPNM, MTLTY_LC, BPRPRR, SELLER_TELNO, BSN_BEGIN_TIME, BSN_CLOS_TIME, SNS_ADRES, INTRCN_SNTNC) "
@@ -246,4 +248,26 @@ public class sellerDAO extends DAO {
 		return r;
 	}
 
+	// 판매자 가게정보 위치 저장
+	public void insertSelerLcInfo(String SelerId, double x ,double y) {
+		
+		try {
+			conn.setAutoCommit(false);
+
+			cstmt = conn.prepareCall("{call seler_lcinfo_inser_pr(?,?,?)}");
+			cstmt.setString(1, SelerId);
+			cstmt.setDouble(2, x);
+			cstmt.setDouble(3, y);
+			cstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

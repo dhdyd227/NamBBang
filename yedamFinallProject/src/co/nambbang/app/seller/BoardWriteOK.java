@@ -1,11 +1,7 @@
 package co.nambbang.app.seller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +15,16 @@ public class BoardWriteOK implements Command{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int n = 0;
+		
+		
+		
 		sellerDTO dto = new sellerDTO();
 		sellerDAO dao = new sellerDAO();
 		
-		dto.setSid(request.getParameter("sid"));
+		double x = Double.parseDouble(request.getParameter("x"));
+		double y = Double.parseDouble(request.getParameter("y"));
+		String SelerId = request.getParameter("sid");
+		dto.setSid(SelerId);
 		dto.setPw(request.getParameter("pw"));
 		dto.setOpen(request.getParameter("open"));
 		dto.setClose(request.getParameter("close"));
@@ -37,6 +39,13 @@ public class BoardWriteOK implements Command{
 		dto.setGrade(request.getParameter("grade"));
 		
 		n = dao.insert(dto);
+		
+		System.out.println(SelerId);
+		System.out.println(x);
+		System.out.println(y);
+		
+		sellerDAO dao1 = new sellerDAO();
+		dao1.insertSelerLcInfo(SelerId, x, y);
 		
 		String path = null;
 		if (n != 0) {

@@ -126,7 +126,12 @@ function FormChk(){
 					<div class="product_color">
 						<span>판매수량:</span>
 						<ul>
+						<c:if test="${sell.sleQy > 0 }">
 						${sell.sleQy }
+						</c:if>
+						<c:if test="${sell.sleQy < 1 }">
+						<h4>SOLD OUT</h4>
+						</c:if>
 						</ul>
 					</div>
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
@@ -141,7 +146,9 @@ function FormChk(){
 						<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div> -->						
 					</div>
 					<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-						<input type="submit" value="구매">
+						<c:if test="${sell.sleQy > 0 }">
+						<input class="" type="submit" value="구매">
+						</c:if>
 					</div>
 				</div>
 			</div>			

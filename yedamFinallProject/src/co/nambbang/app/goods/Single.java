@@ -23,6 +23,8 @@ public class Single implements Command {
 		GoodsDAO goodsDAO = new GoodsDAO();
 		
 		SellGoodsDTO sell = sellDAO.selectSellGoodsDetail((String)param.get("sleId"));
+		System.out.println(sell.getSleId());
+		System.out.println(sell.getSleQy());
 		
 		List<GoodsDTO> photoList = null;
 		if(sell != null && sell.getPhotoGroupId() != null && sell.getPhotoGroupId().length() > 0) {

@@ -21,7 +21,7 @@ public class SellGoodsDAO extends DAO {
 			sql.append("		     , GR.GOODS_INFO ");
 			sql.append("		     , GR.GOODS_CL ");
 			sql.append("		     , GS.SLE_ID ");
-			sql.append("		     , GS.SLE_QY ");
+			sql.append("		     , (GS.SLE_QY - nvl((select sum(order_qy) from orders where sle_id = gs.sle_id group by sle_id),0)) as SLE_QY ");
 			sql.append("		     , GS.SLE_PC ");
 			sql.append("		     , GS.MNFCTUR_DE ");
 			sql.append("		     , TO_CHAR(GS.MNFCTUR_DE, 'YYYY-MM-DD HH24:MI:SS') AS MNFCTUR_DE_VIEW ");
@@ -64,7 +64,7 @@ public class SellGoodsDAO extends DAO {
 			
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery(sql.toString());
-
+			System.out.println(sql);
 			while (rs.next()) {
 				SellGoodsDTO dto = new SellGoodsDTO();
 				dto.setGoodsId(rs.getString("goods_id"));
@@ -148,7 +148,7 @@ public class SellGoodsDAO extends DAO {
 			sql.append("		     , GR.GOODS_INFO ");
 			sql.append("		     , GR.GOODS_CL ");
 			sql.append("		     , GS.SLE_ID ");
-			sql.append("		     , GS.SLE_QY ");
+			sql.append("		     , (GS.SLE_QY - nvl((select sum(order_qy) from orders where sle_id = gs.sle_id group by sle_id),0)) as SLE_QY ");
 			sql.append("		     , GS.SLE_PC ");
 			sql.append("		     , GS.MNFCTUR_DE ");
 			sql.append("		     , TO_CHAR(GS.MNFCTUR_DE, 'YYYY-MM-DD HH24:MI:SS') AS MNFCTUR_DE_VIEW ");

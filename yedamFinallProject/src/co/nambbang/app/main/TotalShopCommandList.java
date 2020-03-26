@@ -19,7 +19,10 @@ public class TotalShopCommandList implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GoodsSellDao Dao = new GoodsSellDao();
-		ArrayList<GoodsMainSellDto> list = Dao.mainList();
+		HttpSession session = request.getSession();
+		Double x = Double.parseDouble((String) session.getAttribute("x"));
+		Double y = Double.parseDouble((String) session.getAttribute("y"));
+		ArrayList<GoodsMainSellDto> list = Dao.mainList(x,y);
 		
 		for (int i = 0; i < list.size(); i++) {
 			String imageString = new String(Base64.encodeBase64(list.get(i).getPhotoFile()));

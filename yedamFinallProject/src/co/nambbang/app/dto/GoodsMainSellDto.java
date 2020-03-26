@@ -13,9 +13,16 @@ public class GoodsMainSellDto {
 	private int netPrc;  //빵판매가격
 	private String mtlty_lc; // 판매점포 주소 
 	private String cmpnm; // 판매점포명
+	private Double dstnc; //거리
 	
 	
 	
+	public Double getDstnc() {
+		return dstnc;
+	}
+	public void setDstnc(Double dstnc) {
+		this.dstnc = dstnc;
+	}
 	//빵이미지 가져오기
 	private byte[] photoFile;
 	

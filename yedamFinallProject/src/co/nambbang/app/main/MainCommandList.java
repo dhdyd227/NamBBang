@@ -26,7 +26,7 @@ public class MainCommandList implements Command{
 		//메인 화면 상품 리스트 출력
 		
 		GoodsSellDao Dao = new GoodsSellDao();
-		ArrayList<GoodsMainSellDto> list = Dao.mainList();
+		
 		
 		Double x = Double.parseDouble(request.getParameter("x"));
 		Double y = Double.parseDouble(request.getParameter("y"));
@@ -37,6 +37,9 @@ public class MainCommandList implements Command{
 		
 		System.out.println("x:"+ x);
 		System.out.println("y:"+ y);
+	
+		
+		ArrayList<GoodsMainSellDto> list = Dao.mainList(x,y);
 		
 		for (int i = 0; i < list.size(); i++) {
 			String imageString = new String(Base64.encodeBase64(list.get(i).getPhotoFile()));

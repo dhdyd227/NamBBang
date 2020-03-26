@@ -24,7 +24,7 @@ public class GoodsSellDao extends DAO {
 				+ "  FROM photo_stre\r\n" + "  WHERE photo_group_id = a.photo_group_id\r\n"
 				+ "  AND ROWNUM           = 1\r\n" + "  ) AS photo_name,\r\n" + "  i.DSTNC\r\n"
 				+ "FROM goods_regist a,\r\n" + "  goods_sle c,\r\n"
-				+ "  (select s.* , round(DSTNC_CALC_FU(l.la,l.lo,3,2),10) as DSTNC\r\n" + "  from seler s,\r\n"
+				+ "  (select s.* , round(DSTNC_CALC_FU(l.la,l.lo,?,?),20) as DSTNC\r\n" + "  from seler s,\r\n"
 				+ "  seler_lcinfo l\r\n" + "  where s.seler_id = l.seler_id) i\r\n"
 				+ "WHERE a.goods_id = c.goods_id\r\n" + "AND a.seler_id   = i.seler_id\r\n"
 				+ " ORDER BY i.DSTNC";

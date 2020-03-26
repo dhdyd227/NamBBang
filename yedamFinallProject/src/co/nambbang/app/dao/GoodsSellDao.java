@@ -1,9 +1,7 @@
 package co.nambbang.app.dao;
 
 import java.sql.Blob;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import co.nambbang.app.dto.GoodsMainSellDto;
@@ -78,7 +76,6 @@ public class GoodsSellDao extends DAO {
 				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close();

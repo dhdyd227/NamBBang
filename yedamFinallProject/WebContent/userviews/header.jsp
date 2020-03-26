@@ -54,7 +54,8 @@
 							
 							<c:if test ="${CONECTR_SE eq 'SE'}">
 							<li><a href="./listGoods.do">상품 등록</a></li>
-							<li><a href="./sellerEdit.do">판매자 수정</a></li>
+							<li><a href="./sellerEdit.do">판매자 정보 수정</a></li>
+							<li><a href="./sellLogManage.do">판매 내역 관리</a></li>
 							</c:if>
 							
 						</ul>
@@ -119,7 +120,7 @@
 		<div class="hamburger_menu_content text-right">
 			<ul class="menu_top_nav">
 				<li class="menu_item"><a href="./index.do">Home</a></li>
-				<li class="menu_item"><a href="#">Total Shop</a></li>
+				
 				<c:if test ="${CONECTR_SE eq 'SE'}">
 				<li class="menu_item"><a href="#">상품 등록</a></li>
 				<li class="menu_item"><a href="#">판매자 등록</a></li>

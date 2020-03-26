@@ -54,6 +54,7 @@ import co.nambbang.app.goods.RegisterGoods;
 import co.nambbang.app.goods.RegisterGoodsForm;
 import co.nambbang.app.goods.SellGoods;
 import co.nambbang.app.goods.SellGoodsForm;
+import co.nambbang.app.goods.SellLogManage;
 import co.nambbang.app.goods.Single;
 import co.nambbang.app.login.AjaxIdDuplicationCheck;
 import co.nambbang.app.login.AjaxIdFindClick;
@@ -72,9 +73,9 @@ import co.nambbang.app.seller.BoardWriteOK;
 import co.nambbang.app.seller.SellerEditCommand;
 import co.nambbang.app.seller.SellerIdCheck;
 import co.nambbang.app.seller.sellerEdit;
+import co.nambbang.app.setle.AjaxSetleCancelCommand;
 import co.nambbang.app.setle.AjaxSetleCommand;
 import co.nambbang.app.setle.SetleFormCommand;
-import co.nambbang.app.setle.AjaxSetleCancelCommand;
 
 @WebServlet({"*.do","*.ad"}) 
 public class FrontController extends HttpServlet {
@@ -137,7 +138,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/logIn.do", new MainCommandLogin());
 		cont.put("/logOut.do", new MainCommandLogOut());
 		cont.put("/totalShop.do", new TotalShopCommandList());
-		cont.put("/myPage.do",new MyPageCommandList()); //mypage 
+		cont.put("/myPage.do",new MyPageCommandList()); //mypage - 구매내역 
 		cont.put("/ajaxLoginCheck.do",new AjaxLoginCheck());//login Check
 		cont.put("/ajaxIdDuplicationCheck.do", new AjaxIdDuplicationCheck());//id Check
 		cont.put("/ajaxRegisterDB.do",new AjaxRegisterDB());//register DB transport
@@ -159,6 +160,9 @@ public class FrontController extends HttpServlet {
 		cont.put("/detailSellGoods.do", new DetailSellGoods()); //상품판대 등록
 		cont.put("/modifySellGoods.do", new ModifySellGoods()); //상품판대 수정		
 		cont.put("/single.do", new Single()); //싱글페이지
+		
+		//재흠
+		cont.put("/sellLogManage.do", new SellLogManage()); //판매내역 관리
 		
 		// 시현 sellerRegi/sellerindex.jsp
 		cont.put("/boardSellRegist.do", new BoardSellRegist());

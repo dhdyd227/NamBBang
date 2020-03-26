@@ -56,6 +56,12 @@ function FormChk(){
 	q_val = document.getElementById("quantity_value").innerHTML;	
 	document.getElementById("q_value").value = q_val;	
 	
+	if(${empty CONECTR_STR}){
+			alert("비회원은 로그인을 해주세요.");
+			return false;
+	}
+	
+	
 }
 $(function(){
 	

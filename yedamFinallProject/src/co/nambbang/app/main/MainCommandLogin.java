@@ -19,10 +19,12 @@ public class MainCommandLogin implements Command {
 						
 		String id = request.getParameter("userid");		
 		int mlg = dao.getMlg(id);
-								
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("id", id);
 		session.setAttribute("mlg", mlg);
+		
+		
 		
 		System.out.println("id = " + id);
 		System.out.println("mlg = " + mlg);

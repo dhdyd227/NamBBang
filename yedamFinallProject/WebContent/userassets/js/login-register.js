@@ -210,6 +210,8 @@ function LoginClick() {
 	$.post(url, data, callback);
 		
 	if(result==2)
+		
+		
 		return true;
 	else
 		return false;

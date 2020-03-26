@@ -10,6 +10,7 @@ import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
@@ -26,6 +27,16 @@ public class MainCommandList implements Command{
 		
 		GoodsSellDao Dao = new GoodsSellDao();
 		ArrayList<GoodsMainSellDto> list = Dao.mainList();
+		
+		Double x = Double.parseDouble(request.getParameter("x"));
+		Double y = Double.parseDouble(request.getParameter("y"));
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("x", x);
+		session.setAttribute("y", y);
+		
+		System.out.println("x:"+ x);
+		System.out.println("y:"+ y);
 		
 		for (int i = 0; i < list.size(); i++) {
 			String imageString = new String(Base64.encodeBase64(list.get(i).getPhotoFile()));

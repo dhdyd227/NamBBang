@@ -22,7 +22,7 @@
 <script>
 $(function(){
 	getLocation();
-	
+		
 });
 
 function getLocation() {
@@ -34,14 +34,22 @@ function getLocation() {
 }
 
 function showPosition(position) {
-	var us_x = position.coords.latitude;
-	var us_y = position.coords.longititude;
+	document.getElementById('x').value = position.coords.latitude;
+	document.getElementById('y').value = position.coords.longititude;
   console.log("Latitude: " + position.coords.latitude);
   console.log("Longitude: " + position.coords.longitude);
+  
 }
 
-
-
+<%-- <%
+	Double x = Double.parseDouble(request.getParameter("x"));
+	Double y = Double.parseDouble(request.getParameter("y"));
+	
+	HttpSession httpsession = request.getSession();
+	session.setAttribute("x", x);
+	session.setAttribute("y", y);	
+%> --%>
+ 
 
 </script>
 </head>
@@ -154,8 +162,8 @@ function showPosition(position) {
 									</div>
 
 								</c:forEach>
-
-
+								<input type="hidden" id="x" name="x" value="">
+								<input type="hidden" id="y" name="x" value="">
 							</div>
 						</div>
 					</div>

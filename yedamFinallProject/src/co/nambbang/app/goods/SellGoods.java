@@ -32,6 +32,11 @@ public class SellGoods implements Command {
 		String sleQy = (String)param.get("sle_qy");
 		String slePc = (String)param.get("sle_pc");
 		
+		System.out.println(goodsId);
+		System.out.println(sleQy);
+		System.out.println(slePc);
+		
+		
 		try {
 			sell = new SellGoodsDTO();
 			sell.setGoodsId(goodsId);
@@ -41,6 +46,10 @@ public class SellGoods implements Command {
 			sell.setMnfcturDe(mnfcturDe);
 			sell.setSleBeginTime((String)param.get("sle_begin_time_hh") + param.get("sle_begin_time_mm") + "00");
 			sell.setSleEndTime((String)param.get("sle_end_time_hh") + param.get("sle_end_time_mm") + "00");
+			
+			
+			System.out.println(sell);
+			
 			
 			dao.insertSellGoods(sell);
 		} catch (Exception e) {

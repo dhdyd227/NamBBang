@@ -192,9 +192,9 @@
 									<select class="form-control" id="mnfctur_mm" name="mnfctur_mm">
 										<%=CommonUtils.printMinuteList()%>	
 									</select>
-									<%-- <select class="form-control" id="mnfctur_ss" name="mnfctur_ss">
+									<select class="form-control" id="mnfctur_ss" name="mnfctur_ss">
 										<%=CommonUtils.printSecondList()%>	
-									</select> --%>
+									</select>
 								</div>
 							</td>
 						</tr>

@@ -159,5 +159,16 @@ public class SellGoodsDTO extends GoodsDTO{
 	public void setCanclDeView(String canclDeView) {
 		this.canclDeView = canclDeView;
 	}
+	@Override
+	public String toString() {
+		return "SellGoodsDTO [sleId=" + sleId + ", sleQy=" + sleQy + ", slePc=" + slePc + ", mnfcturDe=" + mnfcturDe
+				+ ", mnfcturDeYmd=" + mnfcturDeYmd + ", mnfcturDeHh=" + mnfcturDeHh + ", mnfcturDeMm=" + mnfcturDeMm
+				+ ", mnfcturDeSs=" + mnfcturDeSs + ", sleBeginTime=" + sleBeginTime + ", sleBeginTimeHh="
+				+ sleBeginTimeHh + ", sleBeginTimeMm=" + sleBeginTimeMm + ", sleBeginTimeSs=" + sleBeginTimeSs
+				+ ", sleEndTime=" + sleEndTime + ", sleEndTimeHh=" + sleEndTimeHh + ", sleEndTimeMm=" + sleEndTimeMm
+				+ ", sleEndTimeSs=" + sleEndTimeSs + ", goosSleResult=" + goosSleResult + ", goosSleResultView="
+				+ goosSleResultView + ", canclResn=" + canclResn + ", canclDe=" + canclDe + ", canclDeView="
+				+ canclDeView + ", canclYn=" + canclYn + "]";
+	}
 	
 }

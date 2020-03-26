@@ -20,36 +20,17 @@
 <script src="/yedamFinallProject/userjs/custom.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2084a98791b71389462cf829531808b2&libraries=services,clusterer,drawing"></script>
 <script>
-$(function(){
-	getLocation();
-		
-});
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    console.log("Geolocation is not supported by this browser.");
-  }
-}
+//카카오맵api 주소 좌표로 받기
+var geocoder = new kakao.maps.services.Geocoder();
 
-function showPosition(position) {
-	document.getElementById('x').value = position.coords.latitude;
-	document.getElementById('y').value = position.coords.longititude;
-  console.log("Latitude: " + position.coords.latitude);
-  console.log("Longitude: " + position.coords.longitude);
-  
-}
+var callback = function(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+        console.log(result);
+    }
+};
 
-<%-- <%
-	Double x = Double.parseDouble(request.getParameter("x"));
-	Double y = Double.parseDouble(request.getParameter("y"));
-	
-	HttpSession httpsession = request.getSession();
-	session.setAttribute("x", x);
-	session.setAttribute("y", y);	
-%> --%>
- 
+geocoder.addressSearch('대전시', callback); 
 
 </script>
 </head>
@@ -121,7 +102,7 @@ function showPosition(position) {
 									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
 									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".식빵류">식빵류</li>
 									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".과자빵류">과자빵류</li>
-									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".조리빵류">조리빵류</li>
+									<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".조리빵류">조리빵류</li>																		
 								</ul>
 							</div>
 						</div>
@@ -151,9 +132,9 @@ function showPosition(position) {
 													${list.slePc}원<span>${list.netPrc }원</span>
 												</div>
 												<br>
-												<h8 class="product_name">
+												<h7 class="product_name">
 													${list.cmpnm }
-												</h8>
+												</h7>
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button">											
@@ -162,8 +143,7 @@ function showPosition(position) {
 									</div>
 
 								</c:forEach>
-								<input type="hidden" id="x" name="x" value="">
-								<input type="hidden" id="y" name="x" value="">
+								
 							</div>
 						</div>
 					</div>

@@ -255,6 +255,7 @@ public class SellGoodsDAO extends DAO {
 		try { 
 			String sql = "INSERT INTO GOODS_SLE ( SLE_ID,GOODS_ID,SLE_QY,SLE_PC,MNFCTUR_DE,SLE_BEGIN_TIME,SLE_END_TIME,RGSDE ) "
 					+" VALUES ((SELECT 'SLE' || lpad(nvl(max(to_number(REGEXP_REPLACE(SLE_ID, '[^0-9]+'))),0)+1, 10, '0') FROM GOODS_SLE), ?, ?, ?, to_date(replace(?, '-', ''), 'YYYYMMDDHH24MISS'), to_date(to_char(sysdate, 'YYYYMMDD') || ?, 'YYYYMMDDHH24MISS'), to_date(to_char(sysdate, 'YYYYMMDD') || ?, 'YYYYMMDDHH24MISS'), SYSDATE) ";
+			System.out.println("insertSQL::" + sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getGoodsId());
 			pstmt.setInt(2, dto.getSleQy());

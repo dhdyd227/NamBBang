@@ -26,15 +26,18 @@ public class MainCommandList implements Command{
 		//메인 화면 상품 리스트 출력
 		
 		GoodsSellDao Dao = new GoodsSellDao();
-		
-		
-		Double x = Double.parseDouble(request.getParameter("x"));
-		Double y = Double.parseDouble(request.getParameter("y"));
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("x", x);
-		session.setAttribute("y", y);
-		
+		HttpSession session = request.getSession();		
+		Double x,y;
+		if(request.getParameter("x") != null) {
+			x = Double.parseDouble(request.getParameter("x"));
+			y = Double.parseDouble(request.getParameter("y"));
+			session.setAttribute("x", x);
+			session.setAttribute("y", y);
+		}else {
+			x = (Double)session.getAttribute("x");
+			y = (Double)session.getAttribute("y");
+		}
+
 		System.out.println("x:"+ x);
 		System.out.println("y:"+ y);
 	

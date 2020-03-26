@@ -24,13 +24,21 @@ function showPosition(position) {
 	 
 	var x = position.coords.latitude;
 	document.getElementById('x').value = x;
-	 
+	
+	if(x == null && x.equals("")){
+		document.getElementById('x').value = 128.601805491072;
+	} 
+	
 	var y = position.coords.longitude;
 	document.getElementById('y').value = y;
 	
+	if(y == null && y.equals("")){
+		document.getElementById('y').value = 35.8713802646197;
+	} 
+	
   console.log("Latitude: " + position.coords.latitude);
   console.log("Longitude: " + position.coords.longitude);
-  frm.submit();
+  frm.submit(); 
 }
 </script>
 </head>

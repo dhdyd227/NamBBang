@@ -56,7 +56,7 @@ function FormChk(){
 	q_val = document.getElementById("quantity_value").innerHTML;	
 	document.getElementById("q_value").value = q_val;	
 	
-	if(${empty CONECTR_STR}){
+	if(${empty id}){
 			alert("비회원은 로그인을 해주세요.");
 			return false;
 	}
@@ -136,7 +136,7 @@ $(function(){
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.do">Nam Bang</a></li>
+						<li><a href="/yedamFinallProject/">Nam Bang</a></li>
 						<!-- <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li> -->
 						<li class="active"><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>${sell.goodsName }</a></li>
 					</ul>

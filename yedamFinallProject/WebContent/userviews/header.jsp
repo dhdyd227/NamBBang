@@ -44,12 +44,12 @@
 			<div class="row">
 				<div class="col-lg-12 text-right">
 					<div class="logo_container">
-						<a href="/yedamFinallProject/index.do">Nam <span>Bang</span>
+						<a href="/yedamFinallProject/">Nam <span>Bang</span>
 						</a>
 					</div>
 					<nav class="navbar">
 						<ul class="navbar_menu">
-							<li><a href="/yedamFinallProject/index.do">Home</a></li>
+							<li><a href="/yedamFinallProject/">Home</a></li>
 							<!-- <li><a href="./totalShop.do">Total Shop</a></li> -->
 							
 							<c:if test ="${CONECTR_SE eq 'SE'}">

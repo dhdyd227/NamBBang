@@ -312,4 +312,66 @@ public class SellGoodsDAO extends DAO {
 		} 
 		return r;
 	}	
+	
+	
+	//상품 판매내역 리스트
+	public ArrayList<SellLogDTO> sellLogList(String id){
+		ArrayList<SellLogDTO> list = new ArrayList<SellLogDTO>();
+		
+		String sql = "SELECT " + 
+				"        gr.goods_name, " + 
+				"        gs.goods_id, " + 
+				"        gs.sle_id, " + 
+				"        o.order_qy, " + 
+				"        og.user_id, " + 
+				"        s.setle_de, " + 
+				"        s.setle_amount " + 
+				"FROM " + 
+				"        goods_regist gr, " + 
+				"        goods_sle gs, " + 
+				"        orders o, " + 
+				"        order_group og, " + 
+				"        setle s " + 
+				"WHERE " + 
+				"        gr.goods_id = gs.goods_id " + 
+				"AND " + 
+				"        gs.sle_id = o.sle_id " + 
+				"AND " + 
+				"        o.order_group_no = og.order_group_no " + 
+				"AND " + 
+				"        s.order_group_no = og.order_group_no " + 
+				"AND " + 
+				"        s.setle_code = 'SC' " + 
+				"AND " + 
+				"        gr.seler_id = ?";
+		
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, id);
+					rs = pstmt.executeQuery();
+					
+					while(rs.next()) {
+						SellLogDTO dto = new SellLogDTO();
+						dto.setgName(rs.getString("goods_name"));
+						dto.setgId(rs.getString("goods_id"));
+						dto.setSleId(rs.getString("sle_id"));
+						dto.setOrderQy(rs.getInt("order_qy"));
+						dto.setUserId(rs.getString("user_id"));
+						dto.setSetle_de(rs.getString("setle_de"));
+						dto.setSetle_amount(rs.getInt("setle_amount"));
+						list.add(dto);												
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}finally {
+					close();
+				}
+								
+		return list;
+					
+	}
+	
+	
+	
+	
 }

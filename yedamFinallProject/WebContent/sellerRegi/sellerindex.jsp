@@ -153,13 +153,13 @@
 				alert("sns주소를 입력해주세요.")
 				frm.sns.focus();
 				return false;
-			}
+			} 
 			if (frm.intrcn.value == "") {
 				alert("가게 소개글을 입력해주세요.")
 				frm.intrcn.focus();
 				return false;
 			}
-
+			alert("가입이 완료되었습니다. 메인화면에서 다시 로그인해 주세요.");
 			return true;
 		}
 	</script>

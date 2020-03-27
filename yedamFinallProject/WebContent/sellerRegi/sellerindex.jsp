@@ -88,8 +88,8 @@
 
 						var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 						
-						document.getElementById('x').value=  result[0].x;
-						document.getElementById('y').value=  result[0].y;
+						document.getElementById('x').value=  result[0].y;
+						document.getElementById('y').value=  result[0].x;
 						document.frm.submit();
 					}
 				});

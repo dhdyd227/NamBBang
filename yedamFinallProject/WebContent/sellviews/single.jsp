@@ -53,14 +53,22 @@ jQuery(document).ready(function($)
 
 function FormChk(){
 	var q_val;
-	q_val = document.getElementById("quantity_value").innerHTML;	
+	q_val = document.getElementById("quantity_value").innerHTML;
+	if(q_val > ${sell.sleQy}){
+		alert("판매수량보다 많은 수량은 구매할 수 없습니다.");
+		return false;		
+	}else{
 	document.getElementById("q_value").value = q_val;	
+	}
 	
-	if(${empty id}){
+	if(${empty CONECTR_SE}){
 			alert("비회원은 로그인을 해주세요.");
 			return false;
 	}
-	
+	if(${CONECTR_SE == 'SE'}){
+		alert("판매자는 상품을 구매할 수 없습니다.");
+		return false;
+	}
 	
 }
 $(function(){

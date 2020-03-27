@@ -53,7 +53,7 @@
 							<!-- <li><a href="./totalShop.do">Total Shop</a></li> -->
 							
 							<c:if test ="${CONECTR_SE eq 'SE'}">
-							<li><a href="./listGoods.do">상품 등록</a></li>
+							<li><a href="./listGoods.do">상품 관리</a></li>
 							<li><a href="./sellerEdit.do">판매자 정보 수정</a></li>
 							<li><a href="./sellLogManage.do">판매 내역 관리</a></li>
 							</c:if>

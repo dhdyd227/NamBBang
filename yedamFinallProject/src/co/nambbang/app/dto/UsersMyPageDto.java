@@ -11,7 +11,26 @@ public class UsersMyPageDto {
 	private String orderId;
 	private int orderGroupNo; //주문그룹(주문별개)
 	private String sleId; //판매등록 상품 ID;
+	private String setleDe; //상품 결제 시간
+	private int setleAmount; // 상품 결제 금액
 	
+	
+	
+	
+	
+	public String getSetleDe() {
+		return setleDe;
+	}
+	public void setSetleDe(String setleDe) {
+		this.setleDe = setleDe;
+	}
+	
+	public int getSetleAmount() {
+		return setleAmount;
+	}
+	public void setSetleAmount(int setleAmount) {
+		this.setleAmount = setleAmount;
+	}
 	public String getSleId() {
 		return sleId;
 	}

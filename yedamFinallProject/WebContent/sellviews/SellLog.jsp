@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=cssPath %>/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="<%=cssPath %>/styles/contact_styles.css">
 	<link rel="stylesheet" type="text/css" href="<%=cssPath %>/styles/contact_responsive.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1"> -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<script src="<%=jsPath %>/js/jquery-3.2.1.min.js"></script>
 	
@@ -38,13 +38,6 @@
 			var frm = document.frm;
 			frm.curPageNo.value = 1;
 			frm.action = "listGoods.do";			
-			frm.submit();
-		}
-		
-		// 등록하기
-		function goRegistGoods(){
-			var frm = document.frm;
-			frm.action = "regGoodsForm.do";			
 			frm.submit();
 		}
 		
@@ -64,21 +57,7 @@
 			frm.submit();	
 		}
 		
-		// 상품판매폼 이동
-		function goSellGoods(goodsId){
-			var frm = document.frm;
-			frm.goods_id.value = goodsId;
-			frm.action = "sellGoodsForm.do";			
-			frm.submit();
-		}
-	
-		// 상푼판매목록보기
-		function goSellGoodsList(){
-			var frm = document.frm;
-			frm.curPageNo.value = 1;
-			frm.action = "listSellGoods.do";			
-			frm.submit();
-		}
+		
 	</script>
 </head>
 
@@ -104,18 +83,13 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="/yedamFinallProject/">Home</a></li>
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>상품목록</a></li>
+						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>상품판매내역</a></li>
 					</ul>
 				</div>
 
 			</div>
 		</div>
 
-
-<%
-	String goodsId = request.getParameter("goods_id");
-	List<GoodsDTO> list = (List<GoodsDTO>)request.getAttribute("goodsList") ;
-%>
 
 		<div class="row">
 			<div class="col">
@@ -146,72 +120,52 @@
 				<table class="table table-hover table-bordered results mt-3 align-items-center">
 					<thead class="thead-light">
 						<tr class="text-center">							
-							<th width="10%">상품 이미지</th>
-							<th>상품ID</th>
-							<th>상품분류</th>
+							<th width="10%">상품 이미지</th>							
+							<th>주문번호</th>							
 							<th>상품명</th>
-							<th>가격</th>
-							<th>등록일시</th>
-							<th>판매자</th>
-							<th>판매상태</th>
-							<th>상태 선택</th>
+							<th>판매수량</th>
+							<th>판매가격</th>
+							<th>구매자</th>
+							<th>판매시간</th>							
 					  	</tr>
 					</thead>
 					<tbody>
-<%
-	if(list != null && list.size() > 0){
-		for(GoodsDTO goods : list){
-%>
+					<c:choose>
+						<c:when test="${not empty list }">
+						<c:forEach var="i" items="${list }">
+								<tr>					
+									<td class="align-middle text-center">
+									<img src="${i.photoFile }" style="max-height:100%; max-width:100%">
+									</td>
+									<td class="align-middle text-center">${i.oId }</td>									
+									<td class="align-middle text-center">${i.gName}</td>
+									<td class="align-middle text-center">${i.orderQy}</td>
+									<td class="align-middle text-center">${i.setle_amount}</td>
+									<td class="align-middle text-center">${i.userId}</td>
+									<td class="align-middle text-center">${i.setle_de}</td>																		
+								</tr>
+						</c:forEach>
+						</c:when>
+						<c:otherwise>
+								<tr><td colspan="7" class="text-center">판매된 상품이 없습니다.</td></tr>
+						</c:otherwise>
+					</c:choose>
 
-						<tr>
-					
-<%
-			if(goods.getPhotoList() != null && goods.getPhotoList().size() > 0){
-%>
-							<td><img src="data:x-image/jpg;base64, <%=goods.getPhotoList().get(0).getPhotoFileBlob()%>" data-file="<%=goods.getPhotoList().get(0).getPhotoName()%>" class="img-responsive img-thumbnail"></td>
-<%
-			} else {
-				
-%>					
-							<td><img src="<%=imgPath %>/images/no_images.png" class="img-responsive img-thumbnail" alt="no Image" /></td>
-<%
-			}
-%>					
-					
-							<td class="align-middle text-center"><%=goods.getGoodsId() %></td>
-							<td class="align-middle text-center"><%=goods.getGoodsCl() %></td>
-							<td class="align-middle text-center"><%=goods.getGoodsName() %></td>
-							<td class="align-middle text-center"><%=goods.getNetprc() %></td>
-							<td class="align-middle text-center"><%=goods.getRgsdeView() %></td>
-							<td class="align-middle text-center"><%=goods.getSelerId() %></td>
-							<td class="align-middle text-center"><%=goods.getSellCnt() > 0 ? "판매중" : "미판매" %></td>
-							<td class="align-middle text-center">
-								<a href="#" class="btn btn-secondary btn-sm" onclick="goDetailGoods('<%=goods.getGoodsId() %>');">보기</a>
-								<a href="#" class="btn btn-info btn-sm ml-1" onclick="goSellGoods('<%=goods.getGoodsId() %>');">판매</a>
-							</td>
-							<%-- <div class="col align-self-center"><a href="#" class="btn btn-secondary btn-sm" onclick="goDetailGoods('<%=goods.getGoodsId() %>');">상세보기</a></div> --%>
-						</tr>
-<%
-		}
-	}else{
-%>	
-						<tr><td colspan="8" class="text-center">등록 된 상품이 없습니다.</td></tr>
-<%
-	}
-%>
+						
+
 					</tbody>
 				</table>
 				<div class="pager mt-5">
-<%
+<%-- <%
 	//페이징 처리
 	Paging paging = (Paging)request.getAttribute("paging");
 	out.print(paging.printPaging("fnPagingSearch"));
-%>
+%> --%>
 				</div>  	
 				 
 				<div class="text-right mt-5">
-					<a href="#" class="btn btn-primary" onclick="goRegistGoods();">상품등록</a>
-					<a href="#" class="btn btn-success" onclick="goSellGoodsList();">상품판매보기</a>
+					<!-- <a href="#" class="btn btn-primary" onclick="goRegistGoods();">상품등록</a>
+					<a href="#" class="btn btn-success" onclick="goSellGoodsList();">상품판매보기</a> -->
 				</div>
 				</div>
 			</div>

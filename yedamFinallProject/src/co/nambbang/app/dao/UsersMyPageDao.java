@@ -11,20 +11,32 @@ public class UsersMyPageDao extends DAO {
 		
 		ArrayList<UsersMyPageDto> list = new ArrayList<>();
 		
-		String sql="select PHOTO_NAME,GOODS_NAME,ORDER_QY,SETLE_CODE,ORDER_ID,ORDER_GROUP_NO,imglist.SLE_ID SLE_ID" + 
-				" from " + 
-				" (select c.sle_id SLE_ID,a.GOODS_NAME GOODS_NAME,c.sle_qy SLE_QY,c.SLE_PC SLE_PC," + 
+		String sql="SELECT PHOTO_NAME,"
+				+ "GOODS_NAME,"
+				+ "ORDER_QY,"
+				+ "SETLE_CODE,"
+				+ "SETLE_AMOUNT, "
+				+ "to_char(setle_de,'yy-mm-dd hh24:mi') setle_de,"
+				+ "ORDER_ID,"
+				+ "ORDER_GROUP_NO,"
+				+ "imglist.SLE_ID SLE_ID" 
+				+ " FROM " 
+				+ " (select c.sle_id SLE_ID,a.GOODS_NAME GOODS_NAME,c.sle_qy SLE_QY,c.SLE_PC SLE_PC," + 
 				" c.SLE_BEGIN_TIME SLE_BEGIN_TIME, c.SLE_END_TIME SLE_END_TIME," + 
 				" a.GOODS_CL GOODS_CL,a.NETPRC NETPRC" + 
 				" ,(select photo_file from photo_stre where photo_group_id = a.PHOTO_GROUP_ID and rownum = 1 ) as PHOTO_NAME" + 
 				" from GOODS_REGIST a, goods_sle c " + 
 				" where a.GOODS_ID = c.GOODS_ID) imglist," + 
-				" (select order_id,order_qy,sle_id,order_group_no,SETLE_CODE" + 
-				" from ORDERS ord,(select se.ORDER_GROUP_NO ORDER_GROUP_NO_1,SETLE_CODE" + 
+				" (select order_id,order_qy,sle_id,order_group_no,SETLE_CODE, setle_amount, setle_de " + 
+				" from ORDERS ord,(select se.ORDER_GROUP_NO ORDER_GROUP_NO_1,"
+								  + " SETLE_CODE, " 
+								  + " SETLE_AMOUNT, "
+								  + " SETLE_DE " +								  
 				"                 from SETLE se, ORDER_GROUP og" + 
 				"                 where se.ORDER_GROUP_NO =og.ORDER_GROUP_NO and user_id=?) seog  " + 
 				" where ord.ORDER_GROUP_NO = seog.ORDER_GROUP_NO_1) orderlist" + 
 				" where imglist.SLE_ID = orderlist.SLE_ID";
+		System.out.println("myPageSQL:"+ sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -41,6 +53,8 @@ public class UsersMyPageDao extends DAO {
 					dto.setOrderId(rs.getString("ORDER_ID"));
 					dto.setOrderQy(rs.getString("ORDER_QY"));
 					dto.setSetleCode(rs.getString("SETLE_CODE"));
+					dto.setSetleDe(rs.getString("SETLE_DE"));
+					dto.setSetleAmount(rs.getInt("SETLE_AMOUNT"));
 					dto.setSleId(rs.getString("SLE_ID"));
 					Blob blob = rs.getBlob("PHOTO_NAME");
 					dto.setPhotoName(blob.getBytes(1, (int)blob.length()));

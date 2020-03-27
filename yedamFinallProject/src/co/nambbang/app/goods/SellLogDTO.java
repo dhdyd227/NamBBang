@@ -1,16 +1,31 @@
 package co.nambbang.app.goods;
 
+import java.util.Date;
+
 public class SellLogDTO {
 	private String gName;
-    private String gId;
+	private String oId;    
+	private String gId;
     private String sleId;
     private int orderQy;
     private String userId;
     private String setle_de;
-    private int setle_amount;
+    private int setle_amount;        
+    private String photoFile;
     
     
-    
+    public String getoId() {
+		return oId;
+	}
+	public void setoId(String oId) {
+		this.oId = oId;
+	}
+	public String getPhotoFile() {
+		return photoFile;
+	}
+	public void setPhotoFile(String photoFile) {
+		this.photoFile = photoFile;
+	}
 	public String getgName() {
 		return gName;
 	}

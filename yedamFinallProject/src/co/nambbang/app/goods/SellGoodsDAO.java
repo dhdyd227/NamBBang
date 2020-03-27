@@ -1,9 +1,13 @@
 package co.nambbang.app.goods;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import co.nambbang.app.dao.DAO;
 import co.nambbang.app.dto.sellerDTO;
@@ -315,14 +319,16 @@ public class SellGoodsDAO extends DAO {
 	
 	
 	//상품 판매내역 리스트
-	public ArrayList<SellLogDTO> sellLogList(String id){
+	public ArrayList<SellLogDTO> sellLogList(String id) throws IOException{
 		ArrayList<SellLogDTO> list = new ArrayList<SellLogDTO>();
 		
 		String sql = "SELECT " + 
 				"        gr.goods_name, " + 
 				"        gs.goods_id, " + 
-				"        gs.sle_id, " + 
+				"        gs.sle_id, " +
+				"        (select photo_file from photo_stre where photo_group_id = gr.photo_group_id and rownum = 1 ) as photo_file, " +
 				"        o.order_qy, " + 
+				"        o.order_id, " +
 				"        og.user_id, " + 
 				"        s.setle_de, " + 
 				"        s.setle_amount " + 
@@ -344,7 +350,7 @@ public class SellGoodsDAO extends DAO {
 				"        s.setle_code = 'SC' " + 
 				"AND " + 
 				"        gr.seler_id = ?";
-		
+				System.out.println("sellLogSQL:" +  sql);
 				try {
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, id);
@@ -356,9 +362,13 @@ public class SellGoodsDAO extends DAO {
 						dto.setgId(rs.getString("goods_id"));
 						dto.setSleId(rs.getString("sle_id"));
 						dto.setOrderQy(rs.getInt("order_qy"));
+						dto.setoId(rs.getString("order_id"));
 						dto.setUserId(rs.getString("user_id"));
 						dto.setSetle_de(rs.getString("setle_de"));
 						dto.setSetle_amount(rs.getInt("setle_amount"));
+						byte[] encoded = Base64.encodeBase64(rs.getBytes("photo_file"));
+						String base64Encoded = new String(encoded, "UTF-8");
+						dto.setPhotoFile("data:image/jpg;base64, "+ base64Encoded);
 						list.add(dto);												
 					}
 				} catch (SQLException e) {
@@ -370,8 +380,5 @@ public class SellGoodsDAO extends DAO {
 		return list;
 					
 	}
-	
-	
-	
 	
 }

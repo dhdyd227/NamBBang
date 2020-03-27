@@ -140,7 +140,7 @@
 			if(list != null && list.size() > 0){
 				for(GoodsDTO dto : list){
 %>
-          							<div><img src="data:x-image/jpg;base64, <%=dto.getPhotoFileBlob()%>" data-file='<%=dto.getPhotoName()%>' class='img-responsive' title='사진'></div>
+          							<div><img src="data:x-image/jpg;base64, <%=dto.getPhotoFileBlob()%>" data-file='<%=dto.getPhotoName()%>' class='img-responsive' title='사진' style="max-width:300px; max-height:300px"></div>
 <%
 				}
 			}else{

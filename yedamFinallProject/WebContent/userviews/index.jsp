@@ -111,8 +111,8 @@ geocoder.addressSearch('대전시', callback);
 						<div class="col">
 							<div class="product-grid"
 								data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-
-								<c:forEach var="list" items="${GoodsMain }">
+								
+								<c:forEach var="list" items="${GoodsMain }">									
 									<div class="product-item ${list.goodsCl }">
 										<div class="product discount product_filter">
 											<div class="product_image">
@@ -130,18 +130,22 @@ geocoder.addressSearch('대전시', callback);
 												</h6>
 												<div class="product_price">
 													${list.slePc}원<span>${list.netPrc }원</span>
+													
 												</div>
 												<br>
 												<h7 class="product_name">
 													${list.cmpnm }
 												</h7>
+												<br>
+												<p>
+													현 위치에서 ${list.dstnc } Km
+												</p>
 											</div>
 										</div>
 										<div class="red_button add_to_cart_button">											
 											<p style="color:white; padding-top:7px">${list.mtlty_lc }</p>
 										</div>
-									</div>
-
+									</div>									
 								</c:forEach>
 								
 							</div>

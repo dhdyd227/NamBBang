@@ -2,6 +2,7 @@ package co.nambbang.app.main;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +17,14 @@ public class MainCommandLogOut implements Command{
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-
-		return "redirect:"+"index.do";
+		
+		
+		String path="userviews/frontIndex.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+		dispatcher.forward(request, response);
+		
+		return null;
+//		return "redirect:"+"userviews/frontIndex.jsp";
 	}
 
 }

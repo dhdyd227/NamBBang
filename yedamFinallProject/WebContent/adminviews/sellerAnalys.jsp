@@ -174,6 +174,7 @@ function drawDonutChart1(d1,d2){
 	tui.chart.pieChart(container1, data1, options1);
 	
 	$("#tbl1_p").text("[기간: "+ d1 + " ~ " + d2 + " ]");
+	$("#chart1_p").text("[기간: "+ d1 + " ~ " + d2 + " ]");
 	var tbody = $("<tbody>").attr("align","center");
 	
 	for(var i = 0; i <cData.length; i++){
@@ -349,6 +350,7 @@ function drawDonutChart2(d1,d2){
 	}
 	tui.chart.pieChart(container2, data2, options2);
 	$("#tbl2_p").text("[기간: "+ d1 + " ~ " + d2 + " ]");
+	$("#chart2_p").text("[기간: "+ d1 + " ~ " + d2 + " ]");
 	var tbody = $("<tbody>").attr("align","center");
 	
 	for(var i = 0; i <cData.length; i++){
@@ -560,7 +562,15 @@ function formCheck(){
 		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header">
-					<h6 class="h6">판매자별 수량 통계</h6>
+					<div class="row">							
+							<div class="col-md-3 row-st">
+								<h6>판매자별 판매량 통계</h6>
+							</div>
+							<div class="col-md-5 row-st"></div>
+							<div class="col-md-4 text-right">
+								<p id="chart1_p"></p>
+							</div>
+					</div>
 					<hr>
 				</div>
 				<div class="card-body">
@@ -578,7 +588,15 @@ function formCheck(){
 		<div class="col-md-6">
 			<div class="card">
 				<div class="card-header">
-					<h6 class="h6">판매자별 합계 통계</h6>
+					<div class="row">							
+							<div class="col-md-3 row-st">
+								<h6>판매자별 판매액 통계</h6>
+							</div>
+							<div class="col-md-5 row-st"></div>
+							<div class="col-md-4 text-right">
+								<p id="chart2_p"></p>
+							</div>
+					</div>
 					<hr>
 				</div>
 				<div class="card-body">

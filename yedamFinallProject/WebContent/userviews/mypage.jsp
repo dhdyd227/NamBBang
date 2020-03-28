@@ -41,7 +41,47 @@
 	transition: 0.3s;
 
 }
+#wayBtn{
+	border: none;	
+	border-radius: 5px;
+	height: 40px;
+	width: 80px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	background-color:#ff3847;
+	color:white;	
+}
+#wayBtn:hover{
+	background-color:#fc6570;	
+	height: 45px;	
+	transition: 0.5s;
+}
 </style>
+<script>	
+
+function openWay(){
+	var map = document.getElementById("findWay");
+	var btn = document.getElementById("wayBtn");
+	if(${not empty MyPageList} && btn.innerHTML == "길 안내"){
+		
+		var name = document.getElementById("cmpnm").value;
+		var la = document.getElementById("la").value;
+		var lo = document.getElementById("lo").value;
+		btn.style.width = "100px";
+		btn.innerHTML = "길안내 닫기";
+		map.src = "https://map.kakao.com/link/to/"+name+","+la+","+lo;
+		map.style.display = "block";	
+	}else if(${not empty MyPageList} && btn.innerHTML != "길 안내"){
+		btn.style.width = "80px";
+		btn.innerHTML = "길 안내";
+		map.style.display = "none";
+	}
+	
+}
+
+</script>
 </head>
 
 
@@ -53,9 +93,6 @@
 		<!-- Header -->
 		<%@include file="header.jsp"%>
 
-
-		
-		
 		<div class="main_slider">
 			<div class="container contact_container">
 				<div class="row">
@@ -86,6 +123,7 @@
 							<th>구매수량</th>						
 							<th>구매시간</th>						
 							<th>결제상태</th>
+							<th>길 안내</th>
 						</tr>
 					</thead>
 					<c:choose>
@@ -93,7 +131,7 @@
 					<c:forEach var="list" items="${MyPageList }">
 					<tr id="trHover">
 						<td class="align-middle text-center"width="150px">
-							<a href="single.do?sleId=${list.sleId }"><img src="${list.photoString}" width="150px" height="150px" alt="">
+							<a href="single.do?sleId=${list.sleId }"><img src="${list.photoString}" width="100px" height="100px" alt="">
 						</a>						
 						</td >
 						<td class="align-middle text-center">${list.orderId }</td>
@@ -102,17 +140,27 @@
 						<td class="align-middle text-center">${list.orderQy }</td>
 						<td class="align-middle text-center">${list.setleDe }</td>
 						<td class="align-middle text-center">${list.setleCode }</td>
+						<td class="align-middle text-center">
+							<button type="button" id="wayBtn" name="wayBtn" onclick="openWay();">길 안내</button>
+						</td>
 					</tr>
+					<input type="hidden" id="cmpnm" name="cmpnm" value="${list.cmpnm }">
+					<input type="hidden" id="la" name="la" value="${list.la }">
+					<input type="hidden" id="lo" name="lo" value="${list.lo }">
 					</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<tr>
+						<tr align="center">
 							<td colspan="7">구매 내역이 존재하지 않습니다.</td>
 						</tr>
 					</c:otherwise>
 					</c:choose>
 				</table>
+				<div>
+					<iframe src="" id="findWay" name="findWay" width="100%" height="1000px" scrolling="yes" frameborder="0" style="border-radius:10px; display:none"></iframe>
+				</div>
 			</div>
+			
 		</div>
 	</div>
 

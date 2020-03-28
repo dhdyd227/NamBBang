@@ -1,5 +1,7 @@
 package co.nambbang.app.dto;
 
+import java.util.Arrays;
+
 public class UsersMyPageDto {
 
 	private byte[] photoName; //사진
@@ -13,11 +15,32 @@ public class UsersMyPageDto {
 	private String sleId; //판매등록 상품 ID;
 	private String setleDe; //상품 결제 시간
 	private int setleAmount; // 상품 결제 금액
+	private double la;
+	private double lo;
+	private String cmpnm;
 	
 	
 	
 	
 	
+	public String getCmpnm() {
+		return cmpnm;
+	}
+	public void setCmpnm(String cmpnm) {
+		this.cmpnm = cmpnm;
+	}
+	public double getLa() {
+		return la;
+	}
+	public void setLa(double la) {
+		this.la = la;
+	}
+	public double getLo() {
+		return lo;
+	}
+	public void setLo(double lo) {
+		this.lo = lo;
+	}
 	public String getSetleDe() {
 		return setleDe;
 	}
@@ -78,6 +101,13 @@ public class UsersMyPageDto {
 	}
 	public void setOrderGroupNo(int orderGroupNo) {
 		this.orderGroupNo = orderGroupNo;
+	}
+	@Override
+	public String toString() {
+		return "UsersMyPageDto [photoName=" + Arrays.toString(photoName) + ", photoString=" + photoString
+				+ ", goodsName=" + goodsName + ", orderQy=" + orderQy + ", setleCode=" + setleCode + ", orderId="
+				+ orderId + ", orderGroupNo=" + orderGroupNo + ", sleId=" + sleId + ", setleDe=" + setleDe
+				+ ", setleAmount=" + setleAmount + ", la=" + la + ", lo=" + lo + ", cmpnm=" + cmpnm + "]";
 	}
 	
 }

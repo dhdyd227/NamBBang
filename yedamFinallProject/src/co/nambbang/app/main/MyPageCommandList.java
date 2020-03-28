@@ -22,12 +22,13 @@ public class MyPageCommandList implements Command {
 		UsersMyPageDao Dao = new UsersMyPageDao();
 		String id = (String) request.getSession().getAttribute("id");
 		System.out.println("MypageCommandList:  "+id);
-		
+						
 		ArrayList<UsersMyPageDto> list = Dao.myPageList(id);
-
+		
 		for (int i = 0; i < list.size(); i++) {
 			String imageString = new String(Base64.encodeBase64(list.get(i).getPhotoName()));
 			String changeString = "data:image/jpg;base64, " + imageString;
+			
 			list.get(i).setPhotoString(changeString);
 			
 			if(list.get(i).getSetleCode().equals("SC")){//결제완료
@@ -40,7 +41,7 @@ public class MyPageCommandList implements Command {
 			
 
 		}
-		System.out.println("list");
+		System.out.println("list:"+list);
 		request.setAttribute("MyPageList", list);
 
 		return "userviews/mypage.jsp";

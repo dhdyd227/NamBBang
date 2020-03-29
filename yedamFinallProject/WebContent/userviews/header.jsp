@@ -34,7 +34,82 @@
 <!-- 로그인 스크립트 전체 -->
 <script type="text/javascript"
 	src="/yedamFinallProject/userassets/js/login-register.js"></script>
-
+<style>
+#lgBtn{
+	border: none;	
+	border-radius: 15px;
+	height: 40px;
+	width: 80px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	background-color:#ff3847;
+	color:white;	
+}
+#lgBtn:hover{
+	background-color:#fc6570;	
+	height: 45px;	
+	transition: 0.5s;
+}
+#usBtn{
+	border: none;	
+	border-radius: 15px;
+	height: 40px;
+	width: 60px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	background-color:#ff3847;
+	color:white;	
+}
+#usBtn:hover{
+	background-color:#fc6570;	
+	height: 45px;	
+	transition: 0.5s;
+}
+#seBtn{
+	border: none;	
+	border-radius: 15px;
+	height: 40px;
+	width: 60px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	background-color:#00bbff;
+	color:white;	
+}
+#seBtn:hover{
+	background-color:#58d1fc;	
+	height: 45px;	
+	transition: 0.5s;
+}
+#adBtn{
+	border: none;	
+	border-radius: 15px;
+	height: 40px;
+	width: 60px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	background-color:#ffba30;
+	color:white;	
+}
+#adBtn:hover{
+	background-color:#facf78;	
+	height: 45px;	
+	transition: 0.5s;
+}
+a{
+	text-decoration:none;
+}
+a:link a:hover a:visited a:active {
+	text-decoration:none;
+}
+</style>
 <header class="header trans_300">	
 	
 	<!-- Main Navigation(숨겨진 상단메뉴) -->
@@ -44,7 +119,7 @@
 			<div class="row">
 				<div class="col-lg-12 text-right">
 					<div class="logo_container">
-						<a href="/yedamFinallProject/">Nam <span>Bang</span>
+						<a href="/yedamFinallProject/">Nam <span>BBang</span>
 						</a>
 					</div>
 					<nav class="navbar">
@@ -56,6 +131,9 @@
 							<li><a href="./listGoods.do">상품 관리</a></li>
 							<li><a href="./sellerEdit.do">판매자 정보 수정</a></li>
 							<li><a href="./sellLogManage.do">판매 내역 관리</a></li>
+							</c:if>
+							<c:if test ="${CONECTR_SE eq 'AD'}">
+							<li><a href="./AdminMain.ad">관리자 모드</a></li>							
 							</c:if>
 							
 						</ul>
@@ -69,30 +147,42 @@
 							
 								
 						
-							<c:if test ="${empty CONECTR_SE}">
-								비회원
-								<li><a data-toggle="modal" href="" onclick="javascript: openLoginModal();"> <i class="fa fa-user"
-									  aria-hidden="true" ></i></a></li>
+							<c:if test ="${empty CONECTR_SE}">								
+								<li>
+									<a data-toggle="modal" href="" onclick="javascript: openLoginModal();" style="text-decoration:none"> 
+										<button type="button" id="lgBtn">LOGIN</button>										
+									</a>
+								</li>
 							</c:if>
-							<c:if test ="${not empty CONECTR_SE && CONECTR_SE == 'US'}">
-								일반 회원
-								<li><a data-toggle="modal" href="" onclick="javascript: openLogoutModal();"> <i class="fa fa-user"
-									  aria-hidden="true" ></i></a></li>
+							<c:if test ="${not empty CONECTR_SE && CONECTR_SE == 'US'}">								
+								<li>
+									<a data-toggle="modal" href="" onclick="javascript: openLogoutModal();" style="text-decoration:none">
+										<button type="button" id="usBtn">${id }</button>
+									</a>
+								</li>
 							</c:if>
-							<c:if test ="${not empty CONECTR_SE && CONECTR_SE == 'SE'}">
-								판매자
-								<li><a data-toggle="modal" href="" onclick="javascript: openLogoutModal();"> <i class="fa fa-user"
-									  aria-hidden="true" ></i></a></li>
+							<c:if test ="${not empty CONECTR_SE && CONECTR_SE == 'SE'}">								
+								<li>
+									<a data-toggle="modal" href="" onclick="javascript: openLogoutModal();" style="text-decoration:none"> 
+										<button type="button" id="seBtn">${id }</button>
+									</a>
+								</li>
+							</c:if>
+							<c:if test ="${not empty CONECTR_SE && CONECTR_SE == 'AD'}">								
+								<li>
+									<a data-toggle="modal" href="" onclick="javascript: openLogoutModal();" style="text-decoration:none"> 
+										<button type="button" id="adBtn">관리자</button>
+									</a>
+								</li>
 							</c:if>
 							<c:if test ="${not empty CONECTR_SE}">
 							<%
 								String ss = (String) session.getAttribute("id");
-								String sa = (String) session.getAttribute("CONECTR_SE");		
-			
+								String sa = (String) session.getAttribute("CONECTR_SE");					
 							%>
 									
-							<%=ss%>
-														
+							
+							   
 							</c:if>
 							<!-- <li class="checkout">
 							<a href="myPage.do"> 

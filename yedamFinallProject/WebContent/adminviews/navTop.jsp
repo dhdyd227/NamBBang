@@ -60,7 +60,7 @@
           </div>
         </a>
         <a href="" class="simple-text logo-normal"> <!-- 로고 옆 텍스트 링크 -->
-          	먹빵          
+          	NAM <span style="color:#ff3847">BBANG</span>          
         </a>
       </div>
       <div class="sidebar-wrapper">
@@ -163,7 +163,7 @@
               </ul>
             </div>
           </li>
-          <li>
+          <!-- <li>
             <a href="#bbs" data-toggle="collapse" aria-expanded="false" aria-controls="bbs">
               <i class="nc-icon nc-tile-56"></i>
               <p>게시판 관리</p>
@@ -178,7 +178,7 @@
                    </li>
               </ul>
             </div>
-          </li>
+          </li> -->
           <li>
             <a href="#stastics" data-toggle="collapse" aria-expanded="false" aria-controls="stastics">
               <i class="nc-icon nc-chart-pie-36"></i>
@@ -219,7 +219,7 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#">먹빵 관리자 모드</a>
+            <a class="navbar-brand" href="#">NAM <span style="color:#ff3847">BBANG</span> 관리자 모드</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -245,7 +245,7 @@
                 <a class="nav-link btn-rotate" href="#pablo">
                   <i class="nc-icon nc-settings-gear-65"></i>
                   <p>
-                    <span class="d-lg-none d-md-block">Account</span>
+                    <span class="d-lg-none d-md-block">관리자</span>
                   </p>
                 </a>
               </li>
@@ -253,7 +253,7 @@
                 <a class="nav-link btn-rotate" href="">                
                   <i class="nc-icon nc-circle-10"></i>
                   <p>
-                    <span class="d-md-block">Account</span>
+                    <span class="d-md-block">관리자</span>
                   </p>                
                 </a>                
               </li>              

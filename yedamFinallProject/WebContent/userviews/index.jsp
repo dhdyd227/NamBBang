@@ -91,7 +91,7 @@ geocoder.addressSearch('대전시', callback);
 					<div class="row">
 						<div class="col text-center">
 							<div class="section_title new_arrivals_title">
-								<h2>판매 중인 상품</h2>
+								<h2>NAM <span style="color:#ff3847">BBANG</span> SALE</h2>
 							</div>
 						</div>
 					</div>

@@ -362,6 +362,7 @@
 						<div class="table-responsive" style="overflow:hidden;">
 		                  <table class="table table-hover table-condensed">
 		                    <thead class="text-primary text-center">
+		                    <tr>
 		                      <th>		                      	
 								  <div class="custom-control custom-checkbox text-center">
 									  <input type="checkbox" class="custom-control-input" id="resultChkAll" name="result_chkAll">
@@ -376,8 +377,11 @@
 		                      <th>판매자ID</th>
 		                      <th>상호명</th>
 		                      <th>판매상태</th>
+		                    </tr>
 		                    </thead>
 		                    <tbody align="center">
+		                    <c:choose>
+		                    <c:when test="${not empty list}">
 		                    <c:forEach var="map" items="${list }">
 								<tr class="text-center">
 									<td>
@@ -393,9 +397,30 @@
 									<td>${map.get("info") }</td>
 									<td>${map.get("selerId") }</td>
 									<td>${map.get("cName") }</td>
-									<td>${map.get("stat") }</td>
+									<c:if test="${empty map.get('stat')}">
+									<td>판매중</td>
+									</c:if>
+									<c:if test="${map.get('stat') eq 'A'}">
+									<td>완판</td>
+									</c:if>
+									<c:if test="${map.get('stat') eq 'P'}">
+									<td>부분판매</td>
+									</c:if>
+									<c:if test="${map.get('stat') eq 'R'}">
+									<td>취소신청</td>
+									</c:if>
+									<c:if test="${map.get('stat') eq 'C'}">
+									<td>판매취소</td>
+									</c:if>
 								</tr>								
 					 		</c:forEach>
+					 		</c:when>
+					 		<c:otherwise>
+					 			<tr>
+					 				<td colspan="9">검색 결과가 존재하지 않습니다.</td>
+					 			</tr>
+					 		</c:otherwise>
+					 		</c:choose>
 					 		 <%--<tr class="text-center">
 					 		 		<td colspan="7">
 					 		 		

@@ -381,8 +381,8 @@ window.addEventListener("load", function(){
 									<td>${map.get("goods_name") }</td>
 									<td>${map.get("refnd_amount") }</td>									
 									<td>${map.get("refnd_resn") }</td>
-									<c:if test="${map.get('setle_code').equals('CR') }"><td>환불완료</td></c:if>
-									<c:if test="${map.get('setle_code').equals('CC') }"><td>환불신청</td></c:if>									
+									<c:if test="${map.get('setle_code').equals('CR') }"><td>환불신청</td></c:if>
+									<c:if test="${map.get('setle_code').equals('CC') }"><td>환불완료</td></c:if>									
 								</tr>								
 					 		</c:forEach> 		              
 		                    </tbody>

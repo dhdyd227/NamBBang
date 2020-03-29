@@ -64,6 +64,44 @@ input[type=file] {
 	margin-left: 10px;
 	margin-right: 10px;
 }
+input {
+	border:none;
+	border-style:solid;	
+	border-width: 1px;
+	border-radius: 5px;
+	border: 1px solid #cccccc;
+	padding: 5px;
+	
+	
+}
+textarea{
+	border:none;
+	border-style:solid;	
+	border-width: 1px;
+	border-radius: 5px;
+	border: 1px solid #cccccc;
+	padding: 5px;		
+}
+#button{
+	border: none;	
+	border-radius: 10px;
+	height: 35px;
+	width: 60px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top:5px;
+	padding-bottom:5px;
+	background-color:#00bbff;
+	color:white;	
+}
+#button:hover{
+	background-color:#58d1fc;	
+	height: 35px;	
+	transition: 0.5s;
+}
+#tbl {
+	cell-spacing: 5px;
+}
 </style>
 
 <script type="text/javascript">
@@ -264,20 +302,19 @@ input[type=file] {
 					<br>
 					<br>
 					<div>
-						<h3>판매자 수정</h3>
+						<h3>판매자 정보 수정</h3>
 					</div>
 					<br>
 					<div>
-					<table>
+					<table id="tbl">
 						<tr height="30">
 							<th>*ID(사업자번호)</th>
-							<td><input value="${dto.sid}" style="width: 730px;"
-								type="text" class="sid_input" id="sid" name="sid" readonly>
+							<td><input value="${dto.sid}" style="width: 730px;"type="text" class="sid_input" id="sid" name="sid" readonly>
+							</td>
 						</tr>
 						<tr height="30">
 							<th>*비밀번호</th>
-							<td><input style="width: 730px;" type="password" id="pw"
-								name="pw"></td>
+							<td><input style="width: 730px;" type="password" id="pw" name="pw"></td>
 						</tr>
 						<tr height="30">
 							<th>*비밀번호확인</th>
@@ -286,29 +323,24 @@ input[type=file] {
 						</tr>
 						<tr height="30">
 							<th>*상호명</th>
-							<td><input value="${dto.sname}" style="width: 730px;"
-								type="text" id="sname" name="sname"></td>
+							<td><input value="${dto.sname}" style="width: 730px;" type="text" id="sname" name="sname"></td>
 						</tr>
 						<tr height="30">
 							<th>*가게위치</th>
-							<td><input value="${dto.lc}" style="width: 690px;"
-								type="text" id="lc" name="lc">
+							<td><input value="${dto.lc}" style="width: 660px;" type="text" id="lc" name="lc">
 								<button id="button" onclick="fn_setAddr();">검색</button></td>
 						</tr>
 						<tr height="30">
 							<th>*사업주</th>
-							<td><input value="${dto.name}" style="width: 730px;"
-								type="text" id="name" name="name" readonly></td>
+							<td><input value="${dto.name}" style="width: 730px;" type="text" id="name" name="name" readonly></td>
 						</tr>
 						<tr height="30">
 							<th>*전화번호</th>
-							<td><input value="${dto.no}" style="width: 730px;"
-								type="text" id="no" name="no"></td>
+							<td><input value="${dto.no}" style="width: 730px;" type="text" id="no" name="no"></td>
 						</tr>
 						<tr height="30">
 							<th>*영업시작시간</th>
-							<td><input value="${dto.open}" style="width: 730px;"
-								type="Time" id="open" name="open"></td>
+							<td><input value="${dto.open}" style="width: 730px;" type="Time" id="open" name="open"></td>
 						</tr>
 						<tr height="30">
 							<th>*영업마감시간</th>
@@ -322,8 +354,9 @@ input[type=file] {
 						</tr>
 						<tr height="30">
 							<th>*가게소개글</th>
-							<td colspan="3"><textarea style="width: 730px; resize: none"
-									id="intrcn" name="intrcn" cols="60" rows="15">${dto.intrcn}</textarea></td>
+							<td colspan="3">
+								<textarea style="width: 730px; resize: none" id="intrcn" name="intrcn" cols="60" rows="15">${dto.intrcn}</textarea>
+							</td>
 						</tr>
 
 					</table>

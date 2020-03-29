@@ -307,7 +307,7 @@
             </div>
           </div>
           
-           <div class="col-md-12">
+ <%--     <div class="col-md-12">
             <div class="card" >
               <div class="card-header">
                 <h4 class="card-title">공지 사항</h4>
@@ -338,7 +338,7 @@
                   </table>
                 </div>
               </div>
-            </div>
+            </div> --%>
           </div>
 	
 </body>

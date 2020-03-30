@@ -42,7 +42,7 @@ public class GoodsDAO extends DAO {
 			sql.append(startNo);
 			sql.append("AND ");
 			sql.append(endNo);
-			
+			System.out.println("salelist:"+sql); 
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery(sql.toString());
 

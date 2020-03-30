@@ -124,7 +124,7 @@
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="/yedamFinallProject/">Home</a></li>
 						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>상품판매 상세</a></li>
 					</ul>
 				</div>

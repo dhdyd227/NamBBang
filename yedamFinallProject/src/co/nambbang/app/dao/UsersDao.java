@@ -5,11 +5,12 @@ import java.sql.SQLException;
 
 import co.nambbang.app.dto.CertificationDto;
 import co.nambbang.app.dto.LoginInfoDto;
-import co.nambbang.app.dto.SetleDto;
 import co.nambbang.app.dto.UsersDto;
 import oracle.jdbc.OracleTypes;
 
 public class UsersDao extends DAO {
+	CallableStatement cstmt;
+	
 	//email 로 id 값 가져오기
 	public String emailFromidSearch(String email) {
 		String sql = "select user_id "
@@ -206,6 +207,29 @@ public class UsersDao extends DAO {
 		//id not exist
 		return 1;
 	}
+	// login log 파일 기록
+	public void insertConectlog(String id) {
+		// 주문삭제, 주문그룹삭제
+		
+		try {
+			conn.setAutoCommit(false);
+
+			cstmt = conn.prepareCall("{call conect_log_pr(?)}");
+			cstmt.setString(1, id);
+			cstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	
 	//id duplication(중복확인)
 	public int idDuplicationCheck(String id) {

@@ -23,6 +23,7 @@ public class AjaxLoginCheck implements Command {
 		// 1 same not password login ok 3 id not exist
 		int Check = Dao.isLoginCheck(id,pw);
 		if(Check ==2) {
+			Dao.insertConectlog(id);
 			String userStatus = Dao.loginConectrSeCheck(id);
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);

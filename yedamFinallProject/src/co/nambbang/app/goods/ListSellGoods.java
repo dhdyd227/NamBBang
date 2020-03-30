@@ -52,6 +52,7 @@ public class ListSellGoods implements Command {
 			paging.makeLastPageNum(cnt);
 			
 			List<SellGoodsDTO> sellList = dao.selectSellGoodsList(param, paging.getFirst(), paging.getLast());
+											
 			
 			request.setAttribute("sellList", sellList);
 			request.setAttribute("paging", paging);

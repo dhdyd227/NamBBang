@@ -130,7 +130,7 @@ a:link a:hover a:visited a:active {
 							<c:if test ="${CONECTR_SE eq 'SE'}">
 							<li><a href="./listGoods.do">상품 관리</a></li>
 							<li><a href="./sellerEdit.do">판매자 정보 수정</a></li>
-							<li><a href="./sellLogManage.do">판매 내역 관리</a></li>
+							<li><a href="./sellLogManage.do">판매 내역</a></li>
 							</c:if>
 							<c:if test ="${CONECTR_SE eq 'AD'}">
 							<li><a href="./AdminMain.ad">관리자 모드</a></li>							

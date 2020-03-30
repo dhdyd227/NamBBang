@@ -91,7 +91,7 @@
 		</div>
 
 
-		<div class="row">
+		<%-- <div class="row">
 			<div class="col">
 				<div class="row">
 					<div class="col">
@@ -113,7 +113,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 		<div class="row">
 			<div class="col">
 					

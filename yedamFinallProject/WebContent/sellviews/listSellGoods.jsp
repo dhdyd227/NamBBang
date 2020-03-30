@@ -149,7 +149,7 @@
 							<th>판매시작일시</th>
 							<th>판매종료일시</th>
 							<th>판매결과</th>
-							<th></th>
+							<th>상세보기</th>
 					  	</tr>
 					</thead>
 					<tbody>
@@ -167,7 +167,7 @@
 							<td class="align-middle text-center"><%=goods.getSleQy() %></td>
 							<td class="align-middle text-center"><%=goods.getSlePc() %></td>
 							<td class="align-middle text-center"><%=goods.getSleBeginTime() %></td>
-							<td class="align-middle text-center"><%=goods.getSleEndTime() %></td>
+							<td class="align-middle text-center"><%=goods.getSleEndTime() %></td>							
 							<td class="align-middle text-center"><%=goods.getGoosSleResultView() %></td>
 							<td class="align-middle text-center">
 								<a href="#" class="btn btn-secondary btn-sm" onclick="goDetailSellGoods('<%=goods.getSleId() %>', '<%=goods.getGoodsId() %>');">보기</a>

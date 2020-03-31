@@ -92,7 +92,7 @@ public class FrontController extends HttpServlet {
 		cont.put("/AdminMain.ad", new AdminMainCommand());	//admin 메인페이지
 		cont.put("/AdminMerchList.ad", new AdminMerchListCommand()); // admin 목록관리페이지 
 		cont.put("/AdminMerchListOk.ad", new AdminMerchListOkCommand()); //admin 목록페이지 필터 검색 커맨드 		
-		cont.put("/AdminMerchListModify.ad", new AdminMerchListModifyCommand()); //admin 목록 결과 상태적용 커맨드
+//		cont.put("/AdminMerchListModify.ad", new AdminMerchListModifyCommand()); //admin 목록 결과 상태적용 커맨드
 		
 		cont.put("/AdminSetleManage.ad", new AdminSetleManageCommand()); //admin 결제관리 페이지
 		cont.put("/AdminSetleManageOk.ad", new AdminSetleManageOkCommand()); //admin 결제관리 페이지

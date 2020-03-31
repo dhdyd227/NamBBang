@@ -38,7 +38,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update Now
+                  <!-- <i class="fa fa-refresh"></i> Update Now -->
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-calendar-o"></i> Last day
+                  <!-- <i class="fa fa-calendar-o"></i> Last day -->
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-clock-o"></i> In the last hour
+                  <!-- <i class="fa fa-clock-o"></i> In the last hour -->
                 </div>
               </div>
             </div>
@@ -115,7 +115,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update now
+                  <!-- <i class="fa fa-refresh"></i> Update now -->
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update Now
+                  <!-- <i class="fa fa-refresh"></i> Update Now -->
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update Now
+                 <!--  <i class="fa fa-refresh"></i> Update Now -->
                 </div>
               </div>
             </div>
@@ -195,7 +195,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update Now
+                 <!--  <i class="fa fa-refresh"></i> Update Now -->
                 </div>
               </div>
             </div>
@@ -223,7 +223,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update Now
+                 <!--  <i class="fa fa-refresh"></i> Update Now -->
                 </div>
               </div>
             </div>
@@ -249,7 +249,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-calendar-o"></i> Last day
+                 <!--  <i class="fa fa-calendar-o"></i> Last day -->
                 </div>
               </div>
             </div>
@@ -275,7 +275,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-clock-o"></i> In the last hour
+                  <!-- <i class="fa fa-clock-o"></i> In the last hour -->
                 </div>
               </div>
             </div>
@@ -301,7 +301,7 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i> Update now
+                  <!-- <i class="fa fa-refresh"></i> Update now -->
                 </div>
               </div>
             </div>

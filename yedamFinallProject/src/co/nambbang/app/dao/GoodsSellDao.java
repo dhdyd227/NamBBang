@@ -10,13 +10,7 @@ public class GoodsSellDao extends DAO {
 	// 메인화면 전체 상품 리스트
 	public ArrayList<GoodsMainSellDto> mainList(Double x, Double y) {
 		ArrayList<GoodsMainSellDto> list = new ArrayList<>();
-//		String sql="select c.sle_id SLE_ID,a.GOODS_NAME GOODS_NAME,"
-//				+ "c.sle_qy SLE_QY,c.SLE_PC SLE_PC,c.SLE_BEGIN_TIME SLE_BEGIN_TIME,"+
-//				"c.SLE_END_TIME SLE_END_TIME,a.GOODS_CL GOODS_CL,a.NETPRC NETPRC"+
-//				",(select photo_file from photo_stre where photo_group_id = a.PHOTO_GROUP_ID and rownum = 1 ) as PHOTO_NAME"+
-//				" from GOODS_REGIST a, goods_sle c "+
-//				" where a.GOODS_ID = c.GOODS_ID " +
-//				" order by c.SLE_BEGIN_TIME desc ";
+
 		String sql = "SELECT c.sle_id sle_id, " 
 				+ "  a.goods_name goods_name, " 
 				+ "  c.sle_qy sle_qy, "
@@ -41,10 +35,11 @@ public class GoodsSellDao extends DAO {
 				+ "  where s.seler_id = l.seler_id) i "
 				+ "WHERE a.goods_id = c.goods_id " 
 				+ "AND a.seler_id   = i.seler_id "
+				+ "AND sysdate between c.sle_begin_time and c.sle_end_time "
 				+ "ORDER BY i.DSTNC ";
 	
 		
-		System.out.println(sql);
+		System.out.println("main:" + sql);
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setDouble(1, x);

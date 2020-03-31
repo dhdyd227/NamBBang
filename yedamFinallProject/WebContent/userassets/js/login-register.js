@@ -66,12 +66,12 @@ function duplicationCheck(){
 	// 1.넘긴값 2.상태 3.xhr;
 	function callback(result, status, xhr) {
 		if (result == 1) {
-			alert("아이디 중복")
+			alert("아이디 중복");
 			registerForm.idDuplication.value="unCheck";
 			registerForm.userid.style.background = 'red';
 
 		}else{
-			alert("중복아님")
+			alert("중복아님");
 			registerForm.idDuplication.value="check";
 			registerForm.userid.style.background = 'rgb(232, 240, 254)';
 		}

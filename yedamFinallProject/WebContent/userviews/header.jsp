@@ -56,7 +56,7 @@
 	border: none;	
 	border-radius: 15px;
 	height: 40px;
-	width: 60px;
+	width: 100px;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top:5px;
@@ -66,14 +66,14 @@
 }
 #usBtn:hover{
 	background-color:#fc6570;	
-	height: 45px;	
+		
 	transition: 0.5s;
 }
 #seBtn{
 	border: none;	
 	border-radius: 15px;
 	height: 40px;
-	width: 60px;
+	width: 100px;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top:5px;
@@ -83,7 +83,7 @@
 }
 #seBtn:hover{
 	background-color:#58d1fc;	
-	height: 45px;	
+	
 	transition: 0.5s;
 }
 #adBtn{
